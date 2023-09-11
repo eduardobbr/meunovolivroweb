@@ -3,8 +3,14 @@ import { styled } from "styled-components";
 export const Container = styled.header`
   background-color: var(--mainBgColor);
   width: 100%;
+  height: 50px;
   padding-top: 15px;
   z-index: 1;
+
+  @media only screen and (min-width: 900px) {
+    height: 100px;
+    padding-top: 25px;
+  }
 `;
 
 export const Content = styled.div`
@@ -12,11 +18,18 @@ export const Content = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const Logo = styled.div`
   img {
     width: 150px;
+  }
+
+  @media only screen and (min-width: 900px) {
+    img {
+      width: 300px;
+    }
   }
 `;
 
@@ -30,7 +43,16 @@ export const Menu = styled.nav`
   left: 0;
   transition: transform 0.3s ease-in-out;
   background-color: var(--mainBgColor);
-  z-index: 0;
+
+  @media only screen and (min-width: 900px) {
+    transform: scaleY(1);
+    position: relative;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    top: auto;
+    left: auto;
+  }
 `;
 
 export const BurgerButton = styled.button`
@@ -46,12 +68,28 @@ export const BurgerButton = styled.button`
   }
 `;
 
-export const MenuList = styled.ul``;
+export const MenuList = styled.ul`
+  @media only screen and (min-width: 900px) {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+`;
 
 export const MenuItem = styled.li`
   padding: 5px;
   border-bottom: 1px solid var(--tertiaryColor);
   a {
     color: var(--primaryColor);
+    transition: 300ms ease-in-out;
+
+    &:hover {
+      color: var(--tertiaryColor);
+    }
+  }
+
+  @media only screen and (min-width: 900px) {
+    border-bottom: none;
+    padding: 0;
   }
 `;

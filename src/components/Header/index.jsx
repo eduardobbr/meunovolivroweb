@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { GiBookshelf } from "react-icons/gi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { Hidden } from "@material-ui/core";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -42,17 +43,19 @@ const Header = () => {
             </MenuItem>
           </MenuList>
         </Menu>
-        <BurgerButton onClick={() => setOpen(!open)}>
-          {open ? (
-            <>
-              <AiOutlineCloseCircle />
-            </>
-          ) : (
-            <>
-              <GiBookshelf />
-            </>
-          )}
-        </BurgerButton>
+        <Hidden mdUp>
+          <BurgerButton onClick={() => setOpen(!open)}>
+            {open ? (
+              <>
+                <AiOutlineCloseCircle />
+              </>
+            ) : (
+              <>
+                <GiBookshelf />
+              </>
+            )}
+          </BurgerButton>
+        </Hidden>
       </Content>
     </Container>
   );

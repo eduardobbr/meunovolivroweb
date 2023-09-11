@@ -4,8 +4,7 @@ export const Container = styled.footer`
   background-color: var(--tertiaryColor);
   color: var(--secondaryTextColor);
   width: 100%;
-  height: 200px;
-  bottom: 0;
+  height: 175px;
 `;
 
 export const Content = styled.div`
