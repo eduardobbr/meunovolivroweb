@@ -1,5 +1,11 @@
+import Header from "../../components/Header";
+
 const Published = () => {
-  return <></>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
 export default Published;

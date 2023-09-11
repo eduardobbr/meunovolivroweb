@@ -1,5 +1,11 @@
+import Header from "../../components/Header";
+
 const SignUp = () => {
-  return <></>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
 export default SignUp;

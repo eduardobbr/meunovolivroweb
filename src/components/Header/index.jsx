@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom";
-import { BurgerButton, Container, Content, Logo, Menu } from "./style";
+import {
+  BurgerButton,
+  Container,
+  Content,
+  Logo,
+  Menu,
+  MenuItem,
+  MenuList,
+} from "./style";
 import { useState } from "react";
 import { GiBookshelf } from "react-icons/gi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Header = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <Container>
@@ -13,28 +21,28 @@ const Header = () => {
         <Logo>
           <Link to={"/"}>
             <img
-              src="http://localhost:1337/uploads/logo_meunovolivro_1_768x122_fa9d1a0995.png"
+              src="http://localhost:1337/uploads/logo_meunovolivro_1_768x122_e899097e44.png"
               alt="Logo Meu Novo Livro"
             />
           </Link>
         </Logo>
         <Menu open={open}>
-          <ul>
-            <li>
+          <MenuList>
+            <MenuItem>
               <Link to={"/login"}>Entrar/Cadastre-se</Link>
-            </li>
-            <li>
+            </MenuItem>
+            <MenuItem>
               <Link to={"/plans"}>Nossos Planos</Link>
-            </li>
-            <li>
+            </MenuItem>
+            <MenuItem>
               <Link to={"/published"}>Já Publicados</Link>
-            </li>
-            <li>
+            </MenuItem>
+            <MenuItem>
               <Link to={"/blog"}>Blog</Link>
-            </li>
-          </ul>
+            </MenuItem>
+          </MenuList>
         </Menu>
-        <BurgerButton>
+        <BurgerButton onClick={() => setOpen(!open)}>
           {open ? (
             <>
               <AiOutlineCloseCircle />

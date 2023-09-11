@@ -1,5 +1,11 @@
+import Header from "../../components/Header";
+
 const Plans = () => {
-  return <></>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
 export default Plans;

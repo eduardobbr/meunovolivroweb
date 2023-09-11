@@ -1,5 +1,11 @@
+import Header from "../../components/Header";
+
 const Blog = () => {
-  return <></>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
 export default Blog;

@@ -24,15 +24,32 @@ export const Menu = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
+  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(200%)")};
   height: 100vh;
   text-align: right;
-  padding: 2rem;
-  padding-top: 3rem;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 3rem;
+  right: 2rem;
   transition: transform 0.3s ease-in-out;
 `;
 
-export const BurgerButton = styled.button``;
+export const BurgerButton = styled.button`
+  border: none;
+  background: none;
+  width: 2rem;
+  height: 2rem;
+  padding: 1px;
+  svg {
+    color: var(--primaryColor);
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const MenuList = styled.ul``;
+
+export const MenuItem = styled.li`
+  a {
+    color: var(--primaryColor);
+  }
+`;
