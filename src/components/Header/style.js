@@ -3,7 +3,8 @@ import { styled } from "styled-components";
 export const Container = styled.header`
   background-color: var(--mainBgColor);
   width: 100%;
-  margin-top: 15px;
+  padding-top: 15px;
+  z-index: 1;
 `;
 
 export const Content = styled.div`
@@ -19,18 +20,17 @@ export const Logo = styled.div`
   }
 `;
 
-export const Menu = styled.div`
-  dispay: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(200%)")};
-  height: 100vh;
-  text-align: right;
+export const Menu = styled.nav`
+  transform: ${({ open }) => (open ? "scaleY(1)" : "scaleY(0)")};
+  transform-origin: top;
+  text-align: center;
   position: absolute;
-  top: 3rem;
-  right: 2rem;
+  width: 100%;
+  top: 45px;
+  left: 0;
   transition: transform 0.3s ease-in-out;
+  background-color: var(--mainBgColor);
+  z-index: 0;
 `;
 
 export const BurgerButton = styled.button`
@@ -49,6 +49,8 @@ export const BurgerButton = styled.button`
 export const MenuList = styled.ul``;
 
 export const MenuItem = styled.li`
+  padding: 5px;
+  border-bottom: 1px solid var(--tertiaryColor);
   a {
     color: var(--primaryColor);
   }
