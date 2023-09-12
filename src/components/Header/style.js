@@ -7,9 +7,9 @@ export const Container = styled.header`
   padding-top: 15px;
   z-index: 1;
 
-  @media only screen and (min-width: 900px) {
-    height: 100px;
-    padding-top: 25px;
+  @media only screen and (min-width: 960px) {
+    height: 80px;
+    padding-top: 20px;
   }
 `;
 
@@ -26,9 +26,9 @@ export const Logo = styled.div`
     width: 150px;
   }
 
-  @media only screen and (min-width: 900px) {
+  @media only screen and (min-width: 960px) {
     img {
-      width: 300px;
+      width: 250px;
     }
   }
 `;
@@ -45,7 +45,7 @@ export const Menu = styled.nav`
   background-color: var(--mainBgColor);
   z-index: 1;
 
-  @media only screen and (min-width: 900px) {
+  @media only screen and (min-width: 960px) {
     transform: scaleY(1);
     position: relative;
     width: 50%;
@@ -76,7 +76,7 @@ export const BurgerButton = styled.button`
 `;
 
 export const MenuList = styled.ul`
-  @media only screen and (min-width: 900px) {
+  @media only screen and (min-width: 960px) {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -94,7 +94,7 @@ export const MenuItem = styled.li`
     }
   }
 
-  @media only screen and (min-width: 900px) {
+  @media only screen and (min-width: 960px) {
     border-bottom: none;
     padding: 0;
   }

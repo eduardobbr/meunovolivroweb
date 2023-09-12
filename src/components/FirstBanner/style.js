@@ -25,6 +25,12 @@ export const Banner = styled.section`
     left: 0;
     background-color: var(--mainBgColorOpacity);
   }
+
+  @media only screen and (min-width: 960px) {
+    flex-direction: row;
+    text-align: left;
+    padding: 40px 10%;
+  }
 `;
 
 export const BannerTitle = styled.h2`
@@ -32,6 +38,10 @@ export const BannerTitle = styled.h2`
   font-size: 35px;
   font-weight: 800;
   font-family: "Bitter", Sans-serif;
+
+  @media only screen and (min-width: 960px) {
+    font-size: 85px;
+  }
 `;
 
 export const BannerDescription = styled.p`
@@ -61,10 +71,18 @@ export const TextContent = styled.div`
     transition: 300ms ease-in-out;
     border-radius: 2px;
     width: 175px;
+    text-align: center;
   }
 
   a:hover {
     background-color: var(--primaryColor);
+  }
+
+  @media only screen and (min-width: 960px) {
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    width: 70%;
   }
 `;
 
@@ -84,8 +102,14 @@ export const ImgContent = styled.div`
     transition: 0.3s ease-in-out;
   }
 
-  img:hover {
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
-    width: 155px;
+  @media only screen and (min-width: 960px) {
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    width: 30%;
+
+    img {
+      width: 90%;
+    }
   }
 `;
