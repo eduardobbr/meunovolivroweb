@@ -18,14 +18,39 @@ import workSansSemiBoldItalic from "../assets/workSans/WorkSans-SemiBoldItalic.t
 import workSansThin from "../assets/workSans/WorkSans-Thin.ttf";
 import workSansThinItalic from "../assets/workSans/WorkSans-ThinItalic.ttf";
 
+import bitterBlack from "../assets/Bitter/Bitter-Black.ttf";
+import bitterBlackItalic from "../assets/Bitter/Bitter-BlackItalic.ttf";
+import bitterBold from "../assets/Bitter/Bitter-Bold.ttf";
+import bitterBoldItalic from "../assets/Bitter/Bitter-BoldItalic.ttf";
+import bitterExtraBold from "../assets/Bitter/Bitter-ExtraBold.ttf";
+import bitterExtraBoldItalic from "../assets/Bitter/Bitter-ExtraBoldItalic.ttf";
+import bitterExtraLight from "../assets/Bitter/Bitter-ExtraLight.ttf";
+import bitterExtraLightItalic from "../assets/Bitter/Bitter-ExtraLightItalic.ttf";
+import bitterItalic from "../assets/Bitter/Bitter-Italic.ttf";
+import bitterLight from "../assets/Bitter/Bitter-Light.ttf";
+import bitterLightItalic from "../assets/Bitter/Bitter-LightItalic.ttf";
+import bitterMedium from "../assets/Bitter/Bitter-Medium.ttf";
+import bitterMediumItalic from "../assets/Bitter/Bitter-MediumItalic.ttf";
+import bitterRegular from "../assets/Bitter/Bitter-Regular.ttf";
+import bitterSemiBold from "../assets/Bitter/Bitter-SemiBold.ttf";
+import bitterSemiBoldItalic from "../assets/Bitter/Bitter-SemiBoldItalic.ttf";
+import bitterThin from "../assets/Bitter/Bitter-Thin.ttf";
+import bitterThinItalic from "../assets/Bitter/Bitter-ThinItalic.ttf";
+
 export const GlobalStyle = createGlobalStyle`
 @font-face{
     font-family: "Work Sans";
-    src: url(${workSansBlack}) format('ttf'), url(${workSansBlackItalic}) format('ttf'), url(${workSansBold}) format('ttf'), url(${workSansBoldItalic}) format('ttf'), url(${workSansExtraBold}) format('ttf'), url(${workSansExtraBoldItalic}) format('ttf'), url(${workSansExtraLight}) format('ttf'), url(${workSansExtraLightItalic}) format('ttf'), url(${workSansItalic}) format('ttf'), url(${workSansLight}) format('ttf'), url(${workSansLightItalic}) format('ttf'), url(${workSansMedium}) format('ttf'), url(${workSansMediumItalic}) format('ttf'), url(${workSansRegular}) format('ttf'), url(${workSansSemiBold}) format('ttf'), url(${workSansSemiBoldItalic}) format('ttf'), url(${workSansThin}) format('ttf'), url(${workSansThinItalic}) format('ttf');
+    src: url(${workSansBlack}) format('ttf'), url(${workSansBlackItalic}) format('ttf'), url(${workSansBold}) format('ttf'), url(${workSansBoldItalic}) format('ttf'), url(${workSansExtraBold}) format('ttf'), url(${workSansExtraBoldItalic}) format('ttf'), url(${workSansExtraLight}) format('ttf'), url(${workSansExtraLightItalic}) format('ttf'), url(${workSansItalic}) format('ttf'), url(${workSansLight}) format('ttf'), url(${workSansLightItalic}) format('ttf'), url(${workSansMedium}) format('ttf'), url(${workSansMediumItalic}) format('ttf'), url(${workSansRegular}) format('ttf'), url(${workSansSemiBold}) format('ttf'), url(${workSansSemiBoldItalic}) format('ttf'), url(${workSansThin}) format('ttf'), url(${workSansThinItalic}) format('ttf');    
+}
+
+@font-face{
+    font-family: "Bitter";
+    src: url(${bitterBlack}) format('ttf'), url(${bitterBlackItalic}) format('ttf'), url(${bitterBold}) format('ttf'), url(${bitterBoldItalic}) format('ttf'), url(${bitterExtraBold}) format('ttf'), url(${bitterExtraBoldItalic}) format('ttf'), url(${bitterExtraLight}) format('ttf'), url(${bitterExtraLightItalic}) format('ttf'), url(${bitterItalic}) format('ttf'), url(${bitterLight}) format('ttf'), url(${bitterLightItalic}) format('ttf'), url(${bitterMedium}) format('ttf'), url(${bitterMediumItalic}) format('ttf'), url(${bitterRegular}) format('ttf'), url(${bitterSemiBold}) format('ttf'), url(${bitterSemiBoldItalic}) format('ttf'), url(${bitterThin}) format('ttf'), url(${bitterThinItalic}) format('ttf');
 }
 
 :root { 
     --mainBgColor: rgb(255, 255, 255);
+    --mainBgColorOpacity: rgba(8, 9, 48, 0.44);
     --primaryColor: rgb(211, 109, 30);
     --secondaryColor: rgb(175, 28, 30);
     --tertiaryColor: rgb(8, 9, 48);
