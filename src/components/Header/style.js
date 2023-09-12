@@ -61,10 +61,16 @@ export const BurgerButton = styled.button`
   width: 2rem;
   height: 2rem;
   padding: 1px;
+
   svg {
-    color: var(--primaryColor);
+    color: var(--tertiaryColor);
     width: 100%;
     height: 100%;
+    transition: 300ms ease-in-out;
+  }
+
+  svg:hover {
+    color: var(--primaryColor);
   }
 `;
 
@@ -77,14 +83,13 @@ export const MenuList = styled.ul`
 `;
 
 export const MenuItem = styled.li`
-  padding: 5px;
-  border-bottom: 1px solid var(--tertiaryColor);
+  padding: 10px 5px;
   a {
-    color: var(--primaryColor);
+    color: var(--mainTextColor);
     transition: 300ms ease-in-out;
 
     &:hover {
-      color: var(--tertiaryColor);
+      color: var(--primaryColor);
     }
   }
 
