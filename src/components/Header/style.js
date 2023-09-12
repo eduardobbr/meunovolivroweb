@@ -43,6 +43,7 @@ export const Menu = styled.nav`
   left: 0;
   transition: transform 0.3s ease-in-out;
   background-color: var(--mainBgColor);
+  z-index: 1;
 
   @media only screen and (min-width: 900px) {
     transform: scaleY(1);

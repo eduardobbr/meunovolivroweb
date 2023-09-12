@@ -15,7 +15,6 @@ export const Banner = styled.section`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  z-index: -1;
 
   &::before {
     content: "";
@@ -49,7 +48,7 @@ export const TextContent = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-
+  position: relative;
   a {
     position: relative;
     font-size: 14px;
@@ -76,15 +75,17 @@ export const ImgContent = styled.div`
   flex-direction: column;
   justify-content: end;
   align-items: center;
+  position: relative;
 
   img {
     position: relative;
     width: 150px;
     box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
 
   img:hover {
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    width: 155px;
   }
 `;
