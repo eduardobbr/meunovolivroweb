@@ -28,6 +28,7 @@ export const Banner = styled.section`
 
   @media only screen and (min-width: 960px) {
     flex-direction: row;
+    justify-content: space-around;
     text-align: left;
     padding: 40px 10%;
   }
@@ -109,7 +110,7 @@ export const ImgContent = styled.div`
     width: 30%;
 
     img {
-      width: 90%;
+      width: 300px;
     }
   }
 `;

@@ -11,10 +11,12 @@ import {
 import { useState } from "react";
 import { GiBookshelf } from "react-icons/gi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { Hidden } from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
+import { theme } from "../../styles/theme";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const mobile = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <Container>
@@ -43,7 +45,10 @@ const Header = () => {
             </MenuItem>
           </MenuList>
         </Menu>
-        <Hidden mdUp>
+
+        {mobile ? (
+          <></>
+        ) : (
           <BurgerButton onClick={() => setOpen(!open)}>
             {open ? (
               <>
@@ -55,7 +60,7 @@ const Header = () => {
               </>
             )}
           </BurgerButton>
-        </Hidden>
+        )}
       </Content>
     </Container>
   );

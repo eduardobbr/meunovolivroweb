@@ -4,6 +4,11 @@ export const Container = styled.section`
   width: 80%;
   margin: 0 auto;
   height: 500px;
+
+  @media only screen and (min-width: 960px) {
+    display: flex;
+    justify-content: space-around;
+  }
 `;
 
 export const FormBox = styled.div`
@@ -11,6 +16,11 @@ export const FormBox = styled.div`
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
+
+  @media only screen and (min-width: 960px) {
+    width: 50%;
+    padding-right: 30px;
+  }
 `;
 
 export const Title = styled.h2`
@@ -41,4 +51,10 @@ export const FieldName = styled.label`
 export const SelectItem = styled.select`
   height: 50px;
   font-size: 18px;
+`;
+
+export const ImgBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

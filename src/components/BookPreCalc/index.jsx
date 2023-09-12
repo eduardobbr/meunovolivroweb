@@ -3,18 +3,23 @@ import {
   Container,
   FieldName,
   FormBox,
+  ImgBox,
   Paragraph,
   SelectBox,
   SelectItem,
   SubTitle,
   Title,
 } from "./style";
+import { useMediaQuery } from "@material-ui/core";
+import { theme } from "../../styles/theme";
 
 const BookPreCalc = () => {
   const [format, setFormat] = useState("1421");
   const [paper, setPaper] = useState("polenSoft90g");
   const [pagesAmount, setPagesAmount] = useState("80");
   const [value, setValue] = useState(0);
+
+  const mobile = useMediaQuery(theme.breakpoints.up("md"));
 
   const changeFormat = (event) => {
     setFormat(event.target.value);
@@ -42,7 +47,7 @@ const BookPreCalc = () => {
 
     const sum = values[format] + values[paper] + values[pagesAmount];
 
-    setValue(sum.toFixed(2));
+    setValue(sum);
   }, [format, paper, pagesAmount]);
 
   useEffect(() => {
@@ -122,6 +127,17 @@ const BookPreCalc = () => {
           </Paragraph>
         </div>
       </FormBox>
+
+      {mobile ? (
+        <ImgBox sx={{ display: {} }}>
+          <img
+            src="http://localhost:1337/uploads/read_image01_c706438751.jpeg"
+            alt="Imagem de um Leitor"
+          />
+        </ImgBox>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };
