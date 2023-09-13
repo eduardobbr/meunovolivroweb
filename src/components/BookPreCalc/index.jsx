@@ -8,6 +8,7 @@ import {
   SelectBox,
   SelectItem,
   SubTitle,
+  TextBox,
   Title,
 } from "./style";
 import { useMediaQuery } from "@material-ui/core";
@@ -58,10 +59,10 @@ const BookPreCalc = () => {
   return (
     <Container>
       <FormBox>
-        <div>
+        <TextBox>
           <Title>Configure seu livro abaixo:</Title>
           <SubTitle>Faça uma simulação dos valores</SubTitle>
-        </div>
+        </TextBox>
 
         <div>
           <SelectBox>
@@ -133,7 +134,7 @@ const BookPreCalc = () => {
       </FormBox>
 
       {mobile ? (
-        <ImgBox sx={{ display: {} }}>
+        <ImgBox>
           <img
             src="http://localhost:1337/uploads/read_image01_c706438751.jpeg"
             alt="Imagem de um Leitor"

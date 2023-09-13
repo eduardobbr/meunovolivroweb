@@ -54,6 +54,7 @@ export const GlobalStyle = createGlobalStyle`
     --primaryColor: rgb(237, 109, 9);
     --secondaryColor: rgb(175, 28, 30);
     --tertiaryColor: rgb(8, 9, 48);
+    --quaternaryColor: rgb(247, 164, 8);
     --mainTextColor: rgb(122, 122, 122);
     --secondaryTextColor: rgb(255, 255, 255);
 }

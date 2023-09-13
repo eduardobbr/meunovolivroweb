@@ -92,7 +92,7 @@ export const TextContent = styled.div`
   }
 
   a:hover {
-    background-color: var(--primaryColor);
+    background-color: var(--quaternaryColor);
   }
 
   @media only screen and (min-width: 960px) {

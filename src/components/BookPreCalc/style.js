@@ -17,11 +17,17 @@ export const FormBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   height: 100%;
+  width: 100%;
+  > div {
+    width: 100%;
+  }
 
   @media only screen and (min-width: 960px) {
     width: 50%;
     padding-right: 30px;
+    align-items: flex-start;
   }
 `;
 
@@ -77,4 +83,8 @@ export const ImgBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const TextBox = styled.div`
+  align-self: flex-start;
 `;
