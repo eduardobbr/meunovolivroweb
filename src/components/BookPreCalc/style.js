@@ -2,9 +2,11 @@ import { styled } from "styled-components";
 
 export const Container = styled.section`
   width: 80%;
+  max-width: 1200px;
   margin: 0 auto;
   height: 500px;
-
+  display: flex;
+  justify-content: center;
   @media only screen and (min-width: 960px) {
     display: flex;
     justify-content: space-around;
@@ -51,6 +53,7 @@ export const FieldName = styled.label`
 export const SelectItem = styled.select`
   height: 50px;
   font-size: 18px;
+  max-width: 400px;
 `;
 
 export const ImgBox = styled.div`

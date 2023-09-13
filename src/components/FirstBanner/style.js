@@ -16,6 +16,15 @@ export const Banner = styled.section`
   align-items: center;
   position: relative;
 
+  > div {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -30,7 +39,14 @@ export const Banner = styled.section`
     flex-direction: row;
     justify-content: space-around;
     text-align: left;
-    padding: 40px 10%;
+
+    > div {
+      flex-direction: row;
+      justify-content: space-around;
+      text-align: left;
+      width: 80%;
+      max-width: 1200px;
+    }
   }
 `;
 
