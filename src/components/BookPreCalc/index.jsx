@@ -12,6 +12,7 @@ import {
 } from "./style";
 import { useMediaQuery } from "@material-ui/core";
 import { theme } from "../../styles/theme";
+import { Link } from "react-router-dom";
 
 const BookPreCalc = () => {
   const [format, setFormat] = useState("1421");
@@ -124,6 +125,9 @@ const BookPreCalc = () => {
               style: "currency",
               currency: "BRL",
             }).format(value / 10)}
+          </Paragraph>
+          <Paragraph>
+            <Link to="/login">Comece a produção</Link>
           </Paragraph>
         </div>
       </FormBox>

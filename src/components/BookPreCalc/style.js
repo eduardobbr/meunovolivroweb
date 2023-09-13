@@ -36,6 +36,23 @@ export const SubTitle = styled.h3`
 
 export const Paragraph = styled.p`
   color: var(--mainTextColor);
+  margin-bottom: 5px;
+
+  a {
+    padding: 3px;
+    border: 1px solid var(--mainTextColor);
+    transition: 300ms ease-in-out;
+    border-radius: 2px;
+    width: 175px;
+    text-align: center;
+    color: var(--mainTextColor);
+  }
+
+  a:hover {
+    background-color: var(--tertiaryColor);
+    border-color: var(--tertiaryColor);
+    color: var(--secondaryTextColor);
+  }
 `;
 
 export const SelectBox = styled.div`

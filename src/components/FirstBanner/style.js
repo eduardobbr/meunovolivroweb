@@ -42,7 +42,7 @@ export const Banner = styled.section`
 
     > div {
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-between;
       text-align: left;
       width: 80%;
       max-width: 1200px;
@@ -99,7 +99,7 @@ export const TextContent = styled.div`
     align-items: flex-start;
     justify-content: center;
     height: 100%;
-    width: 70%;
+    width: 60%;
   }
 `;
 
