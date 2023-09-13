@@ -4,6 +4,7 @@ import { Container } from "./style";
 import FirstBanner from "../../components/FirstBanner";
 import BookPreCalc from "../../components/BookPreCalc";
 import Works from "../../components/Works";
+import SecondBanner from "../../components/SecondBanner";
 
 const Landing = () => {
   return (
@@ -13,6 +14,7 @@ const Landing = () => {
         <FirstBanner />
         <BookPreCalc />
         <Works />
+        <SecondBanner />
       </Container>
       <Footer />
     </>
