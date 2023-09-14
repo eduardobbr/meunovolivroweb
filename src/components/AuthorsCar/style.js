@@ -23,26 +23,19 @@ export const Container = styled.section`
 export const Content = styled.div`
   position: relative;
   width: 80%;
+  max-width: 1200px;
   height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  .carouselContainer {
-    width: 100%;
-    height: 70%;
-  }
-  .carouselItem {
+  .carousel-root {
     height: 90%;
-  }
-  .swiper-button-prev {
-    height: 30px;
-    position: absolute;
-  }
-  .swiper-button-prev:after {
-    height: 30px;
-    font-size: 30px;
+
+    .carousel {
+      height: 100%;
+    }
   }
 `;
 
@@ -51,4 +44,32 @@ export const Title = styled.h2`
   font-weight: 800;
   font-size: 31px;
   padding: 15px 0;
+`;
+
+export const Balloon = styled.div`
+  background-color: var(--mainBgColor);
+  height: 250px;
+`;
+
+export const BalloonBox = styled.div`
+  width: 20px;
+  height: 20px;
+  background-color: var(--mainBgColor);
+  margin-top: -10px;
+  margin-left: 40px;
+  rotate: 45deg;
+`;
+
+export const Box = styled.div`
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondaryTextColor);
+  img {
+    max-width: 50px;
+    margin-right: 20px;
+    height: 50px;
+    border-radius: 50%;
+  }
 `;
