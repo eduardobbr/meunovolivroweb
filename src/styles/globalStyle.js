@@ -51,6 +51,7 @@ export const GlobalStyle = createGlobalStyle`
 :root { 
     --mainBgColor: rgb(255, 255, 255);
     --mainBgColorOpacity: rgba(8, 9, 48, 0.44);
+    --secondBgColorOpacity: rgba(112, 209, 149, 0.7);
     --primaryColor: rgb(237, 109, 9);
     --secondaryColor: rgb(175, 28, 30);
     --tertiaryColor: rgb(8, 9, 48);
