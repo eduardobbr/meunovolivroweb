@@ -31,6 +31,40 @@ const AuthorsCar = () => {
               </div>
             </Box>
           </div>
+          <div>
+            <div>
+              <Balloon>Texto</Balloon>
+              <BalloonBox></BalloonBox>
+            </div>
+            <Box>
+              <img
+                src="http://localhost:1337/uploads/team_image01_cb03cdcdef.jpeg"
+                alt="Foto do Autor"
+              />
+              <div>
+                <h3>autor</h3>
+                <h4>livro</h4>
+              </div>
+            </Box>
+          </div>
+          <div>
+            <div>
+              <Balloon>
+                Texto
+                <BalloonBox />
+              </Balloon>
+            </div>
+            <Box>
+              <img
+                src="http://localhost:1337/uploads/team_image01_cb03cdcdef.jpeg"
+                alt="Foto do Autor"
+              />
+              <div>
+                <h3>autor</h3>
+                <h4>livro</h4>
+              </div>
+            </Box>
+          </div>
         </Carousel>
       </Content>
     </Container>

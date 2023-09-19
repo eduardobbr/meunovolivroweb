@@ -49,14 +49,17 @@ export const Title = styled.h2`
 export const Balloon = styled.div`
   background-color: var(--mainBgColor);
   height: 250px;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
 `;
 
 export const BalloonBox = styled.div`
   width: 20px;
   height: 20px;
   background-color: var(--mainBgColor);
-  margin-top: -10px;
-  margin-left: 40px;
+  position: absolute;
+  bottom: 0;
   rotate: 45deg;
 `;
 
