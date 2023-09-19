@@ -32,7 +32,7 @@ const Header = () => {
         <Menu open={open}>
           <MenuList>
             <MenuItem>
-              <Link to={"/login"}>Entrar/Cadastre-se</Link>
+              <Link to={"/login-register"}>Entrar/Cadastre-se</Link>
             </MenuItem>
             <MenuItem>
               <Link to={"/plans"}>Nossos Planos</Link>
