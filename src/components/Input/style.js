@@ -5,6 +5,16 @@ export const Container = styled.div`
   padding: 2px;
   width: 80%;
 
+  p {
+    ${(props) =>
+      props.$required &&
+      `&::after{
+        content: "*";
+      color: #c53030;
+
+      }`}
+  }
+
   div:last-child {
     height: 20px;
 
@@ -15,7 +25,7 @@ export const Container = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  background: var(--secondaryTextColor);
+  background: var(--inputBgColorOpacity);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -24,8 +34,8 @@ export const InputContainer = styled.div`
   border: 2px solid transparent;
   transition: border ease-in-out 300ms;
 
-  :hover,
-  :focus {
+  &:hover,
+  &:focus {
     border-color: var(--tertiaryColor);
   }
 
@@ -46,15 +56,7 @@ export const InputContainer = styled.div`
     border: none;
     border-radius: 0 4px 4px 0;
 
-    ${(props) =>
-      props.required &&
-      `::after{
-        content: "*";
-      border-color: #c53030;
-
-      }`}
-
-    ::placeholder {
+    &::placeholder {
       color: var(--mainTextColor);
     }
   }
