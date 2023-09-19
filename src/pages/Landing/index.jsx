@@ -6,6 +6,7 @@ import BookPreCalc from "../../components/BookPreCalc";
 import Works from "../../components/Works";
 import SecondBanner from "../../components/SecondBanner";
 import AuthorsCar from "../../components/AuthorsCar";
+import LastBooks from "../../components/LastBooks";
 
 const Landing = () => {
   return (
@@ -17,6 +18,7 @@ const Landing = () => {
         <Works />
         <SecondBanner />
         <AuthorsCar />
+        <LastBooks />
       </Container>
       <Footer />
     </>

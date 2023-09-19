@@ -18,7 +18,10 @@ const AuthorsCar = () => {
           <div>
             <div>
               <Balloon>
-                Texto
+                Madness ultimate eternal-return hope insofar decieve victorious
+                good faithful pinnacle endless free christian. Holiest merciful
+                ultimate christianity ultimate truth salvation against morality
+                decieve prejudice. Fearful.
                 <BalloonBox />
               </Balloon>
             </div>
@@ -28,15 +31,18 @@ const AuthorsCar = () => {
                 alt="Foto do Autor"
               />
               <div>
-                <h3>autor</h3>
-                <h4>livro</h4>
+                <h3>John Doe</h3>
+                <h4>Autor de Minha Mãe e Eu</h4>
               </div>
             </Box>
           </div>
           <div>
             <div>
               <Balloon>
-                Texto
+                Madness ultimate eternal-return hope insofar decieve victorious
+                good faithful pinnacle endless free christian. Holiest merciful
+                ultimate christianity ultimate truth salvation against morality
+                decieve prejudice. Fearful.
                 <BalloonBox />
               </Balloon>
             </div>
@@ -46,15 +52,18 @@ const AuthorsCar = () => {
                 alt="Foto do Autor"
               />
               <div>
-                <h3>autor</h3>
-                <h4>livro</h4>
+                <h3>John Doe</h3>
+                <h4>Autor de Minha Mãe e Eu</h4>
               </div>
             </Box>
           </div>
           <div>
             <div>
               <Balloon>
-                Texto
+                Madness ultimate eternal-return hope insofar decieve victorious
+                good faithful pinnacle endless free christian. Holiest merciful
+                ultimate christianity ultimate truth salvation against morality
+                decieve prejudice. Fearful.
                 <BalloonBox />
               </Balloon>
             </div>
@@ -64,8 +73,8 @@ const AuthorsCar = () => {
                 alt="Foto do Autor"
               />
               <div>
-                <h3>autor</h3>
-                <h4>livro</h4>
+                <h3>John Doe</h3>
+                <h4>Autor de Minha Mãe e Eu</h4>
               </div>
             </Box>
           </div>

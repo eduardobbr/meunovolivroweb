@@ -35,6 +35,7 @@ export const Content = styled.div`
 
     .carousel {
       height: 100%;
+      display: flex;
     }
   }
 `;
@@ -48,11 +49,12 @@ export const Title = styled.h2`
 
 export const Balloon = styled.div`
   background-color: var(--mainBgColor);
-  height: 250px;
   max-width: 600px;
   margin: 0 auto;
   position: relative;
   padding: 10px;
+  text-align: left;
+  color: var(--mainTextColor);
 `;
 
 export const BalloonBox = styled.div`
@@ -68,9 +70,21 @@ export const BalloonBox = styled.div`
 export const Box = styled.div`
   height: 100px;
   display: flex;
-  justify-content: center;
+  margin-left: 20%;
   align-items: center;
   color: var(--secondaryTextColor);
+  text-align: left;
+
+  h3 {
+    font-family: "Josefin Sans";
+    font-weight: 400;
+  }
+
+  h4 {
+    font-family: "Bitter";
+    font-weight: 400;
+    font-size: 0.7rem;
+  }
   img {
     max-width: 50px;
     margin-right: 20px;
