@@ -17,8 +17,10 @@ const AuthorsCar = () => {
         >
           <div>
             <div>
-              <Balloon>Texto</Balloon>
-              <BalloonBox></BalloonBox>
+              <Balloon>
+                Texto
+                <BalloonBox />
+              </Balloon>
             </div>
             <Box>
               <img
@@ -33,8 +35,10 @@ const AuthorsCar = () => {
           </div>
           <div>
             <div>
-              <Balloon>Texto</Balloon>
-              <BalloonBox></BalloonBox>
+              <Balloon>
+                Texto
+                <BalloonBox />
+              </Balloon>
             </div>
             <Box>
               <img

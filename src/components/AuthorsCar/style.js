@@ -52,6 +52,7 @@ export const Balloon = styled.div`
   max-width: 600px;
   margin: 0 auto;
   position: relative;
+  padding: 10px;
 `;
 
 export const BalloonBox = styled.div`
@@ -59,7 +60,8 @@ export const BalloonBox = styled.div`
   height: 20px;
   background-color: var(--mainBgColor);
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
+  left: 20%;
   rotate: 45deg;
 `;
 
