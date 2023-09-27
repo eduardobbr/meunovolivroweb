@@ -1,5 +1,6 @@
 import { useBooks } from "../../provider/Books";
-import { Container } from "./style";
+import { Container, EditorBox } from "./style";
+import TextPreview from "../TextPreview";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Importe o estilo CSS
 import "react-quill/dist/quill.core.css"; // Importe o estilo CSS
@@ -13,25 +14,27 @@ const TextEditor = () => {
 
   return (
     <Container>
-      <ReactQuill
-        value={bookContent}
-        onChange={handleChange}
-        modules={{
-          toolbar: [
-            [{ header: [1, 2, false] }],
-            ["bold", "italic", "underline"],
-            [{ list: "ordered" }, { list: "bullet" }],
-            [{ align: ["", "center", "right", "justify"] }],
-            ["link", "image"],
-          ],
-        }}
-        style={{ width: "400px", height: "600px" }}
-      />
+      <EditorBox>
+        <ReactQuill
+          value={bookContent}
+          onChange={handleChange}
+          modules={{
+            toolbar: [
+              [{ header: [1, 2, false] }],
+              ["bold", "italic", "underline"],
+              [{ list: "ordered" }, { list: "bullet" }],
+              [{ align: ["justify", "", "center", "right"] }],
+              ["link", "image"],
+            ],
+          }}
+          style={{ width: "100%", height: "500px" }}
+        />
+      </EditorBox>
 
-      <div
+      <TextPreview
         className="view ql-editor"
         dangerouslySetInnerHTML={{ __html: bookContent }}
-      ></div>
+      ></TextPreview>
     </Container>
   );
 };
