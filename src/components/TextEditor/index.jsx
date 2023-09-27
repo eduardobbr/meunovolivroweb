@@ -1,29 +1,38 @@
-import { useState } from "react";
+import { useBooks } from "../../provider/Books";
+import { Container } from "./style";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Importe o estilo CSS
+import "react-quill/dist/quill.core.css"; // Importe o estilo CSS
 
 const TextEditor = () => {
-  const [text, setText] = useState("");
+  const { bookContent, setBookContent } = useBooks();
 
   const handleChange = (content) => {
-    setText(content);
+    setBookContent(content);
   };
 
   return (
-    <div>
+    <Container>
       <ReactQuill
-        value={text}
+        value={bookContent}
         onChange={handleChange}
         modules={{
           toolbar: [
-            [{ header: "1" }, { header: "2" }],
+            [{ header: [1, 2, false] }],
             ["bold", "italic", "underline"],
             [{ list: "ordered" }, { list: "bullet" }],
-            ["clean"],
+            [{ align: ["", "center", "right", "justify"] }],
+            ["link", "image"],
           ],
         }}
+        style={{ width: "400px", height: "600px" }}
       />
-    </div>
+
+      <div
+        className="view ql-editor"
+        dangerouslySetInnerHTML={{ __html: bookContent }}
+      ></div>
+    </Container>
   );
 };
 

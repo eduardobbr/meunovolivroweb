@@ -1,5 +1,7 @@
+import { BooksProvider } from "./Books";
+
 const Provider = ({ children }) => {
-  return <>{children}</>;
+  return <BooksProvider>{children}</BooksProvider>;
 };
 
 export default Provider;
