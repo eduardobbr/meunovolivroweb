@@ -31,10 +31,7 @@ const TextEditor = () => {
         />
       </EditorBox>
 
-      <TextPreview
-        className="view ql-editor"
-        dangerouslySetInnerHTML={{ __html: bookContent }}
-      ></TextPreview>
+      <TextPreview bookContent={bookContent}></TextPreview>
     </Container>
   );
 };

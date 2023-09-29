@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 605px;
-  height: 794px;
   padding: 96px 72px;
   border: 1px solid #ccc;
   word-wrap: break-word;
@@ -10,16 +9,17 @@ export const Container = styled.div`
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+  margin-bottom: 50px;
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 19px;
     page-break-before: always;
   }
   h2 {
-    font-size: 1.2rem;
+    font-size: 13px;
   }
   p {
-    font-size: 1rem;
+    font-size: 11px;
   }
   img {
     max-width: 80%;

@@ -1,7 +1,44 @@
-import { Container } from "./style";
+import { Html } from "react-pdf-html";
+import {
+  Document,
+  PDFViewer,
+  Page,
+  StyleSheet,
+  Text,
+} from "@react-pdf/renderer";
+import { styleHtml } from "./stylesQuill";
 
-const TextPreview = ({ ...rest }) => {
-  return <Container {...rest}></Container>;
+const TextPreview = ({ bookContent }) => {
+  const styles = StyleSheet.create({
+    page: {
+      flexDirection: "row",
+      paddingVertical: 96,
+      paddingHorizontal: 72,
+    },
+  });
+
+  const html = `
+  <html>
+  <body>
+  <style>
+   ${styleHtml}
+  </style>
+    <div class='ql-editor'>${bookContent}</div>
+  </body>
+  </html>
+  `;
+
+  return (
+    <PDFViewer>
+      <Document>
+        <Page size="LETTER" wrap style={styles.page}>
+          <Text break style={styles.text}>
+            <Html collapse={false}>{html}</Html>
+          </Text>
+        </Page>
+      </Document>
+    </PDFViewer>
+  );
 };
 
 export default TextPreview;
