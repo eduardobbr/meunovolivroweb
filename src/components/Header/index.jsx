@@ -19,7 +19,7 @@ const Header = () => {
   const mobile = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <Container>
+    <Container className="header">
       <Content>
         <Logo>
           <Link to={"/"}>

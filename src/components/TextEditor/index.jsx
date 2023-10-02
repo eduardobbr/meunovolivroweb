@@ -16,6 +16,7 @@ const TextEditor = () => {
     <Container>
       <EditorBox>
         <ReactQuill
+          className="editor"
           value={bookContent}
           onChange={handleChange}
           modules={{

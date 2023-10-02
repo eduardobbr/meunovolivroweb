@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 605px;
+  width: 160mm;
+  height: 210mm;
   padding: 96px 72px;
   border: 1px solid #ccc;
   word-wrap: break-word;
@@ -10,6 +11,7 @@ export const Container = styled.div`
   -ms-hyphens: auto;
   hyphens: auto;
   margin-bottom: 50px;
+  font-size: 11px;
 
   h1 {
     font-size: 19px;
@@ -18,10 +20,22 @@ export const Container = styled.div`
   h2 {
     font-size: 13px;
   }
-  p {
-    font-size: 11px;
+  p::before {
+    content: "       ";
   }
   img {
     max-width: 80%;
+  }
+
+  @media print {
+    @page {
+      size: 160mm 210mm;
+      margin: 20mm 20mm 25mm 20mm;
+    }
+
+    height: auto;
+    width: auto;
+    border: none;
+    padding: 0;
   }
 `;

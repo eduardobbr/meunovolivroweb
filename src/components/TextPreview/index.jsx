@@ -1,45 +1,28 @@
-import { Html } from "react-pdf-html";
-import {
-  Document,
-  PDFViewer,
-  Page,
-  StyleSheet,
-  Text,
-} from "@react-pdf/renderer";
-import { styleHtml, styleTest } from "./stylesQuill";
+import { Container } from "./style";
+import "react-quill/dist/quill.core.css"; // Importe o estilo CSS
+import "react-quill/dist/quill.snow.css"; // Importe o estilo CSS
+
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 const TextPreview = ({ bookContent }) => {
-  const styles = StyleSheet.create({
-    page: {
-      flexDirection: "row",
-      paddingVertical: 96,
-      paddingHorizontal: 72,
-    },
+  const printComp = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => printComp.current,
+    documentTitle: "BookPreview",
   });
 
-  const html = `
-  <html>
-  <body>
-  <style>
-   ${styleHtml}
-  </style>
-    <div class='ql-editor'>${bookContent}</div>
-  </body>
-  </html>
-  `;
-
   return (
-    <PDFViewer>
-      <Document>
-        <Page size="LETTER" wrap style={styles.page}>
-          <Text break style={styles.text}>
-            <Html resetStyles collapse={false}>
-              {html}
-            </Html>
-          </Text>
-        </Page>
-      </Document>
-    </PDFViewer>
+    <>
+      <Container
+        ref={printComp}
+        className="ql-editor print"
+        dangerouslySetInnerHTML={{ __html: bookContent }}
+      ></Container>
+
+      <button onClick={handlePrint}>Download Preview</button>
+    </>
   );
 };
 
