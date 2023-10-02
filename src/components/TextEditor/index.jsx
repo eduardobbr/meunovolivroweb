@@ -21,6 +21,7 @@ const TextEditor = () => {
           modules={{
             toolbar: [
               [{ header: [1, 2, false] }],
+              [{ indent: "-1" }, { indent: "+1" }],
               ["bold", "italic", "underline"],
               [{ list: "ordered" }, { list: "bullet" }],
               [{ align: ["justify", "", "center", "right"] }],
