@@ -40,3 +40,20 @@ export const Content = styled.div`
     padding: 0;
   }
 `;
+
+export const Button = styled.button`
+  width: 200px;
+  height: 100px;
+  background-color: var(--primaryColor);
+  font-size: 2rem;
+  border-radius: 20px;
+  border: 1px solid var(--primaryColor);
+  color: var(--secondaryTextColor);
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: 300ms;
+
+  &:hover {
+    box-shadow: 0 0 5px 2px var(--secondaryColor);
+  }
+`;

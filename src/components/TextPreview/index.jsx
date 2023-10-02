@@ -1,4 +1,4 @@
-import { Content } from "./style";
+import { Button, Content } from "./style";
 import "react-quill/dist/quill.core.css"; // Importe o estilo CSS
 
 import { useRef } from "react";
@@ -23,7 +23,7 @@ const TextPreview = ({ bookContent }) => {
         $size={bookSize}
       ></Content>
 
-      <button onClick={handlePrint}>Download Preview</button>
+      <Button onClick={handlePrint}>Download Preview</Button>
     </>
   );
 };
