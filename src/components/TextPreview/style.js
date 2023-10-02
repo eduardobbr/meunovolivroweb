@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Content = styled.div`
   width: 160mm;
   height: 210mm;
   padding: 96px 72px;
