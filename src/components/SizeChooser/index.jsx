@@ -12,6 +12,7 @@ const SizeChooser = () => {
           {booksSize.map((bookSizes) => {
             return (
               <Card
+                key={bookSizes}
                 $size={bookSizes}
                 onClick={() => setBookSize(bookSizes)}
                 $selected={bookSize === bookSizes}

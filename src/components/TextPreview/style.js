@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const Content = styled.div`
-  width: 160mm;
-  height: 210mm;
+  width: ${({ $size }) =>
+    $size === "16x23" ? "160mm" : $size === "15x21" ? "150mm" : "140mm"};
+  height: ${({ $size }) => ($size === "16x23" ? "230mm" : "210mm")};
   padding: 96px 72px;
   border: 1px solid #ccc;
   word-wrap: break-word;
