@@ -34,7 +34,7 @@ export const Content = styled.div`
     content: "       ";
   }
   img {
-    max-width: 80%;
+    max-width: 100%;
   }
 
   @media print {

@@ -3,6 +3,7 @@ import Footer from "../../components/Footer";
 import SizeChooser from "../../components/SizeChooser";
 import TextEditor from "../../components/TextEditor";
 import FontChooser from "../../components/FontChooser";
+import DataChooser from "../../components/DataChooser";
 
 const Dashboard = () => {
   return (
@@ -11,6 +12,7 @@ const Dashboard = () => {
       <SizeChooser />
       <FontChooser />
       <TextEditor />
+      <DataChooser />
       <Footer />
     </>
   );
