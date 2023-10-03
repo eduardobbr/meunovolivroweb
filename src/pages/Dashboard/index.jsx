@@ -4,6 +4,7 @@ import SizeChooser from "../../components/SizeChooser";
 import TextEditor from "../../components/TextEditor";
 import FontChooser from "../../components/FontChooser";
 import DataChooser from "../../components/DataChooser";
+import CoverGenerator from "../../components/CoverGenerator";
 
 const Dashboard = () => {
   return (
@@ -13,6 +14,7 @@ const Dashboard = () => {
       <FontChooser />
       <TextEditor />
       <DataChooser />
+      <CoverGenerator />
       <Footer />
     </>
   );
