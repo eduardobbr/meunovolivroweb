@@ -1,6 +1,22 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.section``;
+
+export const Content = styled.div`
+  width: 80%;
+  max-width: 1200px;
+  margin: 10px auto;
+`;
+
+export const Title = styled.h2`
+  margin: 20px 0;
+`;
+
+export const CoverBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 export const Cover = styled.div`
   position: relative;

@@ -1,14 +1,21 @@
 import { useState } from "react";
 import Shape from "../Shape";
-import { Author, BookTitle, Container, Cover } from "./style";
+import {
+  Author,
+  BookTitle,
+  Container,
+  Content,
+  Cover,
+  CoverBox,
+  Title,
+} from "./style";
 import { useBooks } from "../../provider/Books";
 
 const CoverGenerator = () => {
   const { bookSize, author, bookTitle, bookSubTitle } = useBooks();
 
-  const [shape, setShape] = useState({ name: "circle", amount: 30 });
-  const [color, setColor] = useState("aqua");
-  const [icon, setIcon] = useState("");
+  const [shape, setShape] = useState("triangle");
+  const [color, setColor] = useState("green");
   const [cover, setCover] = useState([]);
 
   const colors = {
@@ -63,7 +70,7 @@ const CoverGenerator = () => {
 
   const coverGeneration = () => {
     const shapes = [];
-    for (let index = 0; index < shape.amount; index++) {
+    for (let index = 0; index < 30; index++) {
       shapes.push({
         size: randomSize(100),
         position: randomPosition(bookSize),
@@ -74,30 +81,52 @@ const CoverGenerator = () => {
 
   return (
     <Container>
-      <Cover
-        $size={bookSize}
-        $background={colors[color].backgroundColor}
-        $color={colors[color].textColor}
-      >
-        <BookTitle>
-          <span>{bookTitle}</span>
-          <p>{bookSubTitle}</p>
-        </BookTitle>
-        <Author>
-          <span>{author}</span>
-        </Author>
+      <Content>
+        <Title>Agora é escolha a capa do seu livro:</Title>
 
-        {cover.map((item, index) => (
-          <Shape
-            key={index}
-            shape={shape.name}
-            size={item.size}
-            position={item.position}
-            color={colors[color].randomColors}
-          />
-        ))}
-      </Cover>
-      <button onClick={() => coverGeneration()}>Teste</button>
+        <CoverBox>
+          <div>
+            <select onChange={(e) => setShape(e.target.value)}>
+              <option value="triangle">Triângulo</option>
+              <option value="circle">Círculo</option>
+              <option value="square">Quadrado</option>
+            </select>
+            <select onChange={(e) => setColor(e.target.value)}>
+              <option value="green">Verde</option>
+              <option value="yellow">Amarelo</option>
+              <option value="blue">Azul</option>
+              <option value="pink">Rosa</option>
+              <option value="aqua">Aqua</option>
+              <option value="red">Vermelho</option>
+              <option value="orange">Laranja</option>
+            </select>
+            <button onClick={() => coverGeneration()}>Teste</button>
+          </div>
+          <Cover
+            $size={bookSize}
+            $background={colors[color].backgroundColor}
+            $color={colors[color].textColor}
+          >
+            <BookTitle>
+              <span>{bookTitle}</span>
+              <p>{bookSubTitle}</p>
+            </BookTitle>
+            <Author>
+              <span>{author}</span>
+            </Author>
+
+            {cover.map((item, index) => (
+              <Shape
+                key={index}
+                shape={shape}
+                size={item.size}
+                position={item.position}
+                color={colors[color].randomColors}
+              />
+            ))}
+          </Cover>
+        </CoverBox>
+      </Content>
     </Container>
   );
 };
