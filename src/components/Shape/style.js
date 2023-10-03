@@ -43,11 +43,11 @@ export const Container = styled.div.attrs((props) => ({
         : undefined,
     borderBottom:
       props.$shape === "triangle"
-        ? `${props.$size}mm solid var(--inputBgColorOpacity)`
+        ? `${props.$size}mm solid ${props.$backgroundColor}`
         : undefined,
     borderRadius: props.$shape === "circle" ? "50%" : undefined,
     backgroundColor:
-      props.$shape === "triangle" ? undefined : `var(--inputBgColorOpacity)`,
+      props.$shape === "triangle" ? undefined : `${props.$backgroundColor}`,
     left: `${props.$position.horizontal}mm`,
     top: `${props.$position.vertical}mm`,
   },
