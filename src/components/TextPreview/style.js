@@ -14,6 +14,15 @@ export const Content = styled.div`
   margin-bottom: 50px;
   font-size: 11px;
 
+  p,
+  li,
+  h1,
+  h2 {
+    ${({ $bookStyle }) =>
+      $bookStyle === "classic"
+        ? "font-family: 'Bitter'"
+        : "font-family: 'Work Sans'"};
+  }
   h1 {
     font-size: 19px;
     page-break-before: always;

@@ -7,7 +7,7 @@ import { useBooks } from "../../provider/Books";
 
 const TextPreview = ({ bookContent }) => {
   const printComp = useRef();
-  const { bookSize } = useBooks();
+  const { bookSize, bookStyle } = useBooks();
 
   const handlePrint = useReactToPrint({
     content: () => printComp.current,
@@ -20,6 +20,7 @@ const TextPreview = ({ bookContent }) => {
         ref={printComp}
         className="ql-editor"
         dangerouslySetInnerHTML={{ __html: bookContent }}
+        $bookStyle={bookStyle}
         $size={bookSize}
       ></Content>
 

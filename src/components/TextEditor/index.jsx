@@ -31,7 +31,7 @@ const TextEditor = () => {
                 ["link", "image"],
               ],
             }}
-            style={{ width: "100%", height: "500px" }}
+            style={{ width: "100%", height: "500px", fontFamily: "Bitter" }}
           />
         </EditorBox>
 
