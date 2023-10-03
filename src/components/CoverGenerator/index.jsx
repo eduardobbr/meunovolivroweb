@@ -3,6 +3,9 @@ import Shape from "../Shape";
 import {
   Author,
   BookTitle,
+  Button,
+  ConfigBox,
+  ConfigFields,
   Container,
   Content,
   Cover,
@@ -85,23 +88,29 @@ const CoverGenerator = () => {
         <Title>Agora é escolha a capa do seu livro:</Title>
 
         <CoverBox>
-          <div>
-            <select onChange={(e) => setShape(e.target.value)}>
-              <option value="triangle">Triângulo</option>
-              <option value="circle">Círculo</option>
-              <option value="square">Quadrado</option>
-            </select>
-            <select onChange={(e) => setColor(e.target.value)}>
-              <option value="green">Verde</option>
-              <option value="yellow">Amarelo</option>
-              <option value="blue">Azul</option>
-              <option value="pink">Rosa</option>
-              <option value="aqua">Aqua</option>
-              <option value="red">Vermelho</option>
-              <option value="orange">Laranja</option>
-            </select>
-            <button onClick={() => coverGeneration()}>Teste</button>
-          </div>
+          <ConfigBox>
+            <ConfigFields>
+              <p>Escoha o formato:</p>
+              <select onChange={(e) => setShape(e.target.value)}>
+                <option value="triangle">Triângulo</option>
+                <option value="circle">Círculo</option>
+                <option value="square">Quadrado</option>
+              </select>
+            </ConfigFields>
+            <ConfigFields>
+              <p>Escolha a cor:</p>
+              <select onChange={(e) => setColor(e.target.value)}>
+                <option value="green">Verde</option>
+                <option value="yellow">Amarelo</option>
+                <option value="blue">Azul</option>
+                <option value="pink">Rosa</option>
+                <option value="aqua">Aqua</option>
+                <option value="red">Vermelho</option>
+                <option value="orange">Laranja</option>
+              </select>
+            </ConfigFields>
+            <Button onClick={() => coverGeneration()}>Gerar capa</Button>
+          </ConfigBox>
           <Cover
             $size={bookSize}
             $background={colors[color].backgroundColor}
