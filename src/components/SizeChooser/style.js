@@ -9,9 +9,8 @@ export const Title = styled.h2``;
 export const CardBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  height: 150mm;
 `;
 export const Card = styled.div`
   background-color: var(--mainBgColorOpacity);
@@ -20,8 +19,8 @@ export const Card = styled.div`
   align-items: center;
   justify-content: center;
   width: ${({ $size }) =>
-    $size === "16x23" ? "80mm" : $size === "15x21" ? "75mm" : "70mm"};
-  height: ${({ $size }) => ($size === "16x23" ? "115mm" : "105mm")};
+    $size === "16x23" ? "16mm" : $size === "15x21" ? "15mm" : "14mm"};
+  height: ${({ $size }) => ($size === "16x23" ? "23mm" : "21mm")};
   cursor: pointer;
   ${({ $selected }) =>
     $selected &&
@@ -32,6 +31,6 @@ export const Card = styled.div`
   transition: 300ms;
 
   span {
-    font-size: 3rem;
+    font-size: 1rem;
   }
 `;
