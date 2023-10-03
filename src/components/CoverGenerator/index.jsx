@@ -6,13 +6,13 @@ import { useBooks } from "../../provider/Books";
 const CoverGenerator = () => {
   const { bookSize } = useBooks();
 
-  const [shape, setShape] = useState({ name: "circle", amount: 30 });
+  const [shape, setShape] = useState({ name: "triangle", amount: 30 });
   const [color, setColor] = useState("green");
   const [icon, setIcon] = useState("");
   const [cover, setCover] = useState([]);
 
   const randomSize = (maxSize) => {
-    return Math.floor(Math.random() * maxSize);
+    return Math.floor(Math.random() * maxSize - 20);
   };
 
   const randomPosition = (size) => {
