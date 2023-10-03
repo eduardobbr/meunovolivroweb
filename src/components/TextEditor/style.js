@@ -19,5 +19,5 @@ export const EditorBox = styled.div`
 
 export const Title = styled.h2`
   width: 100%;
-  margin: 15px;
+  margin: 15px 0;
 `;
