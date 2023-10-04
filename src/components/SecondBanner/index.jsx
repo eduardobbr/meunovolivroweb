@@ -31,11 +31,11 @@ const SecondBanner = () => {
       {mobile ? (
         <ImgContent>
           <FirstImg
-            src="http://localhost:1337/uploads/book_image02_ac34c820e9.png"
+            src="http://localhost:1337/uploads/book_image02_79b6eddf07.png"
             alt="Livro de divulgação"
           />
           <SecondImg
-            src="http://localhost:1337/uploads/book_image01_b6cc584c88.png"
+            src="http://localhost:1337/uploads/book_image01_acd02a46da.png"
             alt="Livro de divulgação"
           />
         </ImgContent>

@@ -16,7 +16,7 @@ const LastBooks = () => {
       <ProductList>
         <Product>
           <ProductImg
-            src="http://localhost:1337/uploads/shop_img01_5e32e7e7cc.png"
+            src="http://localhost:1337/uploads/shop_img01_0c98eb2207.png"
             alt="Livro a venda"
           />
           <ProductCategory>Categoria</ProductCategory>
@@ -25,7 +25,7 @@ const LastBooks = () => {
         </Product>
         <Product>
           <ProductImg
-            src="http://localhost:1337/uploads/shop_img01_5e32e7e7cc.png"
+            src="http://localhost:1337/uploads/shop_img01_0c98eb2207.png"
             alt="Livro a venda"
           />
           <ProductCategory>Categoria</ProductCategory>
@@ -34,7 +34,7 @@ const LastBooks = () => {
         </Product>
         <Product>
           <ProductImg
-            src="http://localhost:1337/uploads/shop_img01_5e32e7e7cc.png"
+            src="http://localhost:1337/uploads/shop_img01_0c98eb2207.png"
             alt="Livro a venda"
           />
           <ProductCategory>Categoria</ProductCategory>
@@ -43,7 +43,7 @@ const LastBooks = () => {
         </Product>
         <Product>
           <ProductImg
-            src="http://localhost:1337/uploads/shop_img01_5e32e7e7cc.png"
+            src="http://localhost:1337/uploads/shop_img01_0c98eb2207.png"
             alt="Livro a venda"
           />
           <ProductCategory>Categoria</ProductCategory>

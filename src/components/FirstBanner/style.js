@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const Banner = styled.section`
-  background: url("http://localhost:1337/uploads/banner_img01_5108e8d364.jpeg"),
+  background: url("http://localhost:1337/uploads/banner_img01_929b21718c.jpg"),
     var(--mainBgColor);
   background-size: cover;
   background-repeat: no-repeat;
@@ -115,7 +115,6 @@ export const ImgContent = styled.div`
   img {
     position: relative;
     width: 150px;
-    box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.2);
     transition: 0.3s ease-in-out;
   }
 

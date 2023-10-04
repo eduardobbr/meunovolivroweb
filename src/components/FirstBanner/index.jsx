@@ -18,7 +18,7 @@ const FirstBanner = () => {
         </TextContent>
         <ImgContent>
           <img
-            src="http://localhost:1337/uploads/banner_book01_dd9b34561a.png"
+            src="http://localhost:1337/uploads/banner_book_df6c6eeb97.png"
             alt="Livro de divulgação"
           />
         </ImgContent>

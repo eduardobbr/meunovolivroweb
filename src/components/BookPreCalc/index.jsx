@@ -136,7 +136,7 @@ const BookPreCalc = () => {
       {mobile ? (
         <ImgBox>
           <img
-            src="http://localhost:1337/uploads/read_image01_c706438751.jpeg"
+            src="http://localhost:1337/uploads/read_image01_4a5978994c.jpg"
             alt="Imagem de um Leitor"
           />
         </ImgBox>

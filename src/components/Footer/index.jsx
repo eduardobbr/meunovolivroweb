@@ -12,7 +12,7 @@ const Footer = () => {
     <Container>
       <Content>
         <img
-          src="http://localhost:1337/uploads/logo_meunovolivro2_768x122_c8b7bfd095.png"
+          src="http://localhost:1337/uploads/logo_meunovolivro2_1536x245_d0b0b2b208.png"
           alt="Meu Novo Livro Logo Branca"
         />
         <Social>

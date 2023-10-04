@@ -27,7 +27,7 @@ const AuthorsCar = () => {
             </div>
             <Box>
               <img
-                src="http://localhost:1337/uploads/team_image01_cb03cdcdef.jpeg"
+                src="http://localhost:1337/uploads/team_image01_4f802be293.jpg"
                 alt="Foto do Autor"
               />
               <div>
@@ -48,7 +48,7 @@ const AuthorsCar = () => {
             </div>
             <Box>
               <img
-                src="http://localhost:1337/uploads/team_image01_cb03cdcdef.jpeg"
+                src="http://localhost:1337/uploads/team_image01_4f802be293.jpg"
                 alt="Foto do Autor"
               />
               <div>
@@ -69,7 +69,7 @@ const AuthorsCar = () => {
             </div>
             <Box>
               <img
-                src="http://localhost:1337/uploads/team_image01_cb03cdcdef.jpeg"
+                src="http://localhost:1337/uploads/team_image01_4f802be293.jpg"
                 alt="Foto do Autor"
               />
               <div>
