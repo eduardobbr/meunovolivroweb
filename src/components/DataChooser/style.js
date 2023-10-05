@@ -20,6 +20,7 @@ export const Title = styled.h2`
 export const DataBox = styled.div`
   margin: 20px 0;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
 `;
 

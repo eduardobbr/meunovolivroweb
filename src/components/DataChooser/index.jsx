@@ -9,6 +9,12 @@ const DataChooser = () => {
     setBookSubTitle,
     bookTitle,
     setBookTitle,
+    keywords,
+    setKeywords,
+    audience,
+    setAudience,
+    isbn,
+    setIsbn,
   } = useBooks();
 
   return (
@@ -27,7 +33,7 @@ const DataChooser = () => {
             />
           </BoxContainer>
           <BoxContainer>
-            <p>Subtitulo do Livro:</p>
+            <p>Subtitulo:</p>
 
             <input
               type="text"
@@ -36,12 +42,39 @@ const DataChooser = () => {
             />
           </BoxContainer>
           <BoxContainer $required>
-            <p>Autor do Livro:</p>
+            <p>Nome do Autor:</p>
 
             <input
               type="text"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
+            />
+          </BoxContainer>
+          <BoxContainer>
+            <p>ISBN:</p>
+
+            <input
+              type="text"
+              value={isbn}
+              onChange={(e) => setIsbn(e.target.value)}
+            />
+          </BoxContainer>
+          <BoxContainer>
+            <p>Público:</p>
+
+            <input
+              type="text"
+              value={audience}
+              onChange={(e) => setAudience(e.target.value)}
+            />
+          </BoxContainer>
+          <BoxContainer>
+            <p>Palavras-chave:</p>
+
+            <input
+              type="text"
+              value={keywords}
+              onChange={(e) => setKeywords(e.target.value)}
             />
           </BoxContainer>
         </DataBox>
