@@ -7,6 +7,7 @@ import Blog from "../pages/Blog";
 import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/404";
+import BookCreator from "../pages/BookCreator";
 
 const router = createBrowserRouter([
   { path: "/", element: <Landing /> },
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
   { path: "/plans", element: <Plans /> },
   { path: "/blog", element: <Blog /> },
   { path: "/dashboard", element: <Dashboard /> },
+  { path: "/producao", element: <BookCreator /> },
   { path: "/profile", element: <Profile /> },
   { path: "*", element: <NotFound /> },
 ]);
