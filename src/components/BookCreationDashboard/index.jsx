@@ -3,6 +3,7 @@ import DataChooser from "../DataChooser";
 import FontChooser from "../FontChooser";
 import TextEditor from "../TextEditor";
 import CoverGenerator from "../CoverGenerator";
+import { Container, Content, ListItem, NavList } from "./style";
 
 const BookCreationDashboard = () => {
   const [step, setStep] = useState(0);
@@ -14,26 +15,29 @@ const BookCreationDashboard = () => {
   ];
 
   return (
-    <div>
+    <Container>
       <nav>
-        <ul>
-          <li onClick={() => setStep(0)}>
+        <NavList>
+          <ListItem onClick={() => setStep(0)}>
             <p>Dados do Livro</p>
-          </li>
-          <li onClick={() => setStep(1)}>
+          </ListItem>
+          <span />
+          <ListItem onClick={() => setStep(1)}>
             <p>Design da Obra</p>
-          </li>
-          <li onClick={() => setStep(2)}>
+          </ListItem>
+          <span />
+          <ListItem onClick={() => setStep(2)}>
             <p>Conteúdo</p>
-          </li>
-          <li onClick={() => setStep(3)}>
+          </ListItem>
+          <span />
+          <ListItem onClick={() => setStep(3)}>
             <p>Capa</p>
-          </li>
-        </ul>
+          </ListItem>
+        </NavList>
       </nav>
 
-      <div>{steps[step]}</div>
-    </div>
+      <Content>{steps[step]}</Content>
+    </Container>
   );
 };
 
