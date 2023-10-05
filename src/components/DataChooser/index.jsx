@@ -14,7 +14,9 @@ const DataChooser = () => {
   return (
     <Container>
       <Content>
-        <Title>Chegou a hora de passar algumas informações importantes:</Title>
+        <Title>
+          Preencha os <span>dados</span> do seu livro
+        </Title>
         <DataBox>
           <BoxContainer $required>
             <p>Titulo do Livro:</p>
