@@ -19,6 +19,7 @@ export const Title = styled.h2`
 
 export const DataBox = styled.div`
   margin: 20px 0;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -27,7 +28,7 @@ export const DataBox = styled.div`
 export const BoxContainer = styled.div`
   color: var(--mainTextColor);
   padding: 2px;
-  width: 30%;
+  width: 90%;
   p {
     ${(props) =>
       props.$required &&
@@ -41,4 +42,17 @@ export const BoxContainer = styled.div`
   input {
     width: 100%;
   }
+`;
+
+export const ContentBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 500px;
+`;
+
+export const SinopseBox = styled.div`
+  width: 50%;
+  padding-top: 35px;
+  color: var(--mainTextColor);
 `;

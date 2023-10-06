@@ -12,6 +12,7 @@ export const BooksProvider = ({ children }) => {
   const [isbn, setIsbn] = useState("");
   const [audience, setAudience] = useState("");
   const [keywords, setKeywords] = useState("");
+  const [sinopse, setSinopse] = useState("");
   const booksSize = ["14x21", "15x21", "16x23"];
 
   return (
@@ -36,6 +37,8 @@ export const BooksProvider = ({ children }) => {
         setAudience,
         keywords,
         setKeywords,
+        sinopse,
+        setSinopse,
       }}
     >
       {children}
