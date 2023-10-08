@@ -3,7 +3,15 @@ import DataChooser from "../DataChooser";
 import FontChooser from "../FontChooser";
 import TextEditor from "../TextEditor";
 import CoverGenerator from "../CoverGenerator";
-import { Container, Content, ListItem, NavList } from "./style";
+import {
+  Container,
+  Content,
+  ListItem,
+  NavList,
+  Prev,
+  PrevContBox,
+  Prox,
+} from "./style";
 
 const BookCreationDashboard = () => {
   const [step, setStep] = useState(0);
@@ -37,6 +45,11 @@ const BookCreationDashboard = () => {
       </nav>
 
       <Content>{steps[step]}</Content>
+      <PrevContBox $step={step}>
+        {step > 0 && <Prev onClick={() => setStep(step - 1)}>Voltar</Prev>}
+
+        {step < 3 && <Prox onClick={() => setStep(step + 1)}>Próximo</Prox>}
+      </PrevContBox>
     </Container>
   );
 };

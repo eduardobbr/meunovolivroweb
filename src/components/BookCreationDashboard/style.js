@@ -4,6 +4,10 @@ export const Container = styled.div`
   width: 80%;
   max-width: 1200px;
   margin: 50px auto;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const NavList = styled.ul`
@@ -28,3 +32,24 @@ export const ListItem = styled.li`
 `;
 
 export const Content = styled.div``;
+
+export const PrevContBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  ${({ $step }) => $step === 0 && `flex-direction: row-reverse;`}
+  width: 100%;
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+`;
+
+export const Prox = styled.button`
+  align-self: flex-end;
+`;
+
+export const Prev = styled.button`
+  align-self: self-start;
+`;

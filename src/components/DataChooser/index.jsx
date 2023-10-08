@@ -113,7 +113,7 @@ const DataChooser = () => {
               }}
               style={{
                 width: "100%",
-                height: "370px",
+                height: "350px",
                 fontFamily: "Bitter",
               }}
             />
