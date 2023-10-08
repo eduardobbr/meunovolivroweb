@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Content = styled.div`
-  width: ${({ $size }) =>
-    $size === "16x23" ? "160mm" : $size === "15x21" ? "150mm" : "140mm"};
-  height: ${({ $size }) => ($size === "16x23" ? "230mm" : "210mm")};
+  width: 100%;
   padding: 96px 72px;
   border: 1px solid #ccc;
   word-wrap: break-word;
@@ -13,6 +17,7 @@ export const Content = styled.div`
   hyphens: auto;
   margin-bottom: 50px;
   font-size: 11px;
+  height: 466px;
 
   p,
   li,
@@ -51,11 +56,11 @@ export const Content = styled.div`
 `;
 
 export const Button = styled.button`
-  width: 200px;
-  height: 100px;
+  width: 100px;
+  height: 50px;
   background-color: var(--primaryColor);
-  font-size: 2rem;
-  border-radius: 20px;
+  font-size: 1rem;
+  border-radius: 10px;
   border: 1px solid var(--primaryColor);
   color: var(--secondaryTextColor);
   margin-bottom: 20px;
