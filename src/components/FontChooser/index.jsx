@@ -7,18 +7,23 @@ const FontChooser = () => {
   return (
     <Container>
       <Content>
-        <Title>Escolha agora qual o estilo do seu livro:</Title>
+        <Title>
+          Escolha agora qual o <span>design</span> do seu livro:
+        </Title>
         <FontBox>
           <Fonts
             onClick={() => setBookStyle("classic")}
             $selected={bookStyle === "classic"}
+            $classic={true}
           >
+            <div></div>
             Clássico
           </Fonts>
           <Fonts
             onClick={() => setBookStyle("modern")}
             $selected={bookStyle === "modern"}
           >
+            <div></div>
             Moderno
           </Fonts>
         </FontBox>

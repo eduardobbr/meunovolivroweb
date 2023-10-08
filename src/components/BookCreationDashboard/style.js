@@ -43,6 +43,10 @@ export const PrevContBox = styled.div`
     background: transparent;
     border: none;
     cursor: pointer;
+    transition: 300ms;
+  }
+  button:hover {
+    text-shadow: 0 0 10px var(--secondaryColor);
   }
 `;
 
