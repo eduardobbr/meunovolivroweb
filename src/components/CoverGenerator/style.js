@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
-export const Container = styled.section``;
+export const Container = styled.section`
+  height: 528px;
+`;
 
 export const Content = styled.div`
-  width: 80%;
+  width: 100%;
   max-width: 1200px;
   margin: 10px auto;
 `;
 
 export const Title = styled.h2`
-  margin: 20px 0;
+  color: var(--mainTextColor);
+  font-weight: 500;
+  font-family: "Bitter";
+
+  span {
+    color: var(--primaryColor);
+  }
 `;
 
 export const CoverBox = styled.div`
@@ -60,13 +68,8 @@ export const Cover = styled.div`
   overflow: hidden;
   background-color: ${({ $background }) => $background};
   color: ${({ $color }) => $color};
-
-  width: ${({ $size }) => {
-    return $size === "16x23" ? "160mm" : $size === "15x21" ? "150mm" : "140mm";
-  }};
-  height: ${({ $size }) => {
-    return $size === "16x23" ? "230mm" : "210mm";
-  }};
+  width: 266px;
+  height: 426px;
 `;
 
 export const BookTitle = styled.h2`

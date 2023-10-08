@@ -31,25 +31,25 @@ import styled from "styled-components";
 
 export const Container = styled.div.attrs((props) => ({
   style: {
-    width: props.$shape === "triangle" ? `0mm` : `${props.$size}mm`,
-    height: props.$shape === "triangle" ? `0mm` : `${props.$size}mm`,
+    width: props.$shape === "triangle" ? `0px` : `${props.$size}px`,
+    height: props.$shape === "triangle" ? `0px` : `${props.$size}px`,
     borderLeft:
       props.$shape === "triangle"
-        ? `${props.$size / 2}mm solid transparent`
+        ? `${props.$size / 2}px solid transparent`
         : undefined,
     borderRight:
       props.$shape === "triangle"
-        ? `${props.$size / 2}mm solid transparent`
+        ? `${props.$size / 2}px solid transparent`
         : undefined,
     borderBottom:
       props.$shape === "triangle"
-        ? `${props.$size}mm solid ${props.$backgroundColor}`
+        ? `${props.$size}px solid ${props.$backgroundColor}`
         : undefined,
     borderRadius: props.$shape === "circle" ? "50%" : undefined,
     backgroundColor:
       props.$shape === "triangle" ? undefined : `${props.$backgroundColor}`,
-    left: `${props.$position.horizontal}mm`,
-    top: `${props.$position.vertical}mm`,
+    left: `${props.$position.horizontal}px`,
+    top: `${props.$position.vertical}px`,
   },
 }))`
   position: absolute;

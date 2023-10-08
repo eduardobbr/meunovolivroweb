@@ -15,7 +15,7 @@ import {
 import { useBooks } from "../../provider/Books";
 
 const CoverGenerator = () => {
-  const { bookSize, author, bookTitle, bookSubTitle } = useBooks();
+  const { author, bookTitle, bookSubTitle } = useBooks();
 
   const [shape, setShape] = useState("triangle");
   const [color, setColor] = useState("green");
@@ -63,20 +63,16 @@ const CoverGenerator = () => {
     return Math.floor(Math.random() * maxSize - 20);
   };
 
-  const randomPosition = (size) => {
-    return size === "16x23"
-      ? { vertical: randomSize(230), horizontal: randomSize(160) }
-      : size === "15x21"
-      ? { vertical: randomSize(210), horizontal: randomSize(150) }
-      : { vertical: randomSize(210), horizontal: randomSize(140) };
+  const randomPosition = () => {
+    return { vertical: randomSize(426), horizontal: randomSize(266) };
   };
 
   const coverGeneration = () => {
     const shapes = [];
     for (let index = 0; index < 30; index++) {
       shapes.push({
-        size: randomSize(100),
-        position: randomPosition(bookSize),
+        size: randomSize(200),
+        position: randomPosition(),
       });
     }
     setCover(shapes);
@@ -85,7 +81,9 @@ const CoverGenerator = () => {
   return (
     <Container>
       <Content>
-        <Title>Agora é escolha a capa do seu livro:</Title>
+        <Title>
+          Agora é escolha a <span>capa</span> do seu livro:
+        </Title>
 
         <CoverBox>
           <ConfigBox>
@@ -112,7 +110,6 @@ const CoverGenerator = () => {
             <Button onClick={() => coverGeneration()}>Gerar capa</Button>
           </ConfigBox>
           <Cover
-            $size={bookSize}
             $background={colors[color].backgroundColor}
             $color={colors[color].textColor}
           >
