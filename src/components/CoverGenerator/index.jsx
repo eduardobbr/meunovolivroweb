@@ -15,11 +15,11 @@ import {
 import { useBooks } from "../../provider/Books";
 
 const CoverGenerator = () => {
-  const { author, bookTitle, bookSubTitle } = useBooks();
+  const { author, bookTitle, bookSubTitle, setBookCover, bookCover } =
+    useBooks();
 
   const [shape, setShape] = useState("triangle");
   const [color, setColor] = useState("green");
-  const [cover, setCover] = useState([]);
 
   const colors = {
     green: {
@@ -75,7 +75,30 @@ const CoverGenerator = () => {
         position: randomPosition(),
       });
     }
-    setCover(shapes);
+    setBookCover(
+      <Cover
+        $background={colors[color].backgroundColor}
+        $color={colors[color].textColor}
+      >
+        <BookTitle>
+          <span>{bookTitle}</span>
+          <p>{bookSubTitle}</p>
+        </BookTitle>
+        <Author>
+          <span>{author}</span>
+        </Author>
+
+        {shapes.map((item, index) => (
+          <Shape
+            key={index}
+            shape={shape}
+            size={item.size}
+            position={item.position}
+            color={colors[color].randomColors}
+          />
+        ))}
+      </Cover>
+    );
   };
 
   return (
@@ -109,28 +132,23 @@ const CoverGenerator = () => {
             </ConfigFields>
             <Button onClick={() => coverGeneration()}>Gerar capa</Button>
           </ConfigBox>
-          <Cover
-            $background={colors[color].backgroundColor}
-            $color={colors[color].textColor}
-          >
-            <BookTitle>
-              <span>{bookTitle}</span>
-              <p>{bookSubTitle}</p>
-            </BookTitle>
-            <Author>
-              <span>{author}</span>
-            </Author>
 
-            {cover.map((item, index) => (
-              <Shape
-                key={index}
-                shape={shape}
-                size={item.size}
-                position={item.position}
-                color={colors[color].randomColors}
-              />
-            ))}
-          </Cover>
+          {bookCover ? (
+            bookCover
+          ) : (
+            <Cover
+              $background={colors[color].backgroundColor}
+              $color={colors[color].textColor}
+            >
+              <BookTitle>
+                <span>{bookTitle}</span>
+                <p>{bookSubTitle}</p>
+              </BookTitle>
+              <Author>
+                <span>{author}</span>
+              </Author>
+            </Cover>
+          )}
         </CoverBox>
       </Content>
     </Container>

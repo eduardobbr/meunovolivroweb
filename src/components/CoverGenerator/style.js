@@ -22,7 +22,7 @@ export const Title = styled.h2`
 
 export const CoverBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 
