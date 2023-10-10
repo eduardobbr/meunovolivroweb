@@ -14,27 +14,12 @@ export const Printer = styled.div`
   p,
   li,
   h1,
-  h2 {
+  h2,
+  span {
     ${({ $bookStyle }) =>
       $bookStyle === "classic"
         ? "font-family: 'Bitter'"
         : "font-family: 'Work Sans'"};
-  }
-  h1 {
-    font-size: 19px;
-    page-break-before: always;
-  }
-  h2 {
-    font-size: 13px;
-  }
-  p::before {
-    content: "       ";
-  }
-  img {
-    max-width: 100%;
-  }
-  .ql-editor {
-    padding: 200px;
   }
 `;
 
@@ -47,5 +32,27 @@ export const CoverBox = styled.div`
 
   .makeLarge {
     scale: 6;
+  }
+`;
+
+export const ContentBox = styled.div`
+  h1 {
+    font-size: 18px;
+    page-break-before: always;
+  }
+  h2 {
+    font-size: 14px;
+  }
+  p {
+    font-size: 12px;
+  }
+  p::before {
+    content: "       ";
+  }
+  img {
+    max-width: 100%;
+  }
+  .ql-editor {
+    padding: 200px;
   }
 `;

@@ -1,7 +1,7 @@
 import { cloneElement, useRef } from "react";
 import { useBooks } from "../../provider/Books";
 import { useReactToPrint } from "react-to-print";
-import { CoverBox, Printer } from "./style";
+import { ContentBox, CoverBox, Printer } from "./style";
 import "react-quill/dist/quill.core.css"; // Importe o estilo CSS
 
 const PublishBook = () => {
@@ -24,11 +24,10 @@ const PublishBook = () => {
     });
   };
 
-  console.log(bookContent);
-
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
+    copyStyles: true,
   });
 
   return (
@@ -40,10 +39,12 @@ const PublishBook = () => {
         $bookStyle={bookStyle}
       >
         <CoverBox>{bookCover && bookCoverResize()}</CoverBox>
-        <div
-          className="ql-editor"
-          dangerouslySetInnerHTML={{ __html: bookContent }}
-        ></div>
+        <ContentBox>
+          <div
+            className="ql-editor"
+            dangerouslySetInnerHTML={{ __html: bookContent }}
+          ></div>
+        </ContentBox>
       </Printer>
     </section>
   );
