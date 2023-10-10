@@ -76,16 +76,16 @@ export const BookTitle = styled.h2`
   position: absolute;
   text-align: center;
   width: 100%;
-  top: 50mm;
+  top: 10%;
   z-index: 500;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 
   span {
     display: inline-block;
     width: 80%;
   }
   p {
-    font-size: 1.5rem;
+    font-size: 1rem;
     width: 80%;
     display: inline-block;
   }
@@ -95,9 +95,9 @@ export const Author = styled.h3`
   position: absolute;
   text-align: center;
   width: 100%;
-  bottom: 10mm;
+  bottom: 5%;
   z-index: 500;
-  font-size: 1.2rem;
+  font-size: 1rem;
 
   span {
     width: 60%;

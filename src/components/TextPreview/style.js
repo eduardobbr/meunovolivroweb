@@ -41,18 +41,6 @@ export const Content = styled.div`
   img {
     max-width: 100%;
   }
-
-  @media print {
-    @page {
-      size: 160mm 210mm;
-      margin: 20mm 20mm 25mm 20mm;
-    }
-
-    height: auto;
-    width: auto;
-    border: none;
-    padding: 0;
-  }
 `;
 
 export const Button = styled.button`

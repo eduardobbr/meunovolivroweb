@@ -13,6 +13,7 @@ import {
   Title,
 } from "./style";
 import { useBooks } from "../../provider/Books";
+import PublishBook from "../PublishBook";
 
 const CoverGenerator = () => {
   const { author, bookTitle, bookSubTitle, setBookCover, bookCover } =
@@ -151,6 +152,7 @@ const CoverGenerator = () => {
           )}
         </CoverBox>
       </Content>
+      <PublishBook></PublishBook>
     </Container>
   );
 };
