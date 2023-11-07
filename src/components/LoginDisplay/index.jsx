@@ -6,10 +6,13 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Container } from "./style";
+import { useUser } from "../../provider/User";
 
 const LoginDisplay = () => {
+  const { login } = useUser();
+
   const schema = yup.object({
-    email: yup.string().email("Email Inválido").required("Campo Obrigatório!"),
+    username: yup.string().required("Campo Obrigatório!"),
     password: yup.string().required("Campo Obrigatório!"),
   });
 
@@ -29,6 +32,7 @@ const LoginDisplay = () => {
 
   const submit = (data) => {
     console.log(data);
+    login(data.username, data.password);
   };
 
   return (
@@ -37,11 +41,11 @@ const LoginDisplay = () => {
         <div>Entrar</div>
         <Form transparent onSubmit={handleSubmit(submit)}>
           <Input
-            label="Email"
+            label="Username"
             register={register}
-            name={"email"}
-            error={errors.email?.message}
-            placeholder="Email"
+            name={"username"}
+            error={errors.username?.message}
+            placeholder="Username"
             required
           />
           <Input

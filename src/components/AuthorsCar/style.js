@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const Container = styled.section`
-  background: url("http://localhost:1337/uploads/testi_bg_86015e888c.jpg"),
+  background: url("https://meunovolivro.com.br/wp-content/uploads/2022/07/testi-bg.jpg"),
     var(--mainBgColor);
   background-size: cover;
   background-repeat: no-repeat;
