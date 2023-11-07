@@ -9,7 +9,7 @@ import { Container } from "./style";
 import { useUser } from "../../provider/User";
 
 const LoginDisplay = () => {
-  const { login } = useUser();
+  const { login, createUser } = useUser();
 
   const schema = yup.object({
     username: yup.string().required("Campo Obrigatório!"),
@@ -20,6 +20,10 @@ const LoginDisplay = () => {
     username: yup.string().required("Campo Obrigatório!"),
     email: yup.string().email("Email Inválido").required("Campo Obrigatório!"),
     password: yup.string().required("Campo Obrigatório!"),
+    passwordConfirm: yup
+      .string()
+      .required("Campo Obrigatório!")
+      .oneOf([yup.ref("password"), null], "As senhas não combinam!"),
   });
 
   const {
@@ -31,8 +35,11 @@ const LoginDisplay = () => {
   const registerUseForm = useForm({ resolver: yupResolver(schemaRegister) });
 
   const submit = (data) => {
-    console.log(data);
     login(data.username, data.password);
+  };
+
+  const submitSignup = (data) => {
+    createUser(data.email, data.username, data.password, data.passwordConfirm);
   };
 
   return (
@@ -41,11 +48,11 @@ const LoginDisplay = () => {
         <div>Entrar</div>
         <Form transparent onSubmit={handleSubmit(submit)}>
           <Input
-            label="Username"
+            label="Nome de Usuário"
             register={register}
             name={"username"}
             error={errors.username?.message}
-            placeholder="Username"
+            placeholder="Nome de Usuário"
             required
           />
           <Input
@@ -62,7 +69,7 @@ const LoginDisplay = () => {
       </div>
       <div>
         <div>Cadastre-se</div>
-        <Form transparent onSubmit={registerUseForm.handleSubmit(submit)}>
+        <Form transparent onSubmit={registerUseForm.handleSubmit(submitSignup)}>
           <Input
             label="Nome de Usuário"
             register={registerUseForm.register}
@@ -84,7 +91,16 @@ const LoginDisplay = () => {
             register={registerUseForm.register}
             name={"password"}
             error={registerUseForm.formState.errors?.password?.message}
-            placeholder="senha"
+            placeholder="Senha"
+            type="password"
+            required
+          />
+          <Input
+            label="Confirme a Senha"
+            register={registerUseForm.register}
+            name={"passwordConfirm"}
+            error={registerUseForm.formState.errors?.passwordConfirm?.message}
+            placeholder="Senha"
             type="password"
             required
           />

@@ -29,8 +29,22 @@ export const UserProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
+  const createUser = (email, username, password, passwordConfirm) => {
+    meuNovoLivroApi
+      .post("register/", {
+        email,
+        username,
+        password,
+        password2: passwordConfirm,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
-    <UserContext.Provider value={{ token, user, login }}>
+    <UserContext.Provider value={{ token, user, login, createUser }}>
       {children}
     </UserContext.Provider>
   );
