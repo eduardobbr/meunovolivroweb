@@ -31,11 +31,11 @@ const SecondBanner = () => {
       {mobile ? (
         <ImgContent>
           <FirstImg
-            src="http://localhost:1337/uploads/book_image02_79b6eddf07.png"
+            src="https://meunovolivro.com.br/wp-content/uploads/2022/07/book-image02.png"
             alt="Livro de divulgação"
           />
           <SecondImg
-            src="http://localhost:1337/uploads/book_image01_acd02a46da.png"
+            src="https://meunovolivro.com.br/wp-content/uploads/2022/07/book-image01.png"
             alt="Livro de divulgação"
           />
         </ImgContent>

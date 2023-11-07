@@ -136,7 +136,7 @@ const BookPreCalc = () => {
       {mobile ? (
         <ImgBox>
           <img
-            src="http://localhost:1337/uploads/read_image01_4a5978994c.jpg"
+            src="https://meunovolivro.com.br/wp-content/uploads/2022/07/read-image01.jpg"
             alt="Imagem de um Leitor"
           />
         </ImgBox>

@@ -24,7 +24,7 @@ const Header = () => {
         <Logo>
           <Link to={"/"}>
             <img
-              src="http://localhost:1337/uploads/logo_meunovolivro_1_1536x245_55a7dd3782.png"
+              src="https://meunovolivro.com.br/wp-content/uploads/2022/07/logo-meunovolivro-1-1536x245.png"
               alt="Logo Meu Novo Livro"
             />
           </Link>

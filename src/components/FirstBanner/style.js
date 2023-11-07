@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const Banner = styled.section`
-  background: url("http://localhost:1337/uploads/banner_img01_929b21718c.jpg"),
+  background: url("https://meunovolivro.com.br/wp-content/uploads/2022/07/banner-img01.jpg"),
     var(--mainBgColor);
   background-size: cover;
   background-repeat: no-repeat;

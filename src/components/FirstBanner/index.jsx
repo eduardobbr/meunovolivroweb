@@ -18,7 +18,7 @@ const FirstBanner = () => {
         </TextContent>
         <ImgContent>
           <img
-            src="http://localhost:1337/uploads/banner_book_df6c6eeb97.png"
+            src="https://meunovolivro.com.br/wp-content/uploads/2022/07/banner-book.png"
             alt="Livro de divulgação"
           />
         </ImgContent>

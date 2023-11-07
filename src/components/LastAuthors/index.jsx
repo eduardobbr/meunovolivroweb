@@ -18,7 +18,7 @@ const LastAuthors = () => {
       <AuthorList>
         <Author>
           <AuthorImg
-            src="http://localhost:1337/uploads/team_image01_4f802be293.jpg"
+            src="https://meunovolivro.com.br/wp-content/uploads/2022/07/team-image01.jpg"
             alt="Imagem do Autor"
           />
           <AuthorName>Mark Galoway</AuthorName>
@@ -39,7 +39,7 @@ const LastAuthors = () => {
         </Author>
         <Author>
           <AuthorImg
-            src="http://localhost:1337/uploads/team_image01_4f802be293.jpg"
+            src="https://meunovolivro.com.br/wp-content/uploads/2022/07/team-image01.jpg"
             alt="Imagem do Autor"
           />
           <AuthorName>Mark Galoway</AuthorName>
@@ -60,7 +60,7 @@ const LastAuthors = () => {
         </Author>
         <Author>
           <AuthorImg
-            src="http://localhost:1337/uploads/team_image01_4f802be293.jpg"
+            src="https://meunovolivro.com.br/wp-content/uploads/2022/07/team-image01.jpg"
             alt="Imagem do Autor"
           />
           <AuthorName>Mark Galoway</AuthorName>

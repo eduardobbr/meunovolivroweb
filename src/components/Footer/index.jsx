@@ -12,7 +12,7 @@ const Footer = () => {
     <Container>
       <Content>
         <img
-          src="http://localhost:1337/uploads/logo_meunovolivro2_1536x245_d0b0b2b208.png"
+          src="https://meunovolivro.com.br/wp-content/uploads/2022/07/logo-meunovolivro2-1536x245.png"
           alt="Meu Novo Livro Logo Branca"
         />
         <Social>
