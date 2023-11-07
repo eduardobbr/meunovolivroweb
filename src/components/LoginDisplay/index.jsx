@@ -7,9 +7,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Container } from "./style";
 import { useUser } from "../../provider/User";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginDisplay = () => {
-  const { login, createUser } = useUser();
+  const { login, createUser, logged } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (logged) {
+      navigate("/dashboard");
+    }
+  }, [logged, navigate]);
 
   const schema = yup.object({
     username: yup.string().required("Campo Obrigatório!"),

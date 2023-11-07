@@ -11,6 +11,7 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@mnl_user")) || {}
   );
+  const [logged, setLogged] = useState(token !== "" ? false : true);
 
   const login = (username, password) => {
     meuNovoLivroApi
@@ -25,6 +26,7 @@ export const UserProvider = ({ children }) => {
       .then(() => {
         setUser(jwtDecode(token));
         localStorage.setItem("@mnl_user", JSON.stringify(jwtDecode(token)));
+        setLogged(true);
       })
       .catch((error) => console.log(error));
   };
@@ -38,13 +40,21 @@ export const UserProvider = ({ children }) => {
         password2: passwordConfirm,
       })
       .then((response) => {
-        console.log(response);
+        window.alert(response.statusText);
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <UserContext.Provider value={{ token, user, login, createUser }}>
+    <UserContext.Provider
+      value={{
+        token,
+        user,
+        login,
+        createUser,
+        logged,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
