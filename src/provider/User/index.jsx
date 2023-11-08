@@ -11,7 +11,13 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("@mnl_user")) || {}
   );
-  const [logged, setLogged] = useState(token !== "" ? false : true);
+  const [logged, setLogged] = useState(token !== "" ? true : false);
+
+  const loginVerify = () => {
+    if (token !== "") {
+      setLogged(true);
+    }
+  };
 
   const login = (username, password) => {
     meuNovoLivroApi
@@ -45,6 +51,13 @@ export const UserProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
+  const logout = () => {
+    setLogged(false);
+    setToken("");
+    localStorage.removeItem("@mnl_token");
+    localStorage.removeItem("@mnl_user");
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -53,6 +66,8 @@ export const UserProvider = ({ children }) => {
         login,
         createUser,
         logged,
+        loginVerify,
+        logout,
       }}
     >
       {children}

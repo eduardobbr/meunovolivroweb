@@ -8,15 +8,22 @@ import {
   MenuItem,
   MenuList,
 } from "./style";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiBookshelf } from "react-icons/gi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useMediaQuery } from "@material-ui/core";
 import { theme } from "../../styles/theme";
+import { useUser } from "../../provider/User";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const mobile = useMediaQuery(theme.breakpoints.up("md"));
+
+  const { logged, loginVerify, logout } = useUser();
+
+  useEffect(() => {
+    loginVerify();
+  });
 
   return (
     <Container className="header">
@@ -31,9 +38,15 @@ const Header = () => {
         </Logo>
         <Menu open={open}>
           <MenuList>
-            <MenuItem>
-              <Link to={"/login-register"}>Entrar/Cadastre-se</Link>
-            </MenuItem>
+            {logged ? (
+              <MenuItem>
+                <Link to={"/dashboard"}>Criação</Link>
+              </MenuItem>
+            ) : (
+              <MenuItem>
+                <Link to={"/login-register"}>Entrar/Cadastre-se</Link>
+              </MenuItem>
+            )}
             <MenuItem>
               <Link to={"/plans"}>Nossos Planos</Link>
             </MenuItem>
@@ -43,6 +56,13 @@ const Header = () => {
             <MenuItem>
               <Link to={"/blog"}>Blog</Link>
             </MenuItem>
+            {logged && (
+              <MenuItem>
+                <Link to={"/"} onClick={logout}>
+                  Sair
+                </Link>
+              </MenuItem>
+            )}
           </MenuList>
         </Menu>
 

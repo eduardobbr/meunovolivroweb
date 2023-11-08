@@ -11,14 +11,15 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginDisplay = () => {
-  const { login, createUser, logged } = useUser();
+  const { login, createUser, logged, loginVerify } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
+    loginVerify();
     if (logged) {
       navigate("/dashboard");
     }
-  }, [logged, navigate]);
+  }, [logged, navigate, loginVerify]);
 
   const schema = yup.object({
     username: yup.string().required("Campo Obrigatório!"),
