@@ -4,7 +4,7 @@ import { UserProvider } from "./User";
 const Provider = ({ children }) => {
   return (
     <UserProvider>
-      <BooksProvider>{children}</BooksProvider>;
+      <BooksProvider>{children}</BooksProvider>
     </UserProvider>
   );
 };

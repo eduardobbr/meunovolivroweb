@@ -19,6 +19,11 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const userSetter = () => {
+    setUser(jwtDecode(token));
+    localStorage.setItem("@mnl_user", JSON.stringify(user));
+  };
+
   const login = (username, password) => {
     meuNovoLivroApi
       .post("login/", { username, password })
@@ -28,10 +33,6 @@ export const UserProvider = ({ children }) => {
           "@mnl_token",
           JSON.stringify(response.data.access)
         );
-      })
-      .then(() => {
-        setUser(jwtDecode(token));
-        localStorage.setItem("@mnl_user", JSON.stringify(jwtDecode(token)));
         setLogged(true);
       })
       .catch((error) => console.log(error));
@@ -68,6 +69,7 @@ export const UserProvider = ({ children }) => {
         logged,
         loginVerify,
         logout,
+        userSetter,
       }}
     >
       {children}
