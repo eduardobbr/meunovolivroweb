@@ -6,6 +6,7 @@ export const Container = styled.div`
   border-radius: 10px;
   border: 3px solid var(--mainTextColor);
   color: var(--mainTextColor);
+  margin: 10px;
 `;
 
 export const Title = styled.p`

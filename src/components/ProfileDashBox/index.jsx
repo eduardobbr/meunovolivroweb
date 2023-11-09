@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useUser } from "../../provider/User";
 import { Container, Content, Title } from "./style";
 import jwtDecode from "jwt-decode";
+import { useBooks } from "../../provider/Books";
 
 const ProfileDashBox = () => {
   const { user, setUser, token } = useUser();
+  const { books } = useBooks();
 
   useEffect(() => {
     setUser(jwtDecode(token));
@@ -14,7 +16,7 @@ const ProfileDashBox = () => {
     <Container>
       <Content>
         <Title>{user.username}</Title>
-        <p>X Livros</p>
+        {books && <p>{books.length} Livro(s)</p>}
       </Content>
     </Container>
   );
