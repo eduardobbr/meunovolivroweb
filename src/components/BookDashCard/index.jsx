@@ -4,7 +4,10 @@ const BookDashCard = ({ book }) => {
   return (
     <Container>
       <Content>
-        <img src={book.cover} alt={`Capa do livro ${book.name}`} />
+        <img
+          src={`http://127.0.0.1:8000${book.cover}`}
+          alt={`Capa do livro ${book.name}`}
+        />
         <Title>{book.name}</Title>
         <div>
           <Button>Publicar</Button>

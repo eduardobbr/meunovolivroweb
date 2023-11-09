@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { meuNovoLivroApi } from "../../services";
 
 const BooksContext = createContext({});
 
@@ -14,7 +15,15 @@ export const BooksProvider = ({ children }) => {
   const [keywords, setKeywords] = useState("");
   const [sinopse, setSinopse] = useState("");
   const [bookCover, setBookCover] = useState();
+  const [books, setBooks] = useState();
   const booksSize = ["14x21", "15x21", "16x23"];
+
+  const getBooks = (userId) => {
+    meuNovoLivroApi
+      .get(`/books?user=${userId}`)
+      .then((response) => setBooks(response.data))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <BooksContext.Provider
@@ -42,6 +51,8 @@ export const BooksProvider = ({ children }) => {
         setSinopse,
         bookCover,
         setBookCover,
+        getBooks,
+        books,
       }}
     >
       {children}
