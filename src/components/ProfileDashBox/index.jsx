@@ -1,20 +1,19 @@
 import { useEffect } from "react";
 import { useUser } from "../../provider/User";
 import { Container, Content, Title } from "./style";
+import jwtDecode from "jwt-decode";
 
 const ProfileDashBox = () => {
-  const { userSetter, user } = useUser();
+  const { user, setUser, token } = useUser();
 
   useEffect(() => {
-    userSetter();
-  });
+    setUser(jwtDecode(token));
+  }, [setUser, token]);
 
   return (
     <Container>
-      <Title>Perfil:</Title>
       <Content>
-        <h3>{user.username}</h3>
-        <p>{user.email}</p>
+        <Title>{user.username}</Title>
         <p>X Livros</p>
       </Content>
     </Container>

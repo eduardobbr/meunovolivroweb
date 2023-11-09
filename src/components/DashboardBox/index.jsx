@@ -1,3 +1,4 @@
+import BooksDashBox from "../BooksDashBox";
 import ProfileDashBox from "../ProfileDashBox";
 import { Container, Content } from "./style";
 
@@ -6,6 +7,7 @@ const DashboardBox = () => {
     <Container>
       <Content>
         <ProfileDashBox />
+        <BooksDashBox />
       </Content>
     </Container>
   );

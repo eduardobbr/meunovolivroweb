@@ -2,17 +2,18 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   border: 1px solid var(--mainTextColor);
-  border-radius: 10px 10px 0 0;
+  border-radius: 0 0 10px 10px;
   padding: 30px;
+  border-top: none;
 `;
 
 export const Title = styled.h2`
-  margin-bottom: 10px;
+  text-align: center;
 `;
 
 export const Content = styled.div`
   margin: 10px 20px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 `;

@@ -21,11 +21,10 @@ export const UserProvider = ({ children }) => {
 
   const userSetter = () => {
     setUser(jwtDecode(token));
-    localStorage.setItem("@mnl_user", JSON.stringify(user));
   };
 
-  const login = (username, password) => {
-    meuNovoLivroApi
+  const login = async (username, password) => {
+    await meuNovoLivroApi
       .post("login/", { username, password })
       .then((response) => {
         setToken(response.data.access);
@@ -33,6 +32,7 @@ export const UserProvider = ({ children }) => {
           "@mnl_token",
           JSON.stringify(response.data.access)
         );
+        userSetter();
         setLogged(true);
       })
       .catch((error) => console.log(error));
@@ -70,6 +70,7 @@ export const UserProvider = ({ children }) => {
         loginVerify,
         logout,
         userSetter,
+        setUser,
       }}
     >
       {children}
