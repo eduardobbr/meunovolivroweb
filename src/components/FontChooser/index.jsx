@@ -12,16 +12,16 @@ const FontChooser = () => {
         </Title>
         <FontBox>
           <Fonts
-            onClick={() => setBookStyle("classic")}
-            $selected={bookStyle === "classic"}
+            onClick={() => setBookStyle("C")}
+            $selected={bookStyle === "C"}
             $classic={true}
           >
             <div></div>
             Clássico
           </Fonts>
           <Fonts
-            onClick={() => setBookStyle("modern")}
-            $selected={bookStyle === "modern"}
+            onClick={() => setBookStyle("M")}
+            $selected={bookStyle === "M"}
           >
             <div></div>
             Moderno

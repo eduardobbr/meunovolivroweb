@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DataChooser from "../DataChooser";
 import FontChooser from "../FontChooser";
 import TextEditor from "../TextEditor";
@@ -11,7 +11,11 @@ import {
   Prev,
   PrevContBox,
   Prox,
+  Save,
 } from "./style";
+import { useBooks } from "../../provider/Books";
+import { useUser } from "../../provider/User";
+import jwtDecode from "jwt-decode";
 
 const BookCreationDashboard = () => {
   const [step, setStep] = useState(0);
@@ -21,6 +25,19 @@ const BookCreationDashboard = () => {
     <TextEditor />,
     <CoverGenerator />,
   ];
+
+  const { saveOrUpdateBooks, getBooks } = useBooks();
+
+  const { token } = useUser();
+
+  useEffect(() => {
+    const user = jwtDecode(token);
+    getBooks(user.user_id);
+  }, []);
+
+  const handleSave = () => {
+    saveOrUpdateBooks(token);
+  };
 
   return (
     <Container>
@@ -50,6 +67,7 @@ const BookCreationDashboard = () => {
 
         {step < 3 && <Prox onClick={() => setStep(step + 1)}>Próximo</Prox>}
       </PrevContBox>
+      <Save onClick={handleSave}>Salvar Livro</Save>
     </Container>
   );
 };

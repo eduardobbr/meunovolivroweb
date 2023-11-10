@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 80%;
   max-width: 1200px;
   margin: 50px auto;
-  height: 700px;
+  min-height: 700px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -56,4 +56,20 @@ export const Prox = styled.button`
 
 export const Prev = styled.button`
   align-self: self-start;
+`;
+
+export const Save = styled.button`
+  cursor: pointer;
+  width: 200px;
+  height: 50px;
+  align-self: center;
+  border: none;
+  background-color: var(--secondaryColor);
+  color: var(--secondaryTextColor);
+  border-radius: 5px;
+  transition: 300ms;
+
+  &:hover {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
 `;
