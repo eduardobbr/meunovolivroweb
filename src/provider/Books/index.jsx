@@ -37,9 +37,11 @@ export const BooksProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const updateBook = (book, token) => {
+  const updateBook = (book, token, oldBook) => {
     meuNovoLivroApi
-      .patch(`/api/books`, book, { Authorization: `Bearer ${token}` })
+      .patch(`/books/${oldBook.id}/`, book, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   };
@@ -62,7 +64,9 @@ export const BooksProvider = ({ children }) => {
 
     const has = books.filter((book) => book.name === bookName);
 
-    has.length === 0 ? createBook(book, token) : updateBook(book, token);
+    has.length === 0
+      ? createBook(book, token)
+      : updateBook(book, token, has[0]);
   };
 
   return (
