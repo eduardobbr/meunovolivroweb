@@ -1,6 +1,13 @@
+import { useNavigate } from "react-router-dom";
+import { useBooks } from "../../provider/Books";
+import { useUser } from "../../provider/User";
 import { Button, Container, Content, Title } from "./style";
 
 const BookDashCard = ({ book }) => {
+  const { bookUpdaterGet } = useBooks();
+  const { token } = useUser();
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Content>
@@ -11,7 +18,19 @@ const BookDashCard = ({ book }) => {
         <Title>{book.name}</Title>
         <div>
           <Button>Publicar</Button>
-          <Button $edit>Editar</Button>
+          <Button
+            $edit
+            onClick={async () => {
+              try {
+                await bookUpdaterGet(book.id, token);
+                navigate(`/producao/`);
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+          >
+            Editar
+          </Button>
         </div>
       </Content>
     </Container>

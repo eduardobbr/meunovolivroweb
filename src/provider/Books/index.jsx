@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { meuNovoLivroApi } from "../../services";
+import jwtDecode from "jwt-decode";
 
 const BooksContext = createContext({});
 
@@ -33,7 +34,7 @@ export const BooksProvider = ({ children }) => {
       .post(`/books/create/`, book, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => console.log(response))
+      .then(() => getBooks(jwtDecode(token).user_id))
       .catch((err) => console.log(err));
   };
 
@@ -48,6 +49,11 @@ export const BooksProvider = ({ children }) => {
 
   const saveOrUpdateBooks = async (token) => {
     setBookName(`${bookTitle} - ${author}`);
+
+    if (typeof audience === "string") {
+      setAudience(0);
+    }
+
     const book = {
       name: bookName,
       content: bookContent,
@@ -67,6 +73,27 @@ export const BooksProvider = ({ children }) => {
     has.length === 0
       ? createBook(book, token)
       : updateBook(book, token, has[0]);
+  };
+
+  const bookUpdaterGet = (bookId, token) => {
+    let book = {};
+    meuNovoLivroApi
+      .get(`/books/${bookId}/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        book = response.data;
+        setBookContent(book.content);
+        setSinopse(book.synopsis);
+        setBookTitle(book.title);
+        setBookSubTitle(book.subtitle);
+        setAuthor(book.author);
+        setIsbn(book.isbn);
+        setAudience(book.public_target);
+        setKeywords(book.keywords);
+        setBookStyle(book.book_style);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -100,6 +127,7 @@ export const BooksProvider = ({ children }) => {
         saveOrUpdateBooks,
         bookName,
         setBookName,
+        bookUpdaterGet,
       }}
     >
       {children}
