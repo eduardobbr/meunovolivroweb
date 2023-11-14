@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Shape from "../Shape";
 import {
   Author,
@@ -13,10 +13,19 @@ import {
   Title,
 } from "./style";
 import { useBooks } from "../../provider/Books";
+import * as htmlToImage from "html-to-image";
 
 const CoverGenerator = () => {
-  const { author, bookTitle, bookSubTitle, setBookCover, bookCover } =
-    useBooks();
+  const {
+    author,
+    bookTitle,
+    bookSubTitle,
+    setBookCover,
+    bookCover,
+    setCoverUp,
+  } = useBooks();
+
+  const coverDiv = useRef(bookCover);
 
   const [shape, setShape] = useState("triangle");
   const [color, setColor] = useState("green");
@@ -67,7 +76,7 @@ const CoverGenerator = () => {
     return { vertical: randomSize(426), horizontal: randomSize(266) };
   };
 
-  const coverGeneration = () => {
+  const coverGeneration = async () => {
     const shapes = [];
     for (let index = 0; index < 30; index++) {
       shapes.push({
@@ -75,30 +84,42 @@ const CoverGenerator = () => {
         position: randomPosition(),
       });
     }
-    setBookCover(
-      <Cover
-        $background={colors[color].backgroundColor}
-        $color={colors[color].textColor}
-      >
-        <BookTitle>
-          <span>{bookTitle}</span>
-          <p>{bookSubTitle}</p>
-        </BookTitle>
-        <Author>
-          <span>{author}</span>
-        </Author>
+    await setBookCover(
+      <div>
+        <Cover
+          ref={coverDiv}
+          $background={colors[color].backgroundColor}
+          $color={colors[color].textColor}
+        >
+          <BookTitle>
+            <span>{bookTitle}</span>
+            <p>{bookSubTitle}</p>
+          </BookTitle>
+          <Author>
+            <span>{author}</span>
+          </Author>
 
-        {shapes.map((item, index) => (
-          <Shape
-            key={index}
-            shape={shape}
-            size={item.size}
-            position={item.position}
-            color={colors[color].randomColors}
-          />
-        ))}
-      </Cover>
+          {shapes.map((item, index) => (
+            <Shape
+              key={index}
+              shape={shape}
+              size={item.size}
+              position={item.position}
+              color={colors[color].randomColors}
+            />
+          ))}
+        </Cover>
+      </div>
     );
+
+    htmlToImage
+      .toJpeg(coverDiv.current, { quality: 1.0 })
+      .then((dataUrl) => {
+        setCoverUp(dataUrl);
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
   };
 
   return (

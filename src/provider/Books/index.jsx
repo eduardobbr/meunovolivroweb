@@ -18,6 +18,7 @@ export const BooksProvider = ({ children }) => {
   const [bookCover, setBookCover] = useState();
   const [bookName, setBookName] = useState("");
   const [books, setBooks] = useState();
+  const [coverUp, setCoverUp] = useState();
   const booksSize = ["14x21", "15x21", "16x23"];
 
   const getBooks = (userId) => {
@@ -32,16 +33,21 @@ export const BooksProvider = ({ children }) => {
   const createBook = (book, token) => {
     meuNovoLivroApi
       .post(`/books/create/`, book, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then(() => getBooks(jwtDecode(token).user_id))
       .catch((err) => console.log(err));
   };
 
   const updateBook = (book, token, oldBook) => {
+    console.log(coverUp);
     meuNovoLivroApi
       .patch(`/books/${oldBook.id}/`, book, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
@@ -66,6 +72,7 @@ export const BooksProvider = ({ children }) => {
       public_target: audience,
       keywords: keywords,
       book_style: bookStyle,
+      cover: coverUp,
     };
 
     const has = books.filter((book) => book.name === bookName);
@@ -79,7 +86,9 @@ export const BooksProvider = ({ children }) => {
     let book = {};
     meuNovoLivroApi
       .get(`/books/${bookId}/`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((response) => {
         book = response.data;
@@ -128,6 +137,7 @@ export const BooksProvider = ({ children }) => {
         bookName,
         setBookName,
         bookUpdaterGet,
+        setCoverUp,
       }}
     >
       {children}
