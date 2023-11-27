@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
-  height: 528px;
-`;
+export const Container = styled.section``;
 
 export const Content = styled.div`
   width: 100%;
@@ -107,4 +105,11 @@ export const Author = styled.h3`
   span {
     width: 60%;
   }
+`;
+
+export const CoverDisplay = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;

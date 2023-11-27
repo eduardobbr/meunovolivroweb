@@ -10,19 +10,24 @@ import {
   Content,
   Cover,
   CoverBox,
+  CoverDisplay,
   Title,
 } from "./style";
 import { useBooks } from "../../provider/Books";
 import * as htmlToImage from "html-to-image";
 
 const CoverGenerator = () => {
-  const { author, bookTitle, bookSubTitle, setBookCover, bookCover } =
-    useBooks();
+  const { setBookCover, bookCover } = useBooks();
 
   const coverDiv = useRef(bookCover);
 
+  const [coverTitle, setCoverTitle] = useState("");
+  const [coverSubTitle, setCoverSubTitle] = useState("");
+  const [coverAuthor, setCoverAuthor] = useState("");
   const [shape, setShape] = useState("triangle");
   const [color, setColor] = useState("green");
+  const [download, setDownload] = useState(false);
+  const [downloadLik, setDownloadLink] = useState();
 
   const colors = {
     green: {
@@ -86,11 +91,11 @@ const CoverGenerator = () => {
           $color={colors[color].textColor}
         >
           <BookTitle>
-            <span>{bookTitle}</span>
-            <p>{bookSubTitle}</p>
+            <span>{coverTitle}</span>
+            <p>{coverSubTitle}</p>
           </BookTitle>
           <Author>
-            <span>{author}</span>
+            <span>{coverAuthor}</span>
           </Author>
 
           {shapes.map((item, index) => (
@@ -107,12 +112,17 @@ const CoverGenerator = () => {
     );
 
     htmlToImage
-      .toJpeg(coverDiv.current, { quality: 1.0 })
+      .toJpeg(coverDiv.current, {
+        quality: 1.0,
+        canvasWidth: 1600,
+        canvasHeight: 2560,
+      })
       .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = "cover.png";
-        link.href = dataUrl;
-        link.click();
+        setDownload(false);
+        setDownloadLink(dataUrl);
+      })
+      .then(() => {
+        setDownload(true);
       })
       .catch(function (error) {
         console.error("oops, something went wrong!", error);
@@ -130,15 +140,33 @@ const CoverGenerator = () => {
           <ConfigBox>
             <ConfigFields>
               <p>Escolha o título</p>
-              <input type="text" name="Título" id="title" />
+              <input
+                type="text"
+                name="Título"
+                id="title"
+                value={coverTitle}
+                onChange={(e) => setCoverTitle(e.target.value)}
+              />
             </ConfigFields>
             <ConfigFields>
               <p>Escolha o subtitulo</p>
-              <input type="text" name="Subtitulo" id="subtitle" />
+              <input
+                type="text"
+                name="Subtitulo"
+                id="subtitle"
+                value={coverSubTitle}
+                onChange={(e) => setCoverSubTitle(e.target.value)}
+              />
             </ConfigFields>
             <ConfigFields>
               <p>Escolha o nome do autor</p>
-              <input type="text" name="Autor" id="author" />
+              <input
+                type="text"
+                name="Autor"
+                id="author"
+                value={coverAuthor}
+                onChange={(e) => setCoverAuthor(e.target.value)}
+              />
             </ConfigFields>
             <ConfigFields>
               <p>Escoha o formato:</p>
@@ -164,22 +192,31 @@ const CoverGenerator = () => {
             <Button onClick={() => coverGeneration()}>Gerar capa</Button>
           </ConfigBox>
 
-          {bookCover ? (
-            bookCover
-          ) : (
-            <Cover
-              $background={colors[color].backgroundColor}
-              $color={colors[color].textColor}
-            >
-              <BookTitle>
-                <span>{bookTitle}</span>
-                <p>{bookSubTitle}</p>
-              </BookTitle>
-              <Author>
-                <span>{author}</span>
-              </Author>
-            </Cover>
-          )}
+          <CoverDisplay>
+            {bookCover ? (
+              bookCover
+            ) : (
+              <Cover
+                $background={colors[color].backgroundColor}
+                $color={colors[color].textColor}
+              >
+                <BookTitle>
+                  <span>{coverTitle}</span>
+                  <p>{coverSubTitle}</p>
+                </BookTitle>
+                <Author>
+                  <span>{coverAuthor}</span>
+                </Author>
+              </Cover>
+            )}
+            {download ? (
+              <a href={downloadLik} download={`capa_${coverTitle}.jpeg`}>
+                Baixar Capa
+              </a>
+            ) : (
+              <></>
+            )}
+          </CoverDisplay>
         </CoverBox>
       </Content>
     </Container>

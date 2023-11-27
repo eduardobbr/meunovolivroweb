@@ -8,6 +8,7 @@ import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import NotFound from "../pages/404";
 import BookCreator from "../pages/BookCreator";
+import CoverGen from "../pages/CoverGen";
 
 const router = createBrowserRouter([
   { path: "/", element: <Landing /> },
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
   { path: "/dashboard", element: <Dashboard /> },
   { path: "/producao", element: <BookCreator /> },
   { path: "/profile", element: <Profile /> },
+  { path: "/gerador-de-capa", element: <CoverGen /> },
   { path: "*", element: <NotFound /> },
 ]);
 
