@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DataChooser from "../DataChooser";
 import FontChooser from "../FontChooser";
 import TextEditor from "../TextEditor";
-import CoverGenerator from "../CoverGenerator";
+import BookCoverUpload from "../BookCoverUpload";
 import {
   Container,
   Content,
@@ -23,7 +23,7 @@ const BookCreationDashboard = () => {
     <DataChooser />,
     <FontChooser />,
     <TextEditor />,
-    <CoverGenerator />,
+    <BookCoverUpload />,
   ];
 
   const { saveOrUpdateBooks, getBooks } = useBooks();

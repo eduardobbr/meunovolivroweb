@@ -35,6 +35,7 @@ export const BooksProvider = ({ children }) => {
       .post(`/books/create/`, book, {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
       })
       .then(() => getBooks(jwtDecode(token).user_id))
@@ -49,7 +50,7 @@ export const BooksProvider = ({ children }) => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then((response) => console.log(response))
+      .then(() => getBooks(jwtDecode(token).user_id))
       .catch((err) => console.log(err));
   };
 
