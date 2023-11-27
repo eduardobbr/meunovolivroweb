@@ -21,8 +21,10 @@ export const Content = styled.div`
   justify-content: center;
 
   img {
-    border-radius: 7px;
-    margin-bottom: 20px;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 7px 7px 0 0;
   }
 
   div {
@@ -45,4 +47,9 @@ export const Button = styled.button`
   &:hover {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
   }
+`;
+
+export const ImgBox = styled.div`
+  height: 220px;
+  margin-bottom: 10px;
 `;
