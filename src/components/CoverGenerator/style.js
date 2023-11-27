@@ -43,6 +43,11 @@ export const ConfigFields = styled.div`
     width: 100%;
     height: 30px;
   }
+
+  input {
+    width: 100%;
+    height: 30px;
+  }
 `;
 
 export const Button = styled.button`

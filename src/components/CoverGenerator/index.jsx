@@ -16,14 +16,8 @@ import { useBooks } from "../../provider/Books";
 import * as htmlToImage from "html-to-image";
 
 const CoverGenerator = () => {
-  const {
-    author,
-    bookTitle,
-    bookSubTitle,
-    setBookCover,
-    bookCover,
-    setCoverUp,
-  } = useBooks();
+  const { author, bookTitle, bookSubTitle, setBookCover, bookCover } =
+    useBooks();
 
   const coverDiv = useRef(bookCover);
 
@@ -115,7 +109,10 @@ const CoverGenerator = () => {
     htmlToImage
       .toJpeg(coverDiv.current, { quality: 1.0 })
       .then((dataUrl) => {
-        setCoverUp(dataUrl);
+        const link = document.createElement("a");
+        link.download = "cover.png";
+        link.href = dataUrl;
+        link.click();
       })
       .catch(function (error) {
         console.error("oops, something went wrong!", error);
@@ -131,6 +128,18 @@ const CoverGenerator = () => {
 
         <CoverBox>
           <ConfigBox>
+            <ConfigFields>
+              <p>Escolha o título</p>
+              <input type="text" name="Título" id="title" />
+            </ConfigFields>
+            <ConfigFields>
+              <p>Escolha o subtitulo</p>
+              <input type="text" name="Subtitulo" id="subtitle" />
+            </ConfigFields>
+            <ConfigFields>
+              <p>Escolha o nome do autor</p>
+              <input type="text" name="Autor" id="author" />
+            </ConfigFields>
             <ConfigFields>
               <p>Escoha o formato:</p>
               <select onChange={(e) => setShape(e.target.value)}>
@@ -151,6 +160,7 @@ const CoverGenerator = () => {
                 <option value="orange">Laranja</option>
               </select>
             </ConfigFields>
+
             <Button onClick={() => coverGeneration()}>Gerar capa</Button>
           </ConfigBox>
 

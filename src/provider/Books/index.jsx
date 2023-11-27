@@ -42,11 +42,11 @@ export const BooksProvider = ({ children }) => {
   };
 
   const updateBook = (book, token, oldBook) => {
-    console.log(coverUp);
     meuNovoLivroApi
       .patch(`/books/${oldBook.id}/`, book, {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => console.log(response))
@@ -59,8 +59,7 @@ export const BooksProvider = ({ children }) => {
     if (typeof audience === "string") {
       setAudience(0);
     }
-
-    const book = {
+    const data = {
       name: bookName,
       content: bookContent,
       synopsis: sinopse,
@@ -72,8 +71,17 @@ export const BooksProvider = ({ children }) => {
       public_target: audience,
       keywords: keywords,
       book_style: bookStyle,
-      cover: coverUp,
     };
+
+    const book = new FormData();
+
+    for (let item in data) {
+      book.append(item, data[item]);
+    }
+
+    if (coverUp) {
+      book.append("cover", coverUp);
+    }
 
     const has = books.filter((book) => book.name === bookName);
 
