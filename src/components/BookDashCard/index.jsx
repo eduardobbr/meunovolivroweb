@@ -4,7 +4,7 @@ import { useUser } from "../../provider/User";
 import { Button, Container, Content, ImgBox, Title } from "./style";
 
 const BookDashCard = ({ book }) => {
-  const { bookUpdaterGet } = useBooks();
+  const { bookUpdaterGet, bookGenerate } = useBooks();
   const { token } = useUser();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const BookDashCard = ({ book }) => {
         </ImgBox>
         <Title>{book.name}</Title>
         <div>
-          <Button>Publicar</Button>
+          <Button onClick={() => bookGenerate(book.id, token)}>Publicar</Button>
           <Button
             $edit
             onClick={async () => {

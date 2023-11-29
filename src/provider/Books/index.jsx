@@ -114,6 +114,23 @@ export const BooksProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
+  const bookGenerate = (id, token) => {
+    meuNovoLivroApi
+      .get(`/books/${id}/generate`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: "blob",
+      })
+      .then((res) => {
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(res.data);
+        link.download = window.URL.createObjectURL(res.data);
+        link.click();
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <BooksContext.Provider
       value={{
@@ -147,6 +164,7 @@ export const BooksProvider = ({ children }) => {
         setBookName,
         bookUpdaterGet,
         setCoverUp,
+        bookGenerate,
       }}
     >
       {children}
