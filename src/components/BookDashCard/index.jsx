@@ -19,7 +19,9 @@ const BookDashCard = ({ book }) => {
         </ImgBox>
         <Title>{book.name}</Title>
         <div>
-          <Button onClick={() => bookGenerate(book.id, token)}>Publicar</Button>
+          <Button onClick={() => bookGenerate(book.id, token, book.name)}>
+            Publicar
+          </Button>
           <Button
             $edit
             onClick={async () => {

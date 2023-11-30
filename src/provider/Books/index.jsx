@@ -114,7 +114,7 @@ export const BooksProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const bookGenerate = (id, token) => {
+  const bookGenerate = (id, token, name) => {
     meuNovoLivroApi
       .get(`/books/${id}/generate`, {
         headers: {
@@ -125,7 +125,7 @@ export const BooksProvider = ({ children }) => {
       .then((res) => {
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(res.data);
-        link.download = window.URL.createObjectURL(res.data);
+        link.download = name;
         link.click();
       })
       .catch((err) => console.log(err));
