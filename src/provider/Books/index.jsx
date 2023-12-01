@@ -86,7 +86,7 @@ export const BooksProvider = ({ children }) => {
       book.append(item, data[item]);
     }
 
-    if (typeof coverUp !== "string") {
+    if (coverUp) {
       book.append("cover", coverUp);
     }
 
