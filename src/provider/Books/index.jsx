@@ -64,11 +64,12 @@ export const BooksProvider = ({ children }) => {
 
     const divToContent = document.createElement("div");
     divToContent.innerHTML = bookContent;
+    divToContent.classList.add("ql-editor");
     divToContent.classList.add("editor");
 
     const data = {
       name: bookName,
-      content: divToContent.toString(),
+      content: divToContent.outerHTML,
       synopsis: sinopse,
       production: true,
       title: bookTitle,

@@ -32,7 +32,7 @@ const Dashboard = () => {
     setKeywords("");
     setSinopse("");
     setBookName("");
-    setCoverUp("");
+    setCoverUp(null);
   }, []);
 
   return (
