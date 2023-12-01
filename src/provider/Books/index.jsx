@@ -56,13 +56,19 @@ export const BooksProvider = ({ children }) => {
 
   const saveOrUpdateBooks = async (token) => {
     setBookName(`${bookTitle} - ${author}`);
+    console.log(coverUp);
 
     if (typeof audience === "string") {
       setAudience(0);
     }
+
+    const divToContent = document.createElement("div");
+    divToContent.innerHTML = bookContent;
+    divToContent.classList.add("editor");
+
     const data = {
       name: bookName,
-      content: bookContent,
+      content: divToContent.toString(),
       synopsis: sinopse,
       production: true,
       title: bookTitle,
@@ -80,7 +86,7 @@ export const BooksProvider = ({ children }) => {
       book.append(item, data[item]);
     }
 
-    if (coverUp) {
+    if (typeof coverUp !== "string") {
       book.append("cover", coverUp);
     }
 
