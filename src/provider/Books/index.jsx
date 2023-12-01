@@ -56,7 +56,6 @@ export const BooksProvider = ({ children }) => {
 
   const saveOrUpdateBooks = async (token) => {
     setBookName(`${bookTitle} - ${author}`);
-    console.log(coverUp);
 
     if (typeof audience === "string") {
       setAudience(0);
