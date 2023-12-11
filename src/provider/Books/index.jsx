@@ -61,14 +61,9 @@ export const BooksProvider = ({ children }) => {
       setAudience(0);
     }
 
-    const divToContent = document.createElement("div");
-    divToContent.innerHTML = bookContent;
-    divToContent.classList.add("ql-editor");
-    divToContent.classList.add("editor");
-
     const data = {
       name: bookName,
-      content: divToContent.outerHTML,
+      content: bookContent,
       synopsis: sinopse,
       production: true,
       title: bookTitle,
