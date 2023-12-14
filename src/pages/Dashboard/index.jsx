@@ -3,8 +3,12 @@ import Footer from "../../components/Footer";
 import DashboardBox from "../../components/DashboardBox";
 import { useBooks } from "../../provider/Books";
 import { useEffect } from "react";
+import { Navigate, redirect } from "react-router-dom";
+import { useUser } from "../../provider/User";
 
 const Dashboard = () => {
+  const { logged } = useUser();
+
   const {
     setBookContent,
     setBookSize,
@@ -38,7 +42,7 @@ const Dashboard = () => {
   return (
     <>
       <Header />
-      <DashboardBox></DashboardBox>
+      {logged ? <DashboardBox></DashboardBox> : <Navigate to={"/"} />}
       <Footer />
     </>
   );
