@@ -12,6 +12,8 @@ export const UserProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("@mnl_user")) || {}
   );
   const [logged, setLogged] = useState(token !== "" ? true : false);
+  const [errorLogin, setErrorLogin] = useState(false);
+  const [errorSignup, setErrorSignup] = useState(false);
 
   const loginVerify = () => {
     if (token !== "") {
@@ -34,8 +36,9 @@ export const UserProvider = ({ children }) => {
         );
         userSetter();
         setLogged(true);
+        setErrorLogin(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setErrorLogin(true));
   };
 
   const createUser = (email, username, password, passwordConfirm) => {
@@ -47,9 +50,9 @@ export const UserProvider = ({ children }) => {
         password2: passwordConfirm,
       })
       .then((response) => {
-        window.alert(response.statusText);
+        setErrorSignup(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setErrorSignup(true));
   };
 
   const logout = () => {
@@ -71,6 +74,8 @@ export const UserProvider = ({ children }) => {
         logout,
         userSetter,
         setUser,
+        errorLogin,
+        errorSignup,
       }}
     >
       {children}

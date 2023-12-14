@@ -11,7 +11,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginDisplay = () => {
-  const { login, createUser, logged, loginVerify } = useUser();
+  const { login, createUser, logged, loginVerify, errorLogin, errorSignup } =
+    useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,6 +75,7 @@ const LoginDisplay = () => {
             type="password"
             required
           />
+          {errorLogin && <span>Senha e/ou ususário incorretos</span>}
           <Button type="submit">Acessar</Button>
         </Form>
       </div>
@@ -114,6 +116,7 @@ const LoginDisplay = () => {
             type="password"
             required
           />
+          {errorSignup && <span>Algo deu errado, Tente novamente.</span>}
           <Button type="submit">Cadastre-se</Button>
         </Form>
       </div>
