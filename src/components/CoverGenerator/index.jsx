@@ -114,8 +114,8 @@ const CoverGenerator = () => {
     htmlToImage
       .toJpeg(coverDiv.current, {
         quality: 1.0,
-        canvasWidth: 1600,
-        canvasHeight: 2560,
+        canvasWidth: 889.19,
+        canvasHeight: 1422.53,
       })
       .then((dataUrl) => {
         setDownload(false);
