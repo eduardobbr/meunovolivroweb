@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Meu Novo Livro
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto desenvolvido com o intúito de facilitar a criação de livros através de uma diagramação facilitada para o usuário.
 
-## Available Scripts
+## Frontend
 
-In the project directory, you can run:
+Desenvolvido em React e utilizando bibliotecas para executar algumas funções
 
-### `yarn start`
+### Bibliotecas utilizadas:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React Hook Form
+- Material Icon
+- React-pdf
+- Axios
+- Framer Motion
+- html-to-image
+- html2canvas
+- JSpdf
+- JWTDecoder
+- React Icons
+- React Quill
+- React Responsive Carousel
+- React Router Dom
+- React to Print
+- Toastify
+- Yup
+- Styled Components
+- Swiper
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Dependências:
 
-### `yarn test`
+```json
+    "@hookform/resolvers": "^3.3.1",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@material-ui/styles": "^4.11.5",
+    "@react-pdf/renderer": "^3.1.12",
+    "@syncfusion/ej2-react-documenteditor": "^23.1.38",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "axios": "^1.5.0",
+    "framer-motion": "^10.16.4",
+    "html-to-image": "^1.11.11",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "jwt-decode": "^3.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.46.1",
+    "react-icons": "^4.10.1",
+    "react-pdf-html": "^1.1.18",
+    "react-quill": "^2.0.0",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.15.0",
+    "react-scripts": "5.0.1",
+    "react-to-print": "^2.14.13",
+    "react-toastify": "^9.1.3",
+    "react-yup": "^1.24.1",
+    "styled-components": "^6.0.7",
+    "swiper": "^10.2.0",
+    "web-vitals": "^2.1.0",
+    "yup": "^1.2.0"
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Iniciar o projeto de forma local:
 
-### `yarn build`
+Clone o _[repositório](https://github.com/cosgon/meunovolivroweb)_
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Execute o comando seguinte comando já dentro do repositório clonado:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+_ou_
 
-### `yarn eject`
+```
+yarn
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Após a instalação de todas as dependências rode o seguinte comando para iniciar o servidor:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+_ou_
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+yarn start
+```
