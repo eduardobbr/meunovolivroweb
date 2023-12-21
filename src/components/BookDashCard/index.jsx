@@ -4,7 +4,7 @@ import { useUser } from "../../provider/User";
 import { Button, Container, Content, ImgBox, Title } from "./style";
 
 const BookDashCard = ({ book }) => {
-  const { bookUpdaterGet, bookGenerate } = useBooks();
+  const { bookUpdaterGet, bookGenerate, deleteBook } = useBooks();
   const { token } = useUser();
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ const BookDashCard = ({ book }) => {
           >
             Editar
           </Button>
+          <Button onClick={() => deleteBook(book.id, token)}>Excluir</Button>
         </div>
       </Content>
     </Container>

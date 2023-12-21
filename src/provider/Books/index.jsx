@@ -132,6 +132,17 @@ export const BooksProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
+  const deleteBook = (id, token) => {
+    meuNovoLivroApi
+      .delete(`/books/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <BooksContext.Provider
       value={{
@@ -166,6 +177,7 @@ export const BooksProvider = ({ children }) => {
         bookUpdaterGet,
         setCoverUp,
         bookGenerate,
+        deleteBook,
       }}
     >
       {children}
