@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { meuNovoLivroApi } from "../../services";
 import jwtDecode from "jwt-decode";
 
@@ -61,6 +61,16 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem("@mnl_token");
     localStorage.removeItem("@mnl_user");
   };
+
+  const checkTokenExp = () => {
+    jwtDecode(token).exp < Math.floor(Date.now() / 1000)
+      ? logout()
+      : setLogged(true);
+  };
+
+  useEffect(() => {
+    token && checkTokenExp();
+  }, []);
 
   return (
     <UserContext.Provider
