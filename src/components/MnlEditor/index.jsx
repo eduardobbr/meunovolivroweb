@@ -4,22 +4,15 @@ import { BodyEditor, Container, EditorTitle, HeadEditor } from "./style";
 const MnlEditor = () => {
   const [editorText, setEditorText] = useState("");
   const [target, setTarget] = useState();
-  const [textRows, setTextRows] = useState([]);
-  const [lineCount, setLineCount] = useState(1);
+  const [endCount, setEndCount] = useState();
+  const [startCount, setStartCount] = useState();
 
   const editor = useRef(null);
 
-  const filterText = (text) => {
-    if (textRows.length > 0) {
-      text.split("\\n");
-      return setTextRows([...textRows, { lineCount }]);
-    }
-  };
-
-  const mouse = (e) => {
+  const textSelector = (e) => {
     if (e) {
-      console.log("start", e.target.selectionStart);
-      console.log("end", e.target.selectionEnd);
+      setStartCount(e.target.selectionStart);
+      setEndCount(e.target.selectionEnd);
     }
   };
 
@@ -36,7 +29,7 @@ const MnlEditor = () => {
         ref={editor}
         value={editorText}
         onChange={(e) => setEditorText(e.target.value)}
-        onSelect={(e) => mouse(e)}
+        onSelect={(e) => textSelector(e)}
         autoComplete="off"
       ></BodyEditor>
       <div>{editorText}</div>

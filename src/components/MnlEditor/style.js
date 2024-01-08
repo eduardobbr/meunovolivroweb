@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   border: 1px solid grey;
   max-width: 1200px;
+  padding: 10px;
 `;
 
 export const HeadEditor = styled.div`
@@ -20,4 +21,5 @@ export const BodyEditor = styled.textarea`
   width: 100%;
   border: none;
   outline: none;
+  resize: none;
 `;
