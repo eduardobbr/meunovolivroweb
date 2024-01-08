@@ -15,7 +15,7 @@ export const EditorTitle = styled.h3`
   color: grey;
 `;
 
-export const BodyEditor = styled.input`
+export const BodyEditor = styled.textarea`
   min-height: 48px;
   width: 100%;
   border: none;
