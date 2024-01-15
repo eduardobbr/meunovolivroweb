@@ -11,8 +11,8 @@ const MnlEditor = () => {
 
   const textSelector = (e) => {
     if (e) {
-      setStartCount(e.target.selectionStart);
-      setEndCount(e.target.selectionEnd);
+      setStartCount(e.baseOffset);
+      setEndCount(e.extentOffset);
     }
   };
 
@@ -24,42 +24,38 @@ const MnlEditor = () => {
     );
   };
 
-  const makeItBold = (start, end) => {
+  const makeIt = (start, end, tag) => {
     if (start !== end) {
       const getText = editorText.slice(start, end);
-      const textBold = `<b>${getText}</b>`;
+      const textBold = `<${tag}>${getText}</${tag}>`;
       setEditorText(filterAndAdd(start, end, textBold));
+      editor.current.innerHTML = filterAndAdd(start, end, textBold);
     }
-    // document.execCommand("bold");
-  };
-
-  const makeItItalic = (start, end) => {
-    if (start !== end) {
-      const getText = editorText.slice(start, end);
-      const textBold = `<i>${getText}</i>`;
-      setEditorText(filterAndAdd(start, end, textBold));
-    }
-    // document.execCommand("italic");
   };
 
   useEffect(() => {
     setTarget(editor.current);
+    console.log(editorText);
   }, [editorText]);
 
   return (
     <Container>
       <HeadEditor>
         <EditorTitle>Editor Meu Novo Livro</EditorTitle>
-        <button onClick={() => makeItBold(startCount, endCount)}>Bold</button>
-        <button onClick={() => makeItItalic(startCount, endCount)}>
-          Italic
+        <button onClick={() => makeIt(startCount, endCount, "strong")}>
+          Negrito
+        </button>
+        <button onClick={() => makeIt(startCount, endCount, "em")}>
+          Italico
         </button>
       </HeadEditor>
       <BodyEditor
         ref={editor}
-        value={editorText}
-        onChange={(e) => setEditorText(e.target.value)}
-        onSelect={(e) => textSelector(e)}
+        contentEditable
+        // onChange={(e) => setEditorText(e.target.value)}
+        onKeyUp={(e) => setEditorText(e.target.innerHTML)}
+        onMouseUp={(e) => textSelector(document.getSelection())}
+        // onSelect={(e) => textSelector(e)}
       ></BodyEditor>
       <div dangerouslySetInnerHTML={{ __html: editorText }} />
     </Container>
