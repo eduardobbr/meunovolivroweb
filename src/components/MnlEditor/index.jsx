@@ -10,9 +10,14 @@ const MnlEditor = () => {
   const editor = useRef(null);
 
   const textSelector = (e) => {
+    // if (e) {
+    //   setStartCount(e.baseOffset);
+    //   setEndCount(e.extentOffset);
+    // }
     if (e) {
-      setStartCount(e.baseOffset);
-      setEndCount(e.extentOffset);
+      // console.log(e);
+      setStartCount(e.target.selectionStart);
+      setEndCount(e.target.selectionEnd);
     }
   };
 
@@ -29,8 +34,16 @@ const MnlEditor = () => {
       const getText = editorText.slice(start, end);
       const textBold = `<${tag}>${getText}</${tag}>`;
       setEditorText(filterAndAdd(start, end, textBold));
-      editor.current.innerHTML = filterAndAdd(start, end, textBold);
+      // editor.current.innerHTML = filterAndAdd(start, end, textBold);
     }
+  };
+
+  const insertBr = () => {
+    const text =
+      editorText.slice(0, startCount) +
+      "</br>\n" +
+      editorText.slice(startCount, editorText.length);
+    setEditorText(text);
   };
 
   useEffect(() => {
@@ -48,14 +61,19 @@ const MnlEditor = () => {
         <button onClick={() => makeIt(startCount, endCount, "em")}>
           Italico
         </button>
+        <button onClick={() => makeIt(startCount, endCount, "h1")}>
+          Título
+        </button>
       </HeadEditor>
       <BodyEditor
         ref={editor}
-        contentEditable
-        // onChange={(e) => setEditorText(e.target.value)}
-        onKeyUp={(e) => setEditorText(e.target.innerHTML)}
-        onMouseUp={(e) => textSelector(document.getSelection())}
-        // onSelect={(e) => textSelector(e)}
+        value={editorText}
+        onChange={(e) => setEditorText(e.target.value)}
+        onKeyUp={(e) => e.key === "Enter" && insertBr()}
+        onSelect={(e) => textSelector(e)}
+        // contentEditable
+        // onKeyUp={(e) => setEditorText(e.target.innerHTML)}
+        // onMouseUp={(e) => textSelector(document.getSelection())}
       ></BodyEditor>
       <div dangerouslySetInnerHTML={{ __html: editorText }} />
     </Container>
