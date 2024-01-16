@@ -11,6 +11,7 @@ const MnlEditor = () => {
 
   const textSelector = (e) => {
     if (e) {
+      console.log(e.addRange());
       setStartCount(e.baseOffset);
       setEndCount(e.extentOffset);
     }
@@ -75,7 +76,7 @@ const MnlEditor = () => {
         // }
         contentEditable
         onKeyUp={(e) => setEditorText(e.target.innerHTML)}
-        onMouseUp={(e) => textSelector(document.getSelection())}
+        onMouseUp={() => textSelector(document.getSelection())}
       ></BodyEditor>
       <div dangerouslySetInnerHTML={{ __html: editorText }} />
     </Container>
