@@ -2,41 +2,41 @@ import { useEffect, useRef, useState } from "react";
 import { BodyEditor, Container, EditorTitle, HeadEditor } from "./style";
 
 const MnlEditor = () => {
-  const [editorText, setEditorText] = useState("");
-  const [startCount, setStartCount] = useState();
-  const [target, setTarget] = useState();
-  const [endCount, setEndCount] = useState();
+  // const [editorText, setEditorText] = useState("");
+  // const [startCount, setStartCount] = useState();
+  // const [target, setTarget] = useState();
+  // const [endCount, setEndCount] = useState();
 
-  const editor = useRef(null);
+  // const editor = useRef(null);
 
-  const textSelector = (e) => {
-    if (e) {
-      console.log(e.addRange());
-      setStartCount(e.baseOffset);
-      setEndCount(e.extentOffset);
-    }
-    // if (e) {
-    //   setStartCount(e.target.selectionStart);
-    //   setEndCount(e.target.selectionEnd);
-    // }
-  };
+  // const textSelector = (e) => {
+  //   if (e) {
+  //     console.log(e.getRangeAt(0));
+  //     setStartCount(e.baseOffset);
+  //     setEndCount(e.extentOffset);
+  //   }
+  // if (e) {
+  //   setStartCount(e.target.selectionStart);
+  //   setEndCount(e.target.selectionEnd);
+  // }
+  // };
 
-  const filterAndAdd = (start, end, str) => {
-    return (
-      editorText.slice(0, start) +
-      str +
-      editorText.slice(end, editorText.length)
-    );
-  };
+  // const filterAndAdd = (start, end, str) => {
+  //   return (
+  //     editorText.slice(0, start) +
+  //     str +
+  //     editorText.slice(end, editorText.length)
+  //   );
+  // };
 
-  const makeIt = (start, end, tag) => {
-    if (start !== end) {
-      const getText = editorText.slice(start, end);
-      const textBold = `<${tag}>${getText}</${tag}>`;
-      setEditorText(filterAndAdd(start, end, textBold));
-      editor.current.innerHTML = filterAndAdd(start, end, textBold);
-    }
-  };
+  // const makeIt = (start, end, tag) => {
+  //   if (start !== end) {
+  //     const getText = editorText.slice(start, end);
+  //     const textBold = `<${tag}>${getText}</${tag}>`;
+  //     setEditorText(filterAndAdd(start, end, textBold));
+  //     editor.current.innerHTML = filterAndAdd(start, end, textBold);
+  //   }
+  // };
 
   // const insertBr = () => {
   //   const text =
@@ -46,16 +46,16 @@ const MnlEditor = () => {
   //   setEditorText(text);
   // };
 
-  useEffect(() => {
-    setTarget(editor.current);
-    console.log(editorText);
-  }, [editorText]);
+  // useEffect(() => {
+  //   setTarget(editor.current);
+  //   console.log(editorText);
+  // }, [editorText]);
 
   return (
     <Container>
       <HeadEditor>
         <EditorTitle>Editor Meu Novo Livro</EditorTitle>
-        <button onClick={() => makeIt(startCount, endCount, "strong")}>
+        {/* {<button onClick={() => makeIt(startCount, endCount, "strong")}>
           Negrito
         </button>
         <button onClick={() => makeIt(startCount, endCount, "em")}>
@@ -63,22 +63,22 @@ const MnlEditor = () => {
         </button>
         <button onClick={() => makeIt(startCount, endCount, "h1")}>
           Título
-        </button>
+        </button>} */}
       </HeadEditor>
       <BodyEditor
-        ref={editor}
-        // value={editorText}
-        // onChange={(e) => setEditorText(e.target.value)}
-        // onKeyUp={(e) => e.key === "Enter" && insertBr()}
-        // onSelect={(e) => textSelector(e)}
-        // onKeyUp={(e) =>
-        //   e.key === "Enter" ? insertBr() : setEditorText(e.target.innerHTML)
-        // }
-        contentEditable
-        onKeyUp={(e) => setEditorText(e.target.innerHTML)}
-        onMouseUp={() => textSelector(document.getSelection())}
+      // ref={editor}
+      // // value={editorText}
+      // // onChange={(e) => setEditorText(e.target.value)}
+      // // onKeyUp={(e) => e.key === "Enter" && insertBr()}
+      // // onSelect={(e) => textSelector(e)}
+      // // onKeyUp={(e) =>
+      // //   e.key === "Enter" ? insertBr() : setEditorText(e.target.innerHTML)
+      // // }
+      // contentEditable
+      // onKeyUp={(e) => setEditorText(e.target.innerHTML)}
+      // onMouseUp={() => textSelector(window.getSelection())}
       ></BodyEditor>
-      <div dangerouslySetInnerHTML={{ __html: editorText }} />
+      {/* <div dangerouslySetInnerHTML={{ __html: editorText }} /> */}
     </Container>
   );
 };
