@@ -1,7 +1,48 @@
 import { useEffect, useRef, useState } from "react";
 import { BodyEditor, Container, EditorTitle, HeadEditor } from "./style";
 
+class Markup {
+  constructor(start, end, tag) {
+    this.start = start;
+    this.end = end;
+    this.tag = tag;
+  }
+}
+
+class ClassStyles {
+  constructor(className) {
+    this.className = className;
+  }
+}
+
+class Section {
+  constructor() {
+    this.styleList = [];
+    this.pList = [];
+  }
+}
+
+class Paragraph {
+  constructor() {
+    this.text = "";
+    this.markList = [];
+  }
+}
+
 const MnlEditor = () => {
+  return (
+    <Container>
+      <HeadEditor>
+        <EditorTitle>Editor Meu Novo Livro</EditorTitle>
+      </HeadEditor>
+      <BodyEditor contentEditable></BodyEditor>
+    </Container>
+  );
+};
+
+export default MnlEditor;
+
+/*
   // const [editorText, setEditorText] = useState("");
   // const [startCount, setStartCount] = useState();
   // const [target, setTarget] = useState();
@@ -55,7 +96,7 @@ const MnlEditor = () => {
     <Container>
       <HeadEditor>
         <EditorTitle>Editor Meu Novo Livro</EditorTitle>
-        {/* {<button onClick={() => makeIt(startCount, endCount, "strong")}>
+         {<button onClick={() => makeIt(startCount, endCount, "strong")}>
           Negrito
         </button>
         <button onClick={() => makeIt(startCount, endCount, "em")}>
@@ -63,7 +104,7 @@ const MnlEditor = () => {
         </button>
         <button onClick={() => makeIt(startCount, endCount, "h1")}>
           Título
-        </button>} */}
+        </button>} 
       </HeadEditor>
       <BodyEditor
       // ref={editor}
@@ -78,9 +119,7 @@ const MnlEditor = () => {
       // onKeyUp={(e) => setEditorText(e.target.innerHTML)}
       // onMouseUp={() => textSelector(window.getSelection())}
       ></BodyEditor>
-      {/* <div dangerouslySetInnerHTML={{ __html: editorText }} /> */}
+       <div dangerouslySetInnerHTML={{ __html: editorText }} /> 
     </Container>
   );
-};
-
-export default MnlEditor;
+*/
