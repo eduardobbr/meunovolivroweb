@@ -64,7 +64,7 @@ const MnlEditor = () => {
       </HeadEditor>
       <BodyEditor
         contentEditable
-        onKeyDown={(e) => {
+        onKeyUp={(e) => {
           e.key === "Enter" ? createParagraph() : testContent(e);
         }}
       ></BodyEditor>
