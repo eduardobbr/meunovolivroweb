@@ -30,12 +30,44 @@ class Paragraph {
 }
 
 const MnlEditor = () => {
+  const [bookSection, setBookSection] = useState(new Section());
+
+  const createParagraph = () => {
+    const paragraph = new Paragraph();
+    const sectionCopy = JSON.parse(JSON.stringify(bookSection));
+    sectionCopy.pList.push(paragraph);
+    setBookSection(sectionCopy);
+    console.log(bookSection);
+  };
+
+  const testContent = (e) => {
+    console.log(e);
+    // e.target.childNodes = [{ textContent: "teste" }];
+    const comming = e.target.innerText.split("\n");
+    const sectionCopy = JSON.parse(JSON.stringify(bookSection));
+    comming.forEach((node) => {
+      const paragraph = new Paragraph();
+      paragraph.text = node;
+      sectionCopy.pList.push(paragraph);
+    });
+    setBookSection(sectionCopy);
+  };
+
+  useEffect(() => {
+    console.log(bookSection);
+  });
+
   return (
     <Container>
       <HeadEditor>
         <EditorTitle>Editor Meu Novo Livro</EditorTitle>
       </HeadEditor>
-      <BodyEditor contentEditable></BodyEditor>
+      <BodyEditor
+        contentEditable
+        onKeyDown={(e) => {
+          e.key === "Enter" ? createParagraph() : testContent(e);
+        }}
+      ></BodyEditor>
     </Container>
   );
 };
