@@ -37,12 +37,11 @@ const MnlEditor = () => {
     const sectionCopy = JSON.parse(JSON.stringify(bookSection));
     sectionCopy.pList.push(paragraph);
     setBookSection(sectionCopy);
-    console.log(bookSection);
+    // console.log(bookSection);
   };
 
   const testContent = (e) => {
     console.log(e);
-    // e.target.childNodes = [{ textContent: "teste" }];
     const comming = e.target.innerText.split("\n");
     const sectionCopy = JSON.parse(JSON.stringify(bookSection));
     comming.forEach((node) => {
@@ -53,9 +52,9 @@ const MnlEditor = () => {
     setBookSection(sectionCopy);
   };
 
-  useEffect(() => {
-    console.log(bookSection);
-  });
+  // useEffect(() => {
+  //   console.log(bookSection);
+  // });
 
   return (
     <Container>
