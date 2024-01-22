@@ -40,10 +40,23 @@ const MnlEditor = () => {
     // console.log(bookSection);
   };
 
+  const whichChild = (e) => {
+    const parent = e.target;
+    const child = window.getSelection();
+    // console.log(child.anchorNode.parentNode);
+
+    parent.childNodes.forEach((node, index) => {
+      if (node === child.anchorNode.parentNode) {
+        console.log(index);
+      }
+    });
+    // console.log(parent.childNodes);
+  };
+
   const testContent = (e) => {
-    console.log(e);
+    // console.log(e);
     const comming = e.target.innerText.split("\n");
-    const sectionCopy = JSON.parse(JSON.stringify(bookSection));
+    const sectionCopy = new Section();
     comming.forEach((node) => {
       const paragraph = new Paragraph();
       paragraph.text = node;
@@ -53,8 +66,8 @@ const MnlEditor = () => {
   };
 
   // useEffect(() => {
-  //   console.log(bookSection);
-  // });
+  //   // console.log(bookSection);
+  // }, [bookSection]);
 
   return (
     <Container>
@@ -65,6 +78,9 @@ const MnlEditor = () => {
         contentEditable
         onKeyUp={(e) => {
           e.key === "Enter" ? createParagraph() : testContent(e);
+        }}
+        onSelect={(e) => {
+          whichChild(e);
         }}
       ></BodyEditor>
     </Container>
