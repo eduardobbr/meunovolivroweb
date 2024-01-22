@@ -31,30 +31,33 @@ class Paragraph {
 
 const MnlEditor = () => {
   const [bookSection, setBookSection] = useState(new Section());
+  const [currentParagraph, setCurrentParagraph] = useState(0);
 
   const createParagraph = () => {
     const paragraph = new Paragraph();
     const sectionCopy = JSON.parse(JSON.stringify(bookSection));
     sectionCopy.pList.push(paragraph);
     setBookSection(sectionCopy);
-    // console.log(bookSection);
   };
 
   const whichChild = (e) => {
     const parent = e.target;
     const child = window.getSelection();
-    // console.log(child.anchorNode.parentNode);
+    let checkEntry = false;
 
     parent.childNodes.forEach((node, index) => {
       if (node === child.anchorNode.parentNode) {
-        console.log(index);
+        setCurrentParagraph(index);
+        checkEntry = true;
       }
     });
-    // console.log(parent.childNodes);
+
+    if (!checkEntry) {
+      setCurrentParagraph(0);
+    }
   };
 
   const testContent = (e) => {
-    // console.log(e);
     const comming = e.target.innerText.split("\n");
     const sectionCopy = new Section();
     comming.forEach((node) => {
@@ -65,9 +68,9 @@ const MnlEditor = () => {
     setBookSection(sectionCopy);
   };
 
-  // useEffect(() => {
-  //   // console.log(bookSection);
-  // }, [bookSection]);
+  useEffect(() => {
+    console.log("linha: ", currentParagraph);
+  }, [currentParagraph]);
 
   return (
     <Container>
