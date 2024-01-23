@@ -44,9 +44,12 @@ const MnlEditor = () => {
   };
 
   const selectorCheck = () => {
-    if (selection) {
+    if (selection.baseOffset < selection.extentOffset) {
       setStartSelection(selection.baseOffset);
       setEndSelection(selection.extentOffset);
+    } else {
+      setEndSelection(selection.baseOffset);
+      setStartSelection(selection.extentOffset);
     }
   };
 
@@ -80,8 +83,22 @@ const MnlEditor = () => {
     setBookSection(sectionCopy);
   };
 
-  const makeItSomething = () => {
-    selectorCheck();
+  const filterAndAdd = (start, end, text, tag) => {
+    const getToChange = text.slice(start, end);
+    const insertTag = `<${tag}>${getToChange}</${tag}>`;
+    const textChaged =
+      text.slice(0, start) + insertTag + text.slice(end, text.length);
+    return textChaged;
+  };
+
+  const makeItSomething = (tag) => {
+    const settedText = filterAndAdd(
+      startSelection,
+      endSelection,
+      bookSection.pList[currentParagraph].text,
+      tag
+    );
+    console.log(settedText);
   };
 
   // useEffect(() => {
@@ -93,7 +110,7 @@ const MnlEditor = () => {
     <Container>
       <HeadEditor>
         <EditorTitle>Editor Meu Novo Livro</EditorTitle>
-        <button onClick={() => makeItSomething()}>Bold</button>
+        <button onClick={() => makeItSomething("strong")}>Bold</button>
       </HeadEditor>
       <BodyEditor
         contentEditable
