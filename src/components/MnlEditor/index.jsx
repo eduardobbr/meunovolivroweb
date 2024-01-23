@@ -36,6 +36,8 @@ const MnlEditor = () => {
   const [startSelection, setStartSelection] = useState();
   const [endSelection, setEndSelection] = useState();
 
+  const editor = useRef(null);
+
   const createParagraph = () => {
     const paragraph = new Paragraph();
     const sectionCopy = JSON.parse(JSON.stringify(bookSection));
@@ -44,12 +46,14 @@ const MnlEditor = () => {
   };
 
   const selectorCheck = () => {
-    if (selection.baseOffset < selection.extentOffset) {
-      setStartSelection(selection.baseOffset);
-      setEndSelection(selection.extentOffset);
-    } else {
-      setEndSelection(selection.baseOffset);
-      setStartSelection(selection.extentOffset);
+    if (selection) {
+      if (selection.baseOffset < selection.extentOffset) {
+        setStartSelection(selection.baseOffset);
+        setEndSelection(selection.extentOffset);
+      } else {
+        setEndSelection(selection.baseOffset);
+        setStartSelection(selection.extentOffset);
+      }
     }
   };
 
@@ -98,7 +102,18 @@ const MnlEditor = () => {
       bookSection.pList[currentParagraph].text,
       tag
     );
-    console.log(settedText);
+
+    const sectionCopy = JSON.parse(JSON.stringify(bookSection));
+
+    sectionCopy.pList[currentParagraph].text = settedText;
+    const markUp = new Markup(startSelection, endSelection, tag);
+    sectionCopy.pList[currentParagraph].markList.push(markUp);
+
+    setBookSection(sectionCopy);
+
+    editor.current.childNodes[currentParagraph].innerHTML = settedText;
+
+    console.log(editor.current.childNodes);
   };
 
   // useEffect(() => {
@@ -113,6 +128,7 @@ const MnlEditor = () => {
         <button onClick={() => makeItSomething("strong")}>Bold</button>
       </HeadEditor>
       <BodyEditor
+        ref={editor}
         contentEditable
         onKeyUp={(e) => {
           e.key === "Enter" ? createParagraph() : writeContent(e);
