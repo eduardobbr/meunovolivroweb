@@ -32,6 +32,9 @@ class Paragraph {
 const MnlEditor = () => {
   const [bookSection, setBookSection] = useState(new Section());
   const [currentParagraph, setCurrentParagraph] = useState(0);
+  const [selection, setSelection] = useState();
+  const [startSelection, setStartSelection] = useState();
+  const [endSelection, setEndSelection] = useState();
 
   const createParagraph = () => {
     const paragraph = new Paragraph();
@@ -40,10 +43,19 @@ const MnlEditor = () => {
     setBookSection(sectionCopy);
   };
 
+  const selectorCheck = () => {
+    if (selection) {
+      setStartSelection(selection.baseOffset);
+      setEndSelection(selection.extentOffset);
+    }
+  };
+
   const whichChild = (e) => {
     const parent = e.target;
     const child = window.getSelection();
+    setSelection(child);
     let checkEntry = false;
+    selectorCheck();
 
     parent.childNodes.forEach((node, index) => {
       if (node === child.anchorNode.parentNode) {
@@ -57,7 +69,7 @@ const MnlEditor = () => {
     }
   };
 
-  const testContent = (e) => {
+  const writeContent = (e) => {
     const comming = e.target.innerText.split("\n");
     const sectionCopy = new Section();
     comming.forEach((node) => {
@@ -68,19 +80,25 @@ const MnlEditor = () => {
     setBookSection(sectionCopy);
   };
 
-  useEffect(() => {
-    console.log("linha: ", currentParagraph);
-  }, [currentParagraph]);
+  const makeItSomething = () => {
+    selectorCheck();
+  };
+
+  // useEffect(() => {
+  //   console.log("Linha: ", currentParagraph);
+  //   console.log("Livro: ", bookSection);
+  // }, [currentParagraph]);
 
   return (
     <Container>
       <HeadEditor>
         <EditorTitle>Editor Meu Novo Livro</EditorTitle>
+        <button onClick={() => makeItSomething()}>Bold</button>
       </HeadEditor>
       <BodyEditor
         contentEditable
         onKeyUp={(e) => {
-          e.key === "Enter" ? createParagraph() : testContent(e);
+          e.key === "Enter" ? createParagraph() : writeContent(e);
         }}
         onSelect={(e) => {
           whichChild(e);
