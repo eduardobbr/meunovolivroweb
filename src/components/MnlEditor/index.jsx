@@ -80,6 +80,9 @@ const MnlEditor = () => {
     const comming = e.target.innerText.split("\n");
     const sectionCopy = new Section();
     comming.forEach((node) => {
+      if (node.nodeName === "#text") {
+        console.log("rruim");
+      }
       const paragraph = new Paragraph();
       paragraph.text = node;
       sectionCopy.pList.push(paragraph);
@@ -116,10 +119,16 @@ const MnlEditor = () => {
     console.log(editor.current.childNodes);
   };
 
-  // useEffect(() => {
-  //   console.log("Linha: ", currentParagraph);
-  //   console.log("Livro: ", bookSection);
-  // }, [currentParagraph]);
+  useEffect(() => {
+    // editor.current.childNodes.forEach((child, idx, self) => {
+    //   if (child.nodeName === "#text") {
+    //     editor.current.removeChild(child);
+    //     console.log(editor.current.childNodes);
+    //   }
+    // });
+    editor.current.innerHTML = "<br />";
+    console.log(editor);
+  }, []);
 
   return (
     <Container>
