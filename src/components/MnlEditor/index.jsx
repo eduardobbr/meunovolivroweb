@@ -45,6 +45,31 @@ const MnlEditor = () => {
     const sectionCopy = JSON.parse(JSON.stringify(bookSection));
     sectionCopy.pList.push(paragraph);
     setBookSection(sectionCopy);
+    const range = document.createRange();
+
+    let html = [];
+    let txt = [];
+
+    sectionCopy.pList.forEach((p) => {
+      if (p.markList.some((mark) => mark === "<h1>")) {
+        html.push(`<h1>${p.text}</h1>`);
+        txt.push(p.text);
+      } else {
+        html.push(`<p>${p.text}</p>`);
+        txt.push(p.text);
+      }
+    });
+
+    editor.current.innerHTML = html.join("");
+    editor.current.innerText = txt.join("\n");
+
+    range.setStart(editor.current.childNodes[currentParagraph], startSelection);
+    range.collapse(true);
+
+    const selection = window.getSelection();
+
+    selection.removeAllRanges();
+    selection.addRange(range);
   };
 
   const selectorCheck = () => {
@@ -61,49 +86,17 @@ const MnlEditor = () => {
     }
   };
 
-  const setCaretAtRightPosition = (tagIndex) => {
-    const range = document.createRange();
-    const selection = window.getSelection();
-    const childIndex = tagIndex && tagIndex > 0 ? tagIndex - 1 : tagIndex;
-    const contentEditableDiv = editor.current;
-
-    if (contentEditableDiv) {
-      if (tagIndex === 0 && contentEditableDiv.childNodes[0]) {
-        range.setStart(contentEditableDiv.childNodes[0], 0);
-        range.collapse(true);
-      } else if (
-        (childIndex === 0 || childIndex) &&
-        contentEditableDiv.childNodes[childIndex]
-      ) {
-        range.selectNode(contentEditableDiv.childNodes[childIndex]);
-        range.collapse(false);
-      } else {
-        range.selectNodeContents(contentEditableDiv);
-        range.collapse(false);
-      }
-
-      selection.removeAllRanges();
-      selection.addRange(range);
-    }
-  };
-
   const whichChild = (e) => {
     const parent = e.target;
     const child = window.getSelection();
     setSelection(child);
-    let checkEntry = false;
     selectorCheck();
 
     parent.childNodes.forEach((node, index) => {
       if (node === child.anchorNode.parentNode) {
         setCurrentParagraph(index);
-        checkEntry = true;
       }
     });
-
-    if (!checkEntry) {
-      setCurrentParagraph(0);
-    }
   };
 
   const writeContent = (e) => {
@@ -176,9 +169,9 @@ const MnlEditor = () => {
     console.log(editor.current.childNodes);
   };
 
-  useEffect(() => {
-    console.log(bookSection);
-  });
+  // useEffect(() => {
+  //   console.log(bookSection);
+  // });
 
   return (
     <Container>
