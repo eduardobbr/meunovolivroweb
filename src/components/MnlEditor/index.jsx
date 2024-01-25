@@ -57,6 +57,32 @@ const MnlEditor = () => {
     }
   };
 
+  const setCaretAtRightPosition = (tagIndex) => {
+    const range = document.createRange();
+    const selection = window.getSelection();
+    const childIndex = tagIndex && tagIndex > 0 ? tagIndex - 1 : tagIndex;
+    const contentEditableDiv = editor.current;
+
+    if (contentEditableDiv) {
+      if (tagIndex === 0 && contentEditableDiv.childNodes[0]) {
+        range.setStart(contentEditableDiv.childNodes[0], 0);
+        range.collapse(true);
+      } else if (
+        (childIndex === 0 || childIndex) &&
+        contentEditableDiv.childNodes[childIndex]
+      ) {
+        range.selectNode(contentEditableDiv.childNodes[childIndex]);
+        range.collapse(false);
+      } else {
+        range.selectNodeContents(contentEditableDiv);
+        range.collapse(false);
+      }
+
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  };
+
   const whichChild = (e) => {
     const parent = e.target;
     const child = window.getSelection();
@@ -77,17 +103,33 @@ const MnlEditor = () => {
   };
 
   const writeContent = (e) => {
-    const comming = e.target.innerText.split("\n");
-    const sectionCopy = new Section();
-    comming.forEach((node) => {
-      if (node.nodeName === "#text") {
-        console.log("rruim");
-      }
-      const paragraph = new Paragraph();
-      paragraph.text = node;
-      sectionCopy.pList.push(paragraph);
-    });
-    setBookSection(sectionCopy);
+    if (e.which <= 90 && e.which >= 48) {
+      const comming = e.target.innerText.split("\n");
+      const sectionCopy = new Section();
+      const range = document.createRange();
+      comming.forEach((node) => {
+        const paragraph = new Paragraph();
+        paragraph.text = node;
+        sectionCopy.pList.push(paragraph);
+      });
+      setBookSection(sectionCopy);
+
+      let html = [];
+      let txt = [];
+
+      sectionCopy.pList.forEach((p) => {
+        if (p.markList.some((mark) => mark === "<h1>")) {
+          html.push(`<h1>${p.text}</h1>`);
+          txt.push(p.text);
+        } else {
+          html.push(`<p>${p.text}</p>`);
+          txt.push(p.text);
+        }
+      });
+
+      editor.current.innerHTML = html.join("");
+      editor.current.innerText = txt.join("\n");
+    }
   };
 
   const filterAndAdd = (start, end, text, tag) => {
@@ -120,15 +162,8 @@ const MnlEditor = () => {
   };
 
   useEffect(() => {
-    // editor.current.childNodes.forEach((child, idx, self) => {
-    //   if (child.nodeName === "#text") {
-    //     editor.current.removeChild(child);
-    //     console.log(editor.current.childNodes);
-    //   }
-    // });
-    editor.current.innerHTML = "<br />";
-    console.log(editor);
-  }, []);
+    console.log(bookSection);
+  });
 
   return (
     <Container>
