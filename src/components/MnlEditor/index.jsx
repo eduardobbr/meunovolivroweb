@@ -35,6 +35,8 @@ const MnlEditor = () => {
   const [selection, setSelection] = useState();
   const [startSelection, setStartSelection] = useState();
   const [endSelection, setEndSelection] = useState();
+  const [lastStartSelection, setLastStartSelection] = useState();
+  const [lastEndSelection, setLastEndSelection] = useState();
 
   const editor = useRef(null);
 
@@ -47,12 +49,14 @@ const MnlEditor = () => {
 
   const selectorCheck = () => {
     if (selection) {
+      setLastStartSelection(startSelection);
+      setLastEndSelection(endSelection);
       if (selection.baseOffset < selection.extentOffset) {
         setStartSelection(selection.baseOffset);
-        setEndSelection(selection.extentOffset);
+        setEndSelection(selection.focusOffset);
       } else {
         setEndSelection(selection.baseOffset);
-        setStartSelection(selection.extentOffset);
+        setStartSelection(selection.focusOffset);
       }
     }
   };
@@ -129,6 +133,17 @@ const MnlEditor = () => {
 
       editor.current.innerHTML = html.join("");
       editor.current.innerText = txt.join("\n");
+
+      range.setStart(
+        editor.current.childNodes[currentParagraph],
+        startSelection
+      );
+      range.collapse(true);
+
+      const selection = window.getSelection();
+
+      selection.removeAllRanges();
+      selection.addRange(range);
     }
   };
 
