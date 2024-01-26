@@ -44,22 +44,26 @@ const MnlEditor = () => {
     const paragraph = new Paragraph();
     const sectionCopy = JSON.parse(JSON.stringify(bookSection));
     sectionCopy.pList.push(paragraph);
-    setBookSection(sectionCopy);
     const range = document.createRange();
+
+    setBookSection(sectionCopy);
 
     let html = [];
     let txt = [];
 
     sectionCopy.pList.forEach((p) => {
       if (p.markList.some((mark) => mark === "<h1>")) {
-        html.push(`<h1>${p.text}</h1>`);
-        txt.push(p.text);
+        html.push(`<h1>${p.text.data}</h1>`);
+        txt.push(p.text.data);
+      } else if (p.text.length === 0) {
+        html.push(`<br/>`);
+        txt.push("\n");
       } else {
-        html.push(`<p>${p.text}</p>`);
-        txt.push(p.text);
+        html.push(`<p>${p.text.data}</p>`);
+        txt.push(p.text.data);
       }
     });
-
+    console.log(html);
     editor.current.innerHTML = html.join("");
     editor.current.innerText = txt.join("\n");
 
@@ -91,7 +95,6 @@ const MnlEditor = () => {
     const child = window.getSelection();
     setSelection(child);
     selectorCheck();
-
     parent.childNodes.forEach((node, index) => {
       if (node === child.anchorNode.parentNode) {
         setCurrentParagraph(index);
@@ -101,42 +104,20 @@ const MnlEditor = () => {
 
   const writeContent = (e) => {
     if (e.which <= 90 && e.which >= 48) {
-      const comming = e.target.innerText.split("\n");
+      debugger;
+      const comming = e.target.childNodes;
       const sectionCopy = new Section();
-      const range = document.createRange();
+      debugger;
       comming.forEach((node) => {
         const paragraph = new Paragraph();
-        paragraph.text = node;
+        if (node.nodeType === 3) {
+          paragraph.text = node.data;
+        } else {
+          paragraph.text = node.innerText;
+        }
         sectionCopy.pList.push(paragraph);
       });
       setBookSection(sectionCopy);
-
-      let html = [];
-      let txt = [];
-
-      sectionCopy.pList.forEach((p) => {
-        if (p.markList.some((mark) => mark === "<h1>")) {
-          html.push(`<h1>${p.text}</h1>`);
-          txt.push(p.text);
-        } else {
-          html.push(`<p>${p.text}</p>`);
-          txt.push(p.text);
-        }
-      });
-
-      editor.current.innerHTML = html.join("");
-      editor.current.innerText = txt.join("\n");
-
-      range.setStart(
-        editor.current.childNodes[currentParagraph],
-        startSelection
-      );
-      range.collapse(true);
-
-      const selection = window.getSelection();
-
-      selection.removeAllRanges();
-      selection.addRange(range);
     }
   };
 
@@ -169,9 +150,47 @@ const MnlEditor = () => {
     console.log(editor.current.childNodes);
   };
 
-  // useEffect(() => {
-  //   console.log(bookSection);
-  // });
+  useEffect(() => {
+    console.log(bookSection);
+  });
+
+  useEffect(() => {
+    const range = document.createRange();
+
+    let html = [];
+    let txt = [];
+
+    if (bookSection.pList.length > 0) {
+      bookSection.pList.forEach((p) => {
+        if (p.markList.some((mark) => mark === "<h1>")) {
+          html.push(`<h1>${p.text.data}</h1>`);
+          txt.push(p.text.data);
+        } else if (p.text.length === 0) {
+          html.push(`<br/>`);
+          txt.push("\n");
+        } else {
+          html.push(`<div>${p.text.data}</div>`);
+          txt.push(p.text.data);
+        }
+      });
+    }
+
+    editor.current.innerHTML = html.join("");
+    editor.current.innerText = txt.join("\n");
+
+    // if (range) {
+    //   range.setStart(
+    //     editor.current.childNodes[currentParagraph],
+    //     startSelection
+    //   );
+    //   range.collapse(true);
+
+    //   const selection = window.getSelection();
+
+    //   selection.removeAllRanges();
+    //   selection.addRange(range);
+    // }
+  }, [bookSection, startSelection, currentParagraph]);
 
   return (
     <Container>
