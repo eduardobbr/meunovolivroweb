@@ -33,47 +33,53 @@ const MnlEditor = () => {
   const [bookSection, setBookSection] = useState(new Section());
   const [currentParagraph, setCurrentParagraph] = useState(0);
   const [selection, setSelection] = useState();
-  const [startSelection, setStartSelection] = useState();
+  const [startSelection, setStartSelection] = useState(0);
   const [endSelection, setEndSelection] = useState();
-  const [lastStartSelection, setLastStartSelection] = useState();
+  const [lastStartSelection, setLastStartSelection] = useState(0);
   const [lastEndSelection, setLastEndSelection] = useState();
 
   const editor = useRef(null);
+
+  const setRange = () => {
+    const range = document.createRange();
+
+    if (editor.current.childNodes[currentParagraph]) {
+      range.setStart(editor.current.childNodes[currentParagraph], 1);
+
+      range.collapse(true);
+
+      const selection = window.getSelection();
+
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  };
+
+  const renderEditorContent = () => {
+    editor.current.innerHTML = "";
+
+    if (bookSection.pList.length > 0) {
+      bookSection.pList.forEach((p) => {
+        if (p.markList.some((mark) => mark === "<h1>")) {
+          editor.current.append(`<h1>${p.text}</h1>`);
+        } else if (p.text.length === 0) {
+          const newBr = document.createElement("br");
+          editor.current.append(newBr);
+        } else {
+          const newP = document.createElement("p");
+          newP.innerHTML = p.text;
+          editor.current.append(newP);
+        }
+      });
+    }
+  };
 
   const createParagraph = () => {
     const paragraph = new Paragraph();
     const sectionCopy = JSON.parse(JSON.stringify(bookSection));
     sectionCopy.pList.push(paragraph);
-    const range = document.createRange();
 
     setBookSection(sectionCopy);
-
-    let html = [];
-    let txt = [];
-
-    sectionCopy.pList.forEach((p) => {
-      if (p.markList.some((mark) => mark === "<h1>")) {
-        html.push(`<h1>${p.text.data}</h1>`);
-        txt.push(p.text.data);
-      } else if (p.text.length === 0) {
-        html.push(`<br/>`);
-        txt.push("\n");
-      } else {
-        html.push(`<p>${p.text.data}</p>`);
-        txt.push(p.text.data);
-      }
-    });
-    console.log(html);
-    editor.current.innerHTML = html.join("");
-    editor.current.innerText = txt.join("\n");
-
-    range.setStart(editor.current.childNodes[currentParagraph], startSelection);
-    range.collapse(true);
-
-    const selection = window.getSelection();
-
-    selection.removeAllRanges();
-    selection.addRange(range);
   };
 
   const selectorCheck = () => {
@@ -104,10 +110,8 @@ const MnlEditor = () => {
 
   const writeContent = (e) => {
     if (e.which <= 90 && e.which >= 48) {
-      debugger;
       const comming = e.target.childNodes;
       const sectionCopy = new Section();
-      debugger;
       comming.forEach((node) => {
         const paragraph = new Paragraph();
         if (node.nodeType === 3) {
@@ -151,46 +155,12 @@ const MnlEditor = () => {
   };
 
   useEffect(() => {
-    console.log(bookSection);
-  });
+    renderEditorContent();
 
-  useEffect(() => {
-    const range = document.createRange();
+    console.table([{ startSelection, lastStartSelection, currentParagraph }]);
 
-    let html = [];
-    let txt = [];
-
-    if (bookSection.pList.length > 0) {
-      bookSection.pList.forEach((p) => {
-        if (p.markList.some((mark) => mark === "<h1>")) {
-          html.push(`<h1>${p.text.data}</h1>`);
-          txt.push(p.text.data);
-        } else if (p.text.length === 0) {
-          html.push(`<br/>`);
-          txt.push("\n");
-        } else {
-          html.push(`<div>${p.text.data}</div>`);
-          txt.push(p.text.data);
-        }
-      });
-    }
-
-    editor.current.innerHTML = html.join("");
-    editor.current.innerText = txt.join("\n");
-
-    // if (range) {
-    //   range.setStart(
-    //     editor.current.childNodes[currentParagraph],
-    //     startSelection
-    //   );
-    //   range.collapse(true);
-
-    //   const selection = window.getSelection();
-
-    //   selection.removeAllRanges();
-    //   selection.addRange(range);
-    // }
-  }, [bookSection, startSelection, currentParagraph]);
+    setRange();
+  }, [bookSection]);
 
   return (
     <Container>
@@ -213,85 +183,3 @@ const MnlEditor = () => {
 };
 
 export default MnlEditor;
-
-/*
-  // const [editorText, setEditorText] = useState("");
-  // const [startCount, setStartCount] = useState();
-  // const [target, setTarget] = useState();
-  // const [endCount, setEndCount] = useState();
-
-  // const editor = useRef(null);
-
-  // const textSelector = (e) => {
-  //   if (e) {
-  //     console.log(e.getRangeAt(0));
-  //     setStartCount(e.baseOffset);
-  //     setEndCount(e.extentOffset);
-  //   }
-  // if (e) {
-  //   setStartCount(e.target.selectionStart);
-  //   setEndCount(e.target.selectionEnd);
-  // }
-  // };
-
-  // const filterAndAdd = (start, end, str) => {
-  //   return (
-  //     editorText.slice(0, start) +
-  //     str +
-  //     editorText.slice(end, editorText.length)
-  //   );
-  // };
-
-  // const makeIt = (start, end, tag) => {
-  //   if (start !== end) {
-  //     const getText = editorText.slice(start, end);
-  //     const textBold = `<${tag}>${getText}</${tag}>`;
-  //     setEditorText(filterAndAdd(start, end, textBold));
-  //     editor.current.innerHTML = filterAndAdd(start, end, textBold);
-  //   }
-  // };
-
-  // const insertBr = () => {
-  //   const text =
-  //     editorText.slice(0, startCount) +
-  //     "</br>\n" +
-  //     editorText.slice(startCount, editorText.length);
-  //   setEditorText(text);
-  // };
-
-  // useEffect(() => {
-  //   setTarget(editor.current);
-  //   console.log(editorText);
-  // }, [editorText]);
-
-  return (
-    <Container>
-      <HeadEditor>
-        <EditorTitle>Editor Meu Novo Livro</EditorTitle>
-         {<button onClick={() => makeIt(startCount, endCount, "strong")}>
-          Negrito
-        </button>
-        <button onClick={() => makeIt(startCount, endCount, "em")}>
-          Italico
-        </button>
-        <button onClick={() => makeIt(startCount, endCount, "h1")}>
-          Título
-        </button>} 
-      </HeadEditor>
-      <BodyEditor
-      // ref={editor}
-      // // value={editorText}
-      // // onChange={(e) => setEditorText(e.target.value)}
-      // // onKeyUp={(e) => e.key === "Enter" && insertBr()}
-      // // onSelect={(e) => textSelector(e)}
-      // // onKeyUp={(e) =>
-      // //   e.key === "Enter" ? insertBr() : setEditorText(e.target.innerHTML)
-      // // }
-      // contentEditable
-      // onKeyUp={(e) => setEditorText(e.target.innerHTML)}
-      // onMouseUp={() => textSelector(window.getSelection())}
-      ></BodyEditor>
-       <div dangerouslySetInnerHTML={{ __html: editorText }} /> 
-    </Container>
-  );
-*/
