@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BodyEditor, Container, EditorTitle, HeadEditor } from "./style";
 
 class Markup {
@@ -40,11 +40,15 @@ const MnlEditor = () => {
 
   const editor = useRef(null);
 
-  const setRange = () => {
-    const range = document.createRange();
+  const setRange = useCallback(() => {
+    try {
+      const range = document.createRange();
 
-    if (editor.current.childNodes[currentParagraph]) {
-      range.setStart(editor.current.childNodes[currentParagraph], 1);
+      if (editor.current.childNodes[currentParagraph].innerText.length === 0) {
+        range.setStart(editor.current.childNodes[0], 0);
+      } else {
+        range.setStart(editor.current.childNodes[currentParagraph], 1);
+      }
 
       range.collapse(true);
 
@@ -52,34 +56,38 @@ const MnlEditor = () => {
 
       selection.removeAllRanges();
       selection.addRange(range);
+    } catch (e) {
+      console.log(editor.current, e);
     }
-  };
+  }, [currentParagraph]);
 
-  const renderEditorContent = () => {
+  const renderEditorContent = useCallback(() => {
     editor.current.innerHTML = "";
 
     if (bookSection.pList.length > 0) {
       bookSection.pList.forEach((p) => {
         if (p.markList.some((mark) => mark === "<h1>")) {
           editor.current.append(`<h1>${p.text}</h1>`);
-        } else if (p.text.length === 0) {
-          const newBr = document.createElement("br");
-          editor.current.append(newBr);
         } else {
           const newP = document.createElement("p");
+          newP.tabIndex = 0;
           newP.innerHTML = p.text;
           editor.current.append(newP);
         }
       });
+      console.log(bookSection);
+    } else {
+      const p = document.createElement("div");
+      editor.current.append(p);
     }
-  };
+  }, [bookSection]);
 
   const createParagraph = () => {
     const paragraph = new Paragraph();
     const sectionCopy = JSON.parse(JSON.stringify(bookSection));
     sectionCopy.pList.push(paragraph);
-
     setBookSection(sectionCopy);
+    setCurrentParagraph(1);
   };
 
   const selectorCheck = () => {
@@ -109,20 +117,19 @@ const MnlEditor = () => {
   };
 
   const writeContent = (e) => {
-    if (e.which <= 90 && e.which >= 48) {
-      const comming = e.target.childNodes;
-      const sectionCopy = new Section();
-      comming.forEach((node) => {
-        const paragraph = new Paragraph();
-        if (node.nodeType === 3) {
-          paragraph.text = node.data;
-        } else {
-          paragraph.text = node.innerText;
-        }
-        sectionCopy.pList.push(paragraph);
-      });
-      setBookSection(sectionCopy);
-    }
+    const comming = e.target.childNodes;
+    console.log(comming);
+    const sectionCopy = new Section();
+    comming.forEach((node) => {
+      const paragraph = new Paragraph();
+      if (node.nodeType === 3) {
+        paragraph.text = node.data;
+      } else {
+        paragraph.text = node.innerText;
+      }
+      sectionCopy.pList.push(paragraph);
+    });
+    setBookSection(sectionCopy);
   };
 
   const filterAndAdd = (start, end, text, tag) => {
@@ -156,11 +163,8 @@ const MnlEditor = () => {
 
   useEffect(() => {
     renderEditorContent();
-
-    console.table([{ startSelection, lastStartSelection, currentParagraph }]);
-
     setRange();
-  }, [bookSection]);
+  }, [bookSection, renderEditorContent, setRange]);
 
   return (
     <Container>
