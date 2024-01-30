@@ -22,4 +22,8 @@ export const BodyEditor = styled.div`
   border: none;
   outline: none;
   resize: none;
+
+  p {
+    tab-index: 1;
+  }
 `;

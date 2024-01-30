@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { BodyEditor, Container, EditorTitle, HeadEditor } from "./style";
+import { editRangeIdProperty } from "@syncfusion/ej2-react-documenteditor";
+import { CollectionsBookmarkOutlined } from "@material-ui/icons";
 
 class Markup {
-  constructor(start, end, tag) {
+  constructor(start, end, tag, endNote) {
     this.start = start;
     this.end = end;
     this.tag = tag;
+    this.endNote = endNote;
   }
 }
 
@@ -26,6 +29,29 @@ class Paragraph {
   constructor() {
     this.text = "";
     this.markList = [];
+    this.type = "";
+  }
+}
+
+class Cursor {
+  constructor() {
+    this.startOffset = 0;
+    this.endOffset = 0;
+    this.startLine = 0;
+    this.endLine = 0;
+  }
+
+  set startOff(value) {
+    this.startOffset = value;
+  }
+  set endOff(value) {
+    this.endOffset = value;
+  }
+  set startL(value) {
+    this.startLine = value;
+  }
+  set endL(value) {
+    this.endLine = value;
   }
 }
 
@@ -33,84 +59,81 @@ const MnlEditor = () => {
   const [bookSection, setBookSection] = useState(new Section());
   const [currentParagraph, setCurrentParagraph] = useState(0);
   const [selection, setSelection] = useState();
-  const [startSelection, setStartSelection] = useState(0);
-  const [endSelection, setEndSelection] = useState();
-  const [lastStartSelection, setLastStartSelection] = useState(0);
-  const [lastEndSelection, setLastEndSelection] = useState();
+  const [cursor, setCursor] = useState(new Cursor());
 
   const editor = useRef(null);
 
   const setRange = useCallback(() => {
     try {
       const range = document.createRange();
+      if (!!editor.current.childNodes[currentParagraph]) {
+        range.setStart(editor.current.childNodes[currentParagraph], 0);
+        range.setEnd(editor.current.childNodes[currentParagraph], 1);
+        range.selectNode(editor.current.childNodes[currentParagraph]);
+        range.collapse(true);
 
-      if (editor.current.childNodes[currentParagraph].innerText.length === 0) {
-        range.setStart(editor.current.childNodes[0], 0);
-      } else {
-        range.setStart(editor.current.childNodes[currentParagraph], 1);
+        const selection = window.getSelection();
+
+        selection.removeAllRanges();
+        selection.addRange(range);
       }
-
-      range.collapse(true);
-
-      const selection = window.getSelection();
-
-      selection.removeAllRanges();
-      selection.addRange(range);
     } catch (e) {
       console.log(editor.current, e);
     }
-  }, [currentParagraph]);
+  }, [currentParagraph, cursor]);
 
   const renderEditorContent = useCallback(() => {
     editor.current.innerHTML = "";
-
     if (bookSection.pList.length > 0) {
       bookSection.pList.forEach((p) => {
-        if (p.markList.some((mark) => mark === "<h1>")) {
+        if (p.type === "h1") {
           editor.current.append(`<h1>${p.text}</h1>`);
         } else {
-          const newP = document.createElement("p");
-          newP.tabIndex = 0;
+          const newP = document.createElement("div");
           newP.innerHTML = p.text;
           editor.current.append(newP);
         }
       });
-      console.log(bookSection);
-    } else {
-      const p = document.createElement("div");
-      editor.current.append(p);
     }
   }, [bookSection]);
 
-  const createParagraph = () => {
+  const createParagraph = (e) => {
+    e.preventDefault();
     const paragraph = new Paragraph();
     const sectionCopy = JSON.parse(JSON.stringify(bookSection));
     sectionCopy.pList.push(paragraph);
     setBookSection(sectionCopy);
-    setCurrentParagraph(1);
   };
 
   const selectorCheck = () => {
     if (selection) {
-      setLastStartSelection(startSelection);
-      setLastEndSelection(endSelection);
       if (selection.baseOffset < selection.extentOffset) {
-        setStartSelection(selection.baseOffset);
-        setEndSelection(selection.focusOffset);
+        const newCursor = new Cursor();
+
+        newCursor.startOff = selection.baseOffset;
+        newCursor.endOff = selection.focusOffset;
+
+        setCursor(newCursor);
       } else {
-        setEndSelection(selection.baseOffset);
-        setStartSelection(selection.focusOffset);
+        const newCursor = new Cursor();
+
+        newCursor.startOff = selection.focusOffset;
+        newCursor.endOff = selection.baseOffset;
+
+        setCursor(newCursor);
       }
     }
   };
 
   const whichChild = (e) => {
+    e.preventDefault();
     const parent = e.target;
     const child = window.getSelection();
     setSelection(child);
     selectorCheck();
     parent.childNodes.forEach((node, index) => {
       if (node === child.anchorNode.parentNode) {
+        console.log(node === child.anchorNode.parentNode);
         setCurrentParagraph(index);
       }
     });
@@ -118,7 +141,6 @@ const MnlEditor = () => {
 
   const writeContent = (e) => {
     const comming = e.target.childNodes;
-    console.log(comming);
     const sectionCopy = new Section();
     comming.forEach((node) => {
       const paragraph = new Paragraph();
@@ -140,43 +162,42 @@ const MnlEditor = () => {
     return textChaged;
   };
 
-  const makeItSomething = (tag) => {
-    const settedText = filterAndAdd(
-      startSelection,
-      endSelection,
-      bookSection.pList[currentParagraph].text,
-      tag
-    );
+  // const makeItSomething = (tag) => {
+  //   const settedText = filterAndAdd(
+  //     startSelection,
+  //     endSelection,
+  //     bookSection.pList[currentParagraph].text,
+  //     tag
+  //   );
 
-    const sectionCopy = JSON.parse(JSON.stringify(bookSection));
+  //   const sectionCopy = JSON.parse(JSON.stringify(bookSection));
 
-    sectionCopy.pList[currentParagraph].text = settedText;
-    const markUp = new Markup(startSelection, endSelection, tag);
-    sectionCopy.pList[currentParagraph].markList.push(markUp);
+  //   sectionCopy.pList[currentParagraph].text = settedText;
+  //   const markUp = new Markup(startSelection, endSelection, tag);
+  //   sectionCopy.pList[currentParagraph].markList.push(markUp);
 
-    setBookSection(sectionCopy);
+  //   setBookSection(sectionCopy);
 
-    editor.current.childNodes[currentParagraph].innerHTML = settedText;
+  //   editor.current.childNodes[currentParagraph].innerHTML = settedText;
 
-    console.log(editor.current.childNodes);
-  };
+  // };
 
   useEffect(() => {
     renderEditorContent();
     setRange();
-  }, [bookSection, renderEditorContent, setRange]);
+  }, [bookSection]);
 
   return (
     <Container>
       <HeadEditor>
         <EditorTitle>Editor Meu Novo Livro</EditorTitle>
-        <button onClick={() => makeItSomething("strong")}>Bold</button>
+        {/* <button onClick={() => makeItSomething("strong")}>Bold</button> */}
       </HeadEditor>
       <BodyEditor
         ref={editor}
         contentEditable
         onKeyUp={(e) => {
-          e.key === "Enter" ? createParagraph() : writeContent(e);
+          e.key === "Enter" ? createParagraph(e) : writeContent(e);
         }}
         onSelect={(e) => {
           whichChild(e);
