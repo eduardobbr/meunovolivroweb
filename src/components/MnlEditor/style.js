@@ -19,11 +19,8 @@ export const EditorTitle = styled.h3`
 export const BodyEditor = styled.div`
   height: 500px;
   width: 100%;
+  padding: 10px;
   border: none;
   outline: none;
   resize: none;
-
-  p {
-    tab-index: 1;
-  }
 `;
