@@ -24,3 +24,5 @@ export const BodyEditor = styled.div`
   outline: none;
   resize: none;
 `;
+
+export const Title = styled.h1``;
