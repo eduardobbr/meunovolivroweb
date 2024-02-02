@@ -41,6 +41,14 @@ const MnlEditor = () => {
   const onSubTitle = () => {
     setEditorState(RichUtils.toggleBlockType(editorState, "header-two"));
   };
+  const onOl = () => {
+    setEditorState(RichUtils.toggleBlockType(editorState, "ordered-list-item"));
+  };
+  const onUl = () => {
+    setEditorState(
+      RichUtils.toggleBlockType(editorState, "unordered-list-item")
+    );
+  };
 
   // useEffect(() => {
   //   console.log(editorState._immutable.currentContent.getPlainText());
@@ -54,6 +62,8 @@ const MnlEditor = () => {
         <button onClick={onItalic}>Italic</button>
         <button onClick={onTitle}>Title</button>
         <button onClick={onSubTitle}>SubTitle</button>
+        <button onClick={onOl}>OL</button>
+        <button onClick={onUl}>UL</button>
       </HeadEditor>
       <BodyEditor>
         <Editor
