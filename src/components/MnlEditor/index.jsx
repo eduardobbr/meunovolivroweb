@@ -19,6 +19,9 @@ const MnlEditor = () => {
     "header-one": {
       element: "h1",
     },
+    "header-two": {
+      element: "h2",
+    },
     unstyled: {
       element: "div",
     },
@@ -35,6 +38,9 @@ const MnlEditor = () => {
   const onTitle = () => {
     setEditorState(RichUtils.toggleBlockType(editorState, "header-one"));
   };
+  const onSubTitle = () => {
+    setEditorState(RichUtils.toggleBlockType(editorState, "header-two"));
+  };
 
   // useEffect(() => {
   //   console.log(editorState._immutable.currentContent.getPlainText());
@@ -47,6 +53,7 @@ const MnlEditor = () => {
         <button onClick={onBold}>Bold</button>
         <button onClick={onItalic}>Italic</button>
         <button onClick={onTitle}>Title</button>
+        <button onClick={onSubTitle}>SubTitle</button>
       </HeadEditor>
       <BodyEditor>
         <Editor
