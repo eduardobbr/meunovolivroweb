@@ -8,12 +8,13 @@ import {
 import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor } from "./style";
 import { Map } from "immutable";
-import { setBlockType } from "draft-js/lib/DraftModifier";
 
 const MnlEditor = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+
+  const [endNotesMarkers, setEndNotesMarkers] = useState();
 
   const blockRenderMap = Map({
     "header-one": {
@@ -49,10 +50,13 @@ const MnlEditor = () => {
       RichUtils.toggleBlockType(editorState, "unordered-list-item")
     );
   };
+  const onFootNote = () => {
+    setEditorState(RichUtils.toggleInlineStyle(editorState, "FOOTNOTE"));
+  };
 
-  // useEffect(() => {
-  //   console.log(editorState._immutable.currentContent.getPlainText());
-  // }, [editorState]);
+  useEffect(() => {
+    console.log(editorState.getCurrentInlineStyle());
+  }, [editorState]);
 
   return (
     <Container>
@@ -64,6 +68,7 @@ const MnlEditor = () => {
         <button onClick={onSubTitle}>SubTitle</button>
         <button onClick={onOl}>OL</button>
         <button onClick={onUl}>UL</button>
+        <button onClick={onFootNote}>Make EndNote</button>
       </HeadEditor>
       <BodyEditor>
         <Editor
