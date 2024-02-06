@@ -3,16 +3,19 @@ import {
   DefaultDraftBlockRenderMap,
   Editor,
   EditorState,
+  Modifier,
   RichUtils,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
 import { Map } from "immutable";
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 const MnlEditor = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+  const [selectionState, setSelectionState] = useState();
 
   const [showModal, setShowModal] = useState(false);
   const [endNoteText, setEndNoteText] = useState("");
@@ -54,7 +57,27 @@ const MnlEditor = () => {
   };
   const onFootNote = () => {
     setShowModal(true);
-    // setEditorState(RichUtils.toggleInlineStyle(editorState, "FOOTNOTE"));
+  };
+
+  const handleCreateFootnote = () => {
+    const contentState = editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+      "LINK",
+      "MUTABLE",
+      {
+        url: "http://www.zombo.com",
+      }
+    );
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+    const contentStateWithLink = Modifier.applyEntity(
+      contentStateWithEntity,
+      selectionState,
+      entityKey
+    );
+    const newEditorState = EditorState.set(editorState, {
+      currentContent: contentStateWithLink,
+    });
+    setEditorState(newEditorState);
   };
 
   const handleCloseModal = (e) => {
@@ -62,6 +85,11 @@ const MnlEditor = () => {
       setShowModal(false);
     }
   };
+
+  useEffect(() => {
+    setSelectionState(editorState.getSelection());
+    console.log(selectionState);
+  }, [editorState]);
 
   return (
     <Container>
@@ -73,11 +101,7 @@ const MnlEditor = () => {
               onChange={(e) => setEndNoteText(e.target.value)}
             ></textarea>
             <button onClick={() => setShowModal(false)}>Cancelar</button>
-            <button
-              onClick={() => console.log(editorState.getCurrentContent())}
-            >
-              Criar
-            </button>
+            <button onClick={() => handleCreateFootnote()}>Criar</button>
           </div>
         </Modal>
       )}
