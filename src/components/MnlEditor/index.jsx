@@ -6,7 +6,7 @@ import {
   RichUtils,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
-import { BodyEditor, Container, EditorTitle, HeadEditor } from "./style";
+import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
 import { Map } from "immutable";
 
 const MnlEditor = () => {
@@ -14,6 +14,8 @@ const MnlEditor = () => {
     EditorState.createEmpty()
   );
 
+  const [showModal, setShowModal] = useState(false);
+  const [endNoteText, setEndNoteText] = useState("");
   const [endNotesMarkers, setEndNotesMarkers] = useState();
 
   const blockRenderMap = Map({
@@ -51,15 +53,34 @@ const MnlEditor = () => {
     );
   };
   const onFootNote = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "FOOTNOTE"));
+    setShowModal(true);
+    // setEditorState(RichUtils.toggleInlineStyle(editorState, "FOOTNOTE"));
   };
 
-  useEffect(() => {
-    console.log(editorState.getCurrentInlineStyle());
-  }, [editorState]);
+  const handleCloseModal = (e) => {
+    if (e.target === e.currentTarget) {
+      setShowModal(false);
+    }
+  };
 
   return (
     <Container>
+      {showModal && (
+        <Modal show={showModal} onClick={(e) => handleCloseModal(e)}>
+          <div>
+            <h2>Insira o texto da sua nota de rodapé</h2>
+            <textarea
+              onChange={(e) => setEndNoteText(e.target.value)}
+            ></textarea>
+            <button onClick={() => setShowModal(false)}>Cancelar</button>
+            <button
+              onClick={() => console.log(editorState.getCurrentContent())}
+            >
+              Criar
+            </button>
+          </div>
+        </Modal>
+      )}
       <HeadEditor>
         <EditorTitle>Editor MNL</EditorTitle>
         <button onClick={onBold}>Bold</button>

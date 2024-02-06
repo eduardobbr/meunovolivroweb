@@ -26,3 +26,22 @@ export const BodyEditor = styled.div`
 `;
 
 export const Title = styled.h1``;
+
+export const Modal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--mainBgColorOpacity);
+  display: ${(props) => (props.show ? "flex" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    width: 50vw;
+    height: 50vh;
+    background-color: var(--mainBgColor);
+  }
+`;
