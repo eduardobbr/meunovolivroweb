@@ -31,7 +31,7 @@ export const Modal = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: var(--mainBgColorOpacity);
-  display: ${(props) => (props.show ? "flex" : "none")};
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
