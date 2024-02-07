@@ -3,13 +3,13 @@ import {
   DefaultDraftBlockRenderMap,
   Editor,
   EditorState,
-  Modifier,
   RichUtils,
+  SelectionState,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
 import { Map } from "immutable";
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
+import { insertText } from "draft-js/lib/DraftModifier";
 
 const MnlEditor = () => {
   const [editorState, setEditorState] = useState(() =>
@@ -19,7 +19,7 @@ const MnlEditor = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [endNoteText, setEndNoteText] = useState("");
-  const [endNotesMarkers, setEndNotesMarkers] = useState();
+  const [endNotesCounter, setEndNotesCounter] = useState(1);
 
   const blockRenderMap = Map({
     "header-one": {
@@ -61,23 +61,43 @@ const MnlEditor = () => {
 
   const handleCreateFootnote = () => {
     const contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(
-      "LINK",
-      "MUTABLE",
-      {
-        url: "http://www.zombo.com",
-      }
-    );
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const contentStateWithLink = Modifier.applyEntity(
-      contentStateWithEntity,
+    const contentStateNewMark = insertText(
+      contentState,
       selectionState,
-      entityKey
+      `[${endNotesCounter}]`
     );
-    const newEditorState = EditorState.set(editorState, {
-      currentContent: contentStateWithLink,
+
+    const newEditorState = EditorState.push(editorState, contentStateNewMark);
+
+    const newContent = newEditorState.getCurrentContent();
+
+    const blockMap = newContent.getBlockMap();
+
+    const key = blockMap.last().getKey();
+
+    const length = blockMap.last().getLength();
+
+    const selection = new SelectionState({
+      anchorKey: key,
+      anchorOffset: length,
+      focusKey: key,
+      focusOffset: length,
     });
-    setEditorState(newEditorState);
+
+    const newEndNote = insertText(
+      contentStateNewMark,
+      selection,
+      `\n[${endNotesCounter}] - ${endNoteText}`
+    );
+
+    const newEditorStateWithEndNote = EditorState.push(
+      newEditorState,
+      newEndNote
+    );
+
+    setEditorState(newEditorStateWithEndNote);
+
+    setEndNotesCounter(endNotesCounter + 1);
   };
 
   const handleCloseModal = (e) => {
@@ -94,7 +114,7 @@ const MnlEditor = () => {
   return (
     <Container>
       {showModal && (
-        <Modal show={showModal} onClick={(e) => handleCloseModal(e)}>
+        <Modal onClick={(e) => handleCloseModal(e)}>
           <div>
             <h2>Insira o texto da sua nota de rodapé</h2>
             <textarea
