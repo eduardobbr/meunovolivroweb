@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import {
+  CompositeDecorator,
   DefaultDraftBlockRenderMap,
   Editor,
   EditorState,
+  Modifier,
   RichUtils,
   SelectionState,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
 import { Map } from "immutable";
-import { insertText } from "draft-js/lib/DraftModifier";
 
 const MnlEditor = () => {
   const [editorState, setEditorState] = useState(() =>
@@ -20,6 +21,22 @@ const MnlEditor = () => {
   const [showModal, setShowModal] = useState(false);
   const [endNoteText, setEndNoteText] = useState("");
   const [endNotesCounter, setEndNotesCounter] = useState(1);
+
+  const Link = ({ entityKey, contentState, children }) => {
+    const { url, id } = contentState.getEntity(entityKey).getData();
+
+    return (
+      <a
+        href={url}
+        id={id}
+        style={{
+          cursor: "pointer",
+        }}
+      >
+        {children}
+      </a>
+    );
+  };
 
   const blockRenderMap = Map({
     "header-one": {
@@ -32,6 +49,13 @@ const MnlEditor = () => {
       element: "div",
     },
   });
+
+  const styleMap = {
+    little: {
+      fontSize: "5px",
+      verticalAlign: "text-top",
+    },
+  };
 
   const extendedBlockRender = DefaultDraftBlockRenderMap.merge(blockRenderMap);
 
@@ -59,15 +83,47 @@ const MnlEditor = () => {
     setShowModal(true);
   };
 
+  const findLinkEntities = (contentBlock, callback, contentState) => {
+    contentBlock.findEntityRanges((character) => {
+      const entityKey = character.getEntity();
+      return (
+        entityKey !== null &&
+        contentState.getEntity(entityKey).getType() === "LINK"
+      );
+    }, callback);
+  };
+
+  const createLinkDecorator = () =>
+    new CompositeDecorator([
+      {
+        strategy: findLinkEntities,
+        component: Link,
+      },
+    ]);
+
   const handleCreateFootnote = () => {
+    const decorator = createLinkDecorator();
     const contentState = editorState.getCurrentContent();
-    const contentStateNewMark = insertText(
+
+    const entityMark = contentState.createEntity("LINK", "MUTABLE", {
+      url: `#endnote${endNotesCounter}`,
+      id: `endnote-mark-${endNotesCounter}`,
+    });
+
+    const entityKey = entityMark.getLastCreatedEntityKey();
+
+    const textWithEntity = Modifier.insertText(
       contentState,
       selectionState,
-      `[${endNotesCounter}]`
+      `[${endNotesCounter}]`,
+      null,
+      entityKey
     );
 
-    const newEditorState = EditorState.push(editorState, contentStateNewMark);
+    const newEditorState = EditorState.createWithContent(
+      textWithEntity,
+      decorator
+    );
 
     const newContent = newEditorState.getCurrentContent();
 
@@ -84,20 +140,49 @@ const MnlEditor = () => {
       focusOffset: length,
     });
 
-    const newEndNote = insertText(
-      contentStateNewMark,
+    const entityEndNote = contentState.createEntity("LINK", "MUTABLE", {
+      url: `#endnote-mark-${endNotesCounter}`,
+      id: `endnote${endNotesCounter}`,
+    });
+
+    const endNoteKey = entityEndNote.getLastCreatedEntityKey();
+
+    const newEndNote = Modifier.insertText(
+      newContent,
       selection,
-      `\n[${endNotesCounter}] - ${endNoteText}`
+      `\n[${endNotesCounter}]`,
+      null,
+      endNoteKey
     );
 
-    const newEditorStateWithEndNote = EditorState.push(
-      newEditorState,
-      newEndNote
+    const endEditorState = EditorState.createWithContent(newEndNote, decorator);
+
+    const newContentWithEndNote = endEditorState.getCurrentContent();
+
+    const newBlockMap = newContentWithEndNote.getBlockMap();
+
+    const newKey = newBlockMap.last().getKey();
+
+    const newLength = newBlockMap.last().getLength();
+
+    const newSelection = new SelectionState({
+      anchorKey: newKey,
+      anchorOffset: newLength,
+      focusKey: newKey,
+      focusOffset: newLength,
+    });
+
+    const newEndNoteText = Modifier.insertText(
+      newContentWithEndNote,
+      newSelection,
+      ` - ${endNoteText}`
     );
 
-    setEditorState(newEditorStateWithEndNote);
+    const newEndEditorState = EditorState.push(endEditorState, newEndNoteText);
 
+    setEditorState(newEndEditorState);
     setEndNotesCounter(endNotesCounter + 1);
+    setEndNoteText("");
   };
 
   const handleCloseModal = (e) => {
@@ -108,7 +193,6 @@ const MnlEditor = () => {
 
   useEffect(() => {
     setSelectionState(editorState.getSelection());
-    console.log(selectionState);
   }, [editorState]);
 
   return (
@@ -140,6 +224,7 @@ const MnlEditor = () => {
           editorState={editorState}
           onChange={setEditorState}
           blockRenderMap={extendedBlockRender}
+          customStyleMap={styleMap}
         ></Editor>
       </BodyEditor>
     </Container>
