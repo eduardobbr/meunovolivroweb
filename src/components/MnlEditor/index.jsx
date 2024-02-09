@@ -20,6 +20,8 @@ const MnlEditor = () => {
   const [selectionState, setSelectionState] = useState();
 
   const [showModal, setShowModal] = useState(false);
+  const [showLinkModal, setShowLinkModal] = useState(false);
+  const [linkText, setLinkText] = useState("");
   const [endNoteText, setEndNoteText] = useState("");
   const [endNotesCounter, setEndNotesCounter] = useState(1);
 
@@ -82,6 +84,9 @@ const MnlEditor = () => {
   };
   const onFootNote = () => {
     setShowModal(true);
+  };
+  const onLink = () => {
+    setShowLinkModal(true);
   };
 
   const findLinkEntities = (contentBlock, callback, contentState) => {
@@ -192,6 +197,7 @@ const MnlEditor = () => {
   const handleCloseModal = (e) => {
     if (e.target === e.currentTarget) {
       setShowModal(false);
+      setShowLinkModal(false);
     }
   };
 
@@ -213,6 +219,15 @@ const MnlEditor = () => {
           </div>
         </Modal>
       )}
+
+      {showLinkModal && (
+        <Modal onClick={(e) => handleCloseModal(e)}>
+          <div>
+            <h2>Insira o Link</h2>
+            <textarea onChange={(e) => setLinkText(e.target.value)}></textarea>
+          </div>
+        </Modal>
+      )}
       <HeadEditor>
         <EditorTitle>Editor MNL</EditorTitle>
         <button onClick={onBold}>Bold</button>
@@ -222,6 +237,7 @@ const MnlEditor = () => {
         <button onClick={onOl}>OL</button>
         <button onClick={onUl}>UL</button>
         <button onClick={onFootNote}>Make EndNote</button>
+        <button onClick={onLink}>Link</button>
       </HeadEditor>
       <BodyEditor>
         <Editor
