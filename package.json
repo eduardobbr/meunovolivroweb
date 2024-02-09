@@ -34,6 +34,7 @@
     "react-yup": "^1.24.1",
     "styled-components": "^6.0.7",
     "swiper": "^10.2.0",
+    "uuid": "^9.0.1",
     "web-vitals": "^2.1.0",
     "yup": "^1.2.0"
   },

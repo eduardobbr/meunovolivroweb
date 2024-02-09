@@ -11,6 +11,7 @@ import {
 import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
 import { Map } from "immutable";
+import { v4 as uuidv4 } from "uuid";
 
 const MnlEditor = () => {
   const [editorState, setEditorState] = useState(() =>
@@ -105,9 +106,12 @@ const MnlEditor = () => {
     const decorator = createLinkDecorator();
     const contentState = editorState.getCurrentContent();
 
+    const firstId = uuidv4();
+    const secondId = uuidv4();
+
     const entityMark = contentState.createEntity("LINK", "MUTABLE", {
-      url: `#endnote${endNotesCounter}`,
-      id: `endnote-mark-${endNotesCounter}`,
+      url: `#endnote${secondId}`,
+      id: `endnote-mark-${firstId}`,
     });
 
     const entityKey = entityMark.getLastCreatedEntityKey();
@@ -141,8 +145,8 @@ const MnlEditor = () => {
     });
 
     const entityEndNote = contentState.createEntity("LINK", "MUTABLE", {
-      url: `#endnote-mark-${endNotesCounter}`,
-      id: `endnote${endNotesCounter}`,
+      url: `#endnote-mark-${firstId}`,
+      id: `endnote${secondId}`,
     });
 
     const endNoteKey = entityEndNote.getLastCreatedEntityKey();
