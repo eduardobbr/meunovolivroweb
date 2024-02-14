@@ -21,6 +21,7 @@ const MnlEditor = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [showLinkModal, setShowLinkModal] = useState(false);
+  const [link, setLink] = useState("");
   const [linkText, setLinkText] = useState("");
   const [endNoteText, setEndNoteText] = useState("");
   const [endNotesCounter, setEndNotesCounter] = useState(1);
@@ -35,6 +36,22 @@ const MnlEditor = () => {
         style={{
           cursor: "pointer",
         }}
+      >
+        {children}
+      </a>
+    );
+  };
+  const LinkRedirect = ({ entityKey, contentState, children }) => {
+    const { url } = contentState.getEntity(entityKey).getData();
+
+    return (
+      <a
+        href={url}
+        style={{
+          cursor: "pointer",
+        }}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         {children}
       </a>
@@ -106,6 +123,13 @@ const MnlEditor = () => {
         component: Link,
       },
     ]);
+  const createLinkRedirectDecorator = () =>
+    new CompositeDecorator([
+      {
+        strategy: findLinkEntities,
+        component: LinkRedirect,
+      },
+    ]);
 
   const handleCreateFootnote = () => {
     const decorator = createLinkDecorator();
@@ -115,7 +139,7 @@ const MnlEditor = () => {
     const secondId = uuidv4();
 
     const entityMark = contentState.createEntity("LINK", "MUTABLE", {
-      url: `#endnote${secondId}`,
+      url: `#endnote-${secondId}`,
       id: `endnote-mark-${firstId}`,
     });
 
@@ -151,7 +175,7 @@ const MnlEditor = () => {
 
     const entityEndNote = contentState.createEntity("LINK", "MUTABLE", {
       url: `#endnote-mark-${firstId}`,
-      id: `endnote${secondId}`,
+      id: `endnote-${secondId}`,
     });
 
     const endNoteKey = entityEndNote.getLastCreatedEntityKey();
@@ -201,6 +225,35 @@ const MnlEditor = () => {
     }
   };
 
+  const handleCreateLink = () => {
+    const decorator = createLinkRedirectDecorator();
+    const contentState = editorState.getCurrentContent();
+
+    const entityLink = contentState.createEntity("LINK", "MUTABLE", {
+      url: link,
+    });
+
+    const entityKey = entityLink.getLastCreatedEntityKey();
+
+    const newEndNoteText = Modifier.insertText(
+      contentState,
+      selectionState,
+      linkText,
+      null,
+      entityKey
+    );
+
+    const newEditorState = EditorState.createWithContent(
+      newEndNoteText,
+      decorator
+    );
+
+    setEditorState(newEditorState);
+    setLink("");
+    setLinkText("");
+    setShowLinkModal(false);
+  };
+
   useEffect(() => {
     setSelectionState(editorState.getSelection());
   }, [editorState]);
@@ -223,8 +276,12 @@ const MnlEditor = () => {
       {showLinkModal && (
         <Modal onClick={(e) => handleCloseModal(e)}>
           <div>
-            <h2>Insira o Link</h2>
+            <h2>Insira o texto do link</h2>
             <textarea onChange={(e) => setLinkText(e.target.value)}></textarea>
+            <h2>Insira o Link</h2>
+            <textarea onChange={(e) => setLink(e.target.value)}></textarea>
+            <button onClick={() => setShowLinkModal(false)}>Cancelar</button>
+            <button onClick={() => handleCreateLink()}>Criar</button>
           </div>
         </Modal>
       )}
