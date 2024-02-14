@@ -52,6 +52,7 @@ const MnlEditor = () => {
         }}
         target="_blank"
         rel="noopener noreferrer"
+        readonly="true"
       >
         {children}
       </a>
@@ -300,6 +301,12 @@ const MnlEditor = () => {
         <Editor
           editorState={editorState}
           onChange={setEditorState}
+          blockRenderMap={extendedBlockRender}
+          customStyleMap={styleMap}
+        ></Editor>
+        <Editor
+          readOnly={true}
+          editorState={editorState}
           blockRenderMap={extendedBlockRender}
           customStyleMap={styleMap}
         ></Editor>
