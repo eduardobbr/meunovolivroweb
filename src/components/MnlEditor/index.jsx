@@ -7,6 +7,7 @@ import {
   Modifier,
   RichUtils,
   SelectionState,
+  convertToRaw,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
@@ -256,6 +257,7 @@ const MnlEditor = () => {
 
   useEffect(() => {
     setSelectionState(editorState.getSelection());
+    console.log(convertToRaw(editorState.getCurrentContent()));
   }, [editorState]);
 
   return (

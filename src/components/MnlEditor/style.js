@@ -25,9 +25,10 @@ export const BodyEditor = styled.div`
   resize: none;
   display: flex;
   justify-content: space-between;
+  overflow-y: scroll;
+
   .DraftEditor-root {
     width: 48%;
-    overflowy: scroll;
   }
   .divisor {
     width: 1px;
