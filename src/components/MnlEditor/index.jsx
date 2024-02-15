@@ -52,7 +52,6 @@ const MnlEditor = () => {
         }}
         target="_blank"
         rel="noopener noreferrer"
-        readonly="true"
       >
         {children}
       </a>
