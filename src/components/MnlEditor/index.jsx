@@ -303,7 +303,9 @@ const MnlEditor = () => {
           onChange={setEditorState}
           blockRenderMap={extendedBlockRender}
           customStyleMap={styleMap}
+          classList="editor"
         ></Editor>
+        <div className="divisor"></div>
         <Editor
           readOnly={true}
           editorState={editorState}

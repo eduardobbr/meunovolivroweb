@@ -23,6 +23,17 @@ export const BodyEditor = styled.div`
   border: none;
   outline: none;
   resize: none;
+  display: flex;
+  justify-content: space-between;
+  .DraftEditor-root {
+    width: 48%;
+    overflowy: scroll;
+  }
+  .divisor {
+    width: 1px;
+    height: 100%;
+    background-color: grey;
+  }
 `;
 
 export const Title = styled.h1``;
