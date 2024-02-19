@@ -13,7 +13,7 @@ import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
 import { Map } from "immutable";
 import { v4 as uuidv4 } from "uuid";
 
-const MnlEditor = () => {
+const MnlEditor = ({ changer, bookContent }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
@@ -260,6 +260,11 @@ const MnlEditor = () => {
     setSelectionState(editorState.getSelection());
   }, [editorState]);
 
+  const handleOnChange = (ev) => {
+    changer(editor.current.editor.innerHTML);
+    setEditorState(ev);
+  };
+
   return (
     <Container>
       {showModal && (
@@ -301,7 +306,7 @@ const MnlEditor = () => {
       <BodyEditor>
         <Editor
           editorState={editorState}
-          onChange={setEditorState}
+          onChange={handleOnChange}
           blockRenderMap={extendedBlockRender}
           customStyleMap={styleMap}
           classList="editor"

@@ -1,9 +1,6 @@
 import { useBooks } from "../../provider/Books";
 import { Container, Content, EditorBox, Title } from "./style";
-import TextPreview from "../TextPreview";
 import MnlEditor from "../MnlEditor";
-import "react-quill/dist/quill.snow.css"; // Importe o estilo CSS
-import "react-quill/dist/quill.core.css"; // Importe o estilo CSS
 
 const TextEditor = () => {
   const { bookContent, setBookContent } = useBooks();
@@ -20,7 +17,7 @@ const TextEditor = () => {
         </Title>
         <Content>
           <EditorBox>
-            <MnlEditor />
+            <MnlEditor changer={handleChange} bookContent={bookContent} />
           </EditorBox>
         </Content>
       </Container>
