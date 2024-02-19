@@ -24,16 +24,11 @@ export const BodyEditor = styled.div`
   outline: none;
   resize: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   overflow-y: scroll;
 
   .DraftEditor-root {
-    width: 48%;
-  }
-  .divisor {
-    width: 1px;
-    height: 100%;
-    background-color: grey;
+    width: 100%;
   }
 `;
 

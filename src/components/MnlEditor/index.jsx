@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   CompositeDecorator,
   DefaultDraftBlockRenderMap,
@@ -7,7 +7,6 @@ import {
   Modifier,
   RichUtils,
   SelectionState,
-  convertToRaw,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
@@ -255,9 +254,10 @@ const MnlEditor = () => {
     setShowLinkModal(false);
   };
 
+  const editor = useRef();
+
   useEffect(() => {
     setSelectionState(editorState.getSelection());
-    console.log(convertToRaw(editorState.getCurrentContent()));
   }, [editorState]);
 
   return (
@@ -305,13 +305,7 @@ const MnlEditor = () => {
           blockRenderMap={extendedBlockRender}
           customStyleMap={styleMap}
           classList="editor"
-        ></Editor>
-        <div className="divisor"></div>
-        <Editor
-          readOnly={true}
-          editorState={editorState}
-          blockRenderMap={extendedBlockRender}
-          customStyleMap={styleMap}
+          ref={editor}
         ></Editor>
       </BodyEditor>
     </Container>
