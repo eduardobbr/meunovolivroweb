@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   CompositeDecorator,
+  ContentState,
   DefaultDraftBlockRenderMap,
   Editor,
   EditorState,
@@ -12,6 +13,7 @@ import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
 import { Map } from "immutable";
 import { v4 as uuidv4 } from "uuid";
+import htmlToDraft from "html-to-draftjs";
 
 const MnlEditor = ({ changer, bookContent }) => {
   const [editorState, setEditorState] = useState(() =>
@@ -259,6 +261,19 @@ const MnlEditor = ({ changer, bookContent }) => {
   useEffect(() => {
     setSelectionState(editorState.getSelection());
   }, [editorState]);
+
+  useEffect(() => {
+    if (bookContent) {
+      const blocksFromHtml = htmlToDraft(bookContent);
+      const { contentBlocks, entityMap } = blocksFromHtml;
+      const newContent = ContentState.createFromBlockArray(
+        contentBlocks,
+        entityMap
+      );
+      const newEditor = EditorState.createWithContent(newContent);
+      setEditorState(newEditor);
+    }
+  }, []);
 
   const handleOnChange = (ev) => {
     changer(editor.current.editor.innerHTML);
