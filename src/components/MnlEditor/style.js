@@ -4,6 +4,7 @@ export const Container = styled.div`
   border: 1px solid grey;
   max-width: 1200px;
   padding: 10px;
+  height: inherit;
 `;
 
 export const HeadEditor = styled.div`
@@ -17,7 +18,8 @@ export const EditorTitle = styled.h3`
 `;
 
 export const BodyEditor = styled.div`
-  height: 500px;
+  margin-top: 10px;
+  height: 410px;
   width: 100%;
   padding: 10px;
   border: none;

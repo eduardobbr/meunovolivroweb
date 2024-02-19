@@ -11,8 +11,8 @@ export const Container = styled.section`
 `;
 
 export const EditorBox = styled.div`
-  width: 40%;
-  height: 542px;
+  width: 100%;
+  height: 500px;
 `;
 
 export const Title = styled.h2`
