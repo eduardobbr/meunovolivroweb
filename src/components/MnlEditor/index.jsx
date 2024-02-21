@@ -8,19 +8,19 @@ import {
   Modifier,
   RichUtils,
   SelectionState,
+  convertFromHTML,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
 import { Map } from "immutable";
 import { v4 as uuidv4 } from "uuid";
-import htmlToDraft from "html-to-draftjs";
+import { Link, LinkRedirect } from "./classBlocks";
 
 const MnlEditor = ({ changer, bookContent }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
   const [selectionState, setSelectionState] = useState();
-
   const [showModal, setShowModal] = useState(false);
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [link, setLink] = useState("");
@@ -28,38 +28,7 @@ const MnlEditor = ({ changer, bookContent }) => {
   const [endNoteText, setEndNoteText] = useState("");
   const [endNotesCounter, setEndNotesCounter] = useState(1);
 
-  const Link = ({ entityKey, contentState, children }) => {
-    const { url, id } = contentState.getEntity(entityKey).getData();
-
-    return (
-      <a
-        href={url}
-        id={id}
-        style={{
-          cursor: "pointer",
-        }}
-      >
-        {children}
-      </a>
-    );
-  };
-  const LinkRedirect = ({ entityKey, contentState, children }) => {
-    const { url } = contentState.getEntity(entityKey).getData();
-
-    return (
-      <a
-        href={url}
-        style={{
-          cursor: "pointer",
-        }}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {children}
-      </a>
-    );
-  };
-
+  //BlockRender
   const blockRenderMap = Map({
     "header-one": {
       element: "h1",
@@ -72,15 +41,9 @@ const MnlEditor = ({ changer, bookContent }) => {
     },
   });
 
-  const styleMap = {
-    little: {
-      fontSize: "5px",
-      verticalAlign: "text-top",
-    },
-  };
-
   const extendedBlockRender = DefaultDraftBlockRenderMap.merge(blockRenderMap);
 
+  //Button press functions
   const onBold = () => {
     setEditorState(RichUtils.toggleInlineStyle(editorState, "BOLD"));
   };
@@ -108,6 +71,7 @@ const MnlEditor = ({ changer, bookContent }) => {
     setShowLinkModal(true);
   };
 
+  //Entities find Functions for decorators
   const findLinkEntities = (contentBlock, callback, contentState) => {
     contentBlock.findEntityRanges((character) => {
       const entityKey = character.getEntity();
@@ -118,6 +82,7 @@ const MnlEditor = ({ changer, bookContent }) => {
     }, callback);
   };
 
+  //Decorators for generate blocks
   const createLinkDecorator = () =>
     new CompositeDecorator([
       {
@@ -133,6 +98,7 @@ const MnlEditor = ({ changer, bookContent }) => {
       },
     ]);
 
+  //FootNotes Creattion
   const handleCreateFootnote = () => {
     const decorator = createLinkDecorator();
     const contentState = editorState.getCurrentContent();
@@ -227,6 +193,7 @@ const MnlEditor = ({ changer, bookContent }) => {
     }
   };
 
+  //Link Creation
   const handleCreateLink = () => {
     const decorator = createLinkRedirectDecorator();
     const contentState = editorState.getCurrentContent();
@@ -258,13 +225,15 @@ const MnlEditor = ({ changer, bookContent }) => {
 
   const editor = useRef();
 
+  //Get Selection
   useEffect(() => {
     setSelectionState(editorState.getSelection());
   }, [editorState]);
 
+  //Editor load book
   useEffect(() => {
     if (bookContent) {
-      const blocksFromHtml = htmlToDraft(bookContent);
+      const blocksFromHtml = convertFromHTML(bookContent);
       const { contentBlocks, entityMap } = blocksFromHtml;
       const newContent = ContentState.createFromBlockArray(
         contentBlocks,
@@ -323,7 +292,6 @@ const MnlEditor = ({ changer, bookContent }) => {
           editorState={editorState}
           onChange={handleOnChange}
           blockRenderMap={extendedBlockRender}
-          customStyleMap={styleMap}
           classList="editor"
           ref={editor}
         ></Editor>
