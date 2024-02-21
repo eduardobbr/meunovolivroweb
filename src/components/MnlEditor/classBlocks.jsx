@@ -29,3 +29,10 @@ export const LinkRedirect = ({ entityKey, contentState, children }) => {
     </a>
   );
 };
+
+export const Title = ({ children }) => {
+  return <h1 className="title">{children}</h1>;
+};
+export const Italic = ({ children }) => {
+  return <em className="italic">{children}</em>;
+};

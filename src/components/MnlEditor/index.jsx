@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import {
   CompositeDecorator,
-  ContentState,
   DefaultDraftBlockRenderMap,
   Editor,
   EditorState,
   Modifier,
   RichUtils,
   SelectionState,
-  convertFromHTML,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { BodyEditor, Container, EditorTitle, HeadEditor, Modal } from "./style";
 import { Map } from "immutable";
 import { v4 as uuidv4 } from "uuid";
-import { Link, LinkRedirect } from "./classBlocks";
+import { Link, LinkRedirect, Title } from "./classBlocks";
+import { stateFromHTML } from "draft-js-import-html";
 
 const MnlEditor = ({ changer, bookContent }) => {
   const [editorState, setEditorState] = useState(() =>
@@ -31,7 +30,7 @@ const MnlEditor = ({ changer, bookContent }) => {
   //BlockRender
   const blockRenderMap = Map({
     "header-one": {
-      element: "h1",
+      element: Title,
     },
     "header-two": {
       element: "h2",
@@ -233,13 +232,9 @@ const MnlEditor = ({ changer, bookContent }) => {
   //Editor load book
   useEffect(() => {
     if (bookContent) {
-      const blocksFromHtml = convertFromHTML(bookContent);
-      const { contentBlocks, entityMap } = blocksFromHtml;
-      const newContent = ContentState.createFromBlockArray(
-        contentBlocks,
-        entityMap
-      );
-      const newEditor = EditorState.createWithContent(newContent);
+      const fromHtml = stateFromHTML(bookContent);
+      const newEditor = EditorState.createWithContent(fromHtml);
+      console.log(fromHtml);
       setEditorState(newEditor);
     }
   }, []);
