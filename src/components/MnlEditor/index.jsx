@@ -1,10 +1,11 @@
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import "./style.css";
 import { useBooks } from "../../provider/Books";
 import { v4 as uuidv4 } from "uuid";
 
 // Criação de um ícone para o botão de nota de fim
-const CustomButton = () => '<span className="octicon octicon-star">N</span>';
+const CustomButton = () => '<span class="ql-endnote">N¹</span>';
 
 // Função para adicionar a nota de fim
 function insertEndnote(quill) {
@@ -14,7 +15,7 @@ function insertEndnote(quill) {
   let mark = prompt("Insira o marcador");
   let value = prompt("Insira o texto da nota de fim");
   if (value) {
-    const markLink = `<a id='endnoteMark-${firstId}' href='#endnote-${secondId}'>[${mark}]</a>`;
+    const markLink = `<a class="endNoteLine" id='endnoteMark-${firstId}' href='#endnote-${secondId}'>[${mark}]</a>`;
     quill.insertEmbed(range.index, "custom", markLink, Quill.sources.USER);
     const endNoteLink = `<p><span>[${mark}] - ${value}</span> <a id='endnote-${secondId}' href='#endnoteMark-${firstId}'>voltar</a></p>`;
     quill.insertEmbed(
@@ -86,7 +87,6 @@ const MnlEditor = () => {
           { indent: "+1" },
         ],
         ["link", "image"],
-        ["endnote"], // Adicionar botão personalizado na barra de ferramentas
       ],
       handlers: {
         endnote: insertEndnote,
