@@ -3,8 +3,6 @@ import "react-quill/dist/quill.snow.css";
 import { useBooks } from "../../provider/Books";
 import { v4 as uuidv4 } from "uuid";
 
-let endNoteCounter = 1;
-
 // Criação de um ícone para o botão de nota de fim
 const CustomButton = () => '<span className="octicon octicon-star">N</span>';
 
@@ -13,19 +11,18 @@ function insertEndnote(quill) {
   const range = quill.getSelection();
   const firstId = uuidv4();
   const secondId = uuidv4();
+  let mark = prompt("Insira o marcador");
   let value = prompt("Insira o texto da nota de fim");
-  console.log(quill);
   if (value) {
-    const markLink = `<a contenteditable="true" id='endnoteMark-${firstId}' href='#endnote-${secondId}'>[${endNoteCounter}]</a>`;
+    const markLink = `<a id='endnoteMark-${firstId}' href='#endnote-${secondId}'>[${mark}]</a>`;
     quill.insertEmbed(range.index, "custom", markLink, Quill.sources.USER);
-    const endNoteLink = `<p contenteditable="true"><span>[${endNoteCounter}] - ${value}</span> <a id='endnote-${secondId}' href='#endnoteMark-${firstId}'>voltar</a></p>`;
+    const endNoteLink = `<p><span>[${mark}] - ${value}</span> <a id='endnote-${secondId}' href='#endnoteMark-${firstId}'>voltar</a></p>`;
     quill.insertEmbed(
       quill.getLength() - 1,
       "custom",
       endNoteLink,
       Quill.sources.USER
     );
-    endNoteCounter++;
   }
 }
 
