@@ -71,13 +71,30 @@ CustomBlotFormat.tagName = "span";
 
 Quill.register(CustomBlotFormat);
 
+const Font = ReactQuill.Quill.import("formats/font"); // <<<< ReactQuill exports it
+Font.whitelist = ["WorkSans", "Bitter", "Cursive"]; // allow ONLY these fonts and the default
+ReactQuill.Quill.register(Font, true);
+
 const MnlEditor = () => {
   const { bookContent, setBookContent } = useBooks();
+
+  const fonts = [
+    { label: "Work Sans", value: "WorkSans" },
+    { label: "Bitter", value: "Bitter" },
+    { label: "Cursive", value: "Cursive" },
+  ];
+
+  const fontSelectOptions = fonts.map((font) => (
+    <option key={font.value} value={font.value}>
+      {font.label}
+    </option>
+  ));
 
   const modules = {
     toolbar: {
       container: [
         [{ header: [1, 2, false] }],
+        [{ font: ["WorkSans", "Bitter", "Cursive"] }],
         ["bold", "italic", "underline", "strike", "blockquote"],
         [
           { list: "ordered" },
