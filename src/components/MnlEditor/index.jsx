@@ -78,23 +78,11 @@ ReactQuill.Quill.register(Font, true);
 const MnlEditor = () => {
   const { bookContent, setBookContent } = useBooks();
 
-  const fonts = [
-    { label: "Work Sans", value: "WorkSans" },
-    { label: "Bitter", value: "Bitter" },
-    { label: "Cursive", value: "Cursive" },
-  ];
-
-  const fontSelectOptions = fonts.map((font) => (
-    <option key={font.value} value={font.value}>
-      {font.label}
-    </option>
-  ));
-
   const modules = {
     toolbar: {
       container: [
         [{ header: [1, 2, false] }],
-        [{ font: ["WorkSans", "Bitter", "Cursive"] }],
+        [{ font: Font.whitelist }],
         ["bold", "italic", "underline", "strike", "blockquote"],
         [
           { list: "ordered" },
@@ -112,11 +100,27 @@ const MnlEditor = () => {
     endNoteButton: true, // Ativando o módulo personalizado
   };
 
+  const formats = [
+    "font",
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "align",
+    "list",
+    "link",
+    "image",
+    "endnote",
+  ];
+
   return (
     <div>
       <ReactQuill
         theme="snow"
         modules={modules}
+        formats={formats}
         value={bookContent}
         onChange={setBookContent}
         style={{ height: "450px" }}
