@@ -3,14 +3,14 @@
   vertical-align: top;
 }
 
-.ql-font-Bitter {
-  font-family: "Bitter", serif;
+.ql-font-serif {
+  font-family: "Bitter", serif !important;
 }
 
-.ql-font-WorkSans {
-  font-family: "Work Sans", sans-serif;
+.ql-font-sans {
+  font-family: "Work Sans", sans-serif !important;
 }
 
-.ql-font-Cursive {
-  font-family: cursive;
+.ql-editor .ql-font-monospace {
+  font-family: cursive !important;
 }
