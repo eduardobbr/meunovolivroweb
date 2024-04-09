@@ -12,7 +12,7 @@
 }
 
 .ql-editor .ql-font-monospace {
-  font-family: cursive !important;
+  font-family: "Dancing Script", cursive !important;
 }
 
 .ql-picker-item[data-value="sans"]::before {
@@ -25,8 +25,8 @@
 }
 
 .ql-picker-item[data-value="monospace"]::before {
-  content: "Cursive" !important;
-  font-family: cursive !important;
+  content: "Dancing Script" !important;
+  font-family: "Dancing Script", cursive !important;
 }
 
 .ql-picker-label[data-value="sans"]::before {
@@ -38,6 +38,6 @@
   font-family: "Bitter", serif !important;
 }
 .ql-picker-label[data-value="monospace"]::before {
-  content: "Cursive" !important;
-  font-family: cursive !important;
+  content: "Dancing Script" !important;
+  font-family: "Dancing Script", cursive !important;
 }
