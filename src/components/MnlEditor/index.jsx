@@ -116,27 +116,11 @@ const MnlEditor = () => {
     endNoteButton: true, // Ativando o módulo personalizado
   };
 
-  const formats = [
-    "font",
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "align",
-    "list",
-    "link",
-    "image",
-    "endnote",
-  ];
-
   return (
     <div>
       <ReactQuill
         theme="snow"
         modules={modules}
-        formats={formats}
         value={bookContent}
         onChange={setBookContent}
         style={{ height: "450px" }}
