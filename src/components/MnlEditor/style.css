@@ -14,3 +14,30 @@
 .ql-editor .ql-font-monospace {
   font-family: cursive !important;
 }
+
+.ql-picker-item[data-value="sans"]::before {
+  content: "Work Sans" !important;
+  font-family: "Work Sans", sans-serif !important;
+}
+.ql-picker-item[data-value="serif"]::before {
+  content: "Bitter" !important;
+  font-family: "Bitter", serif !important;
+}
+
+.ql-picker-item[data-value="monospace"]::before {
+  content: "Cursive" !important;
+  font-family: cursive !important;
+}
+
+.ql-picker-label[data-value="sans"]::before {
+  content: "Work Sans" !important;
+  font-family: "Work Sans", sans-serif !important;
+}
+.ql-picker-label[data-value="serif"]::before {
+  content: "Bitter" !important;
+  font-family: "Bitter", serif !important;
+}
+.ql-picker-label[data-value="monospace"]::before {
+  content: "Cursive" !important;
+  font-family: cursive !important;
+}

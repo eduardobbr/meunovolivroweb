@@ -3,6 +3,7 @@ import "react-quill/dist/quill.snow.css";
 import "./style.css";
 import { useBooks } from "../../provider/Books";
 import { v4 as uuidv4 } from "uuid";
+import { useEffect } from "react";
 
 // Criação de um ícone para o botão de nota de fim
 const CustomButton = () => '<span class="ql-endnote">N¹</span>';
@@ -77,6 +78,21 @@ ReactQuill.Quill.register(Font, true);
 
 const MnlEditor = () => {
   const { bookContent, setBookContent } = useBooks();
+
+  useEffect(() => {
+    const test = document.querySelectorAll(".ql-picker-item");
+    test.forEach((node) => {
+      if (node.dataset.value === "sans") {
+        node.classList.add("ql-font-sans", "beforeWorkSans");
+      }
+      if (node.dataset.value === "serif") {
+        node.classList.add("ql-font-serif", "beforeBitter");
+      }
+      if (node.dataset.value === "monospace") {
+        node.classList.add("ql-font-monospace", "beforeCursive");
+      }
+    });
+  }, []);
 
   const modules = {
     toolbar: {
