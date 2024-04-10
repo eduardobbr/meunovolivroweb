@@ -76,6 +76,10 @@ const Font = ReactQuill.Quill.import("formats/font"); // <<<< ReactQuill exports
 Font.whitelist = ["sans", "serif", "monospace"]; // allow ONLY these fonts and the default
 ReactQuill.Quill.register(Font, true);
 
+const Size = Quill.import("attributors/style/size");
+Size.whitelist = ["1rem", "1.5rem", "2rem"];
+Quill.register(Size, true);
+
 const MnlEditor = () => {
   const { bookContent, setBookContent } = useBooks();
 
@@ -91,6 +95,15 @@ const MnlEditor = () => {
       if (node.dataset.value === "monospace") {
         node.classList.add("ql-font-monospace", "beforeCursive");
       }
+      if (node.dataset.value === "1rem") {
+        node.classList.add("ql-fontSize-1rem", "before1rem");
+      }
+      if (node.dataset.value === "1.5rem") {
+        node.classList.add("ql-fontSize-1.5rem", "before1.5rem");
+      }
+      if (node.dataset.value === "monospace") {
+        node.classList.add("ql-fontSize-2rem", "before2rem");
+      }
     });
   }, []);
 
@@ -99,7 +112,8 @@ const MnlEditor = () => {
       container: [
         [{ header: [1, 2, false] }],
         [{ font: ["sans", "serif", "monospace"] }],
-        ["bold", "italic", "underline", "strike", "blockquote"],
+        [{ size: ["1rem", "1.5rem", "2rem"] }],
+        [("bold", "italic", "underline", "strike", "blockquote")],
         [
           { list: "ordered" },
           { list: "bullet" },

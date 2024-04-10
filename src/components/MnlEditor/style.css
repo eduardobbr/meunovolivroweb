@@ -41,3 +41,28 @@
   content: "Dancing Script" !important;
   font-family: "Dancing Script", cursive !important;
 }
+
+.ql-picker-item[data-value="1rem"]::before {
+  content: "Normal" !important;
+  font-size: 1rem !important;
+}
+.ql-picker-item[data-value="1.5rem"]::before {
+  content: "Médio" !important;
+  font-size: 1.5rem !important;
+}
+
+.ql-picker-item[data-value="2rem"]::before {
+  content: "Grande" !important;
+  font-size: 2rem !important;
+}
+
+.ql-picker-label[data-value="1rem"]::before {
+  content: "Normal" !important;
+}
+.ql-picker-label[data-value="1.5rem"]::before {
+  content: "Médio" !important;
+}
+
+.ql-picker-label[data-value="2rem"]::before {
+  content: "Grande" !important;
+}
