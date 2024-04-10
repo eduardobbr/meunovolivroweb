@@ -66,3 +66,17 @@
 .ql-picker-label[data-value="2rem"]::before {
   content: "Grande" !important;
 }
+
+.ql-picker-item[data-value="1"]::before {
+  content: "Título" !important;
+}
+.ql-picker-item[data-value="2"]::before {
+  content: "Sub-Título" !important;
+}
+
+.ql-picker-label[data-value="1"]::before {
+  content: "Título" !important;
+}
+.ql-picker-label[data-value="2"]::before {
+  content: "Sub-Título" !important;
+}
