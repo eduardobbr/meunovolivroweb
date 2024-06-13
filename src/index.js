@@ -15,7 +15,18 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme="light"
+      />
       <Provider>
         <RouterProvider router={router} />
       </Provider>
