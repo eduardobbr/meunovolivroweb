@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { meuNovoLivroApi } from "../../services";
 import jwtDecode from "jwt-decode";
+import { toast } from "react-toastify";
 
 const BooksContext = createContext({});
 
@@ -24,8 +25,15 @@ export const BooksProvider = ({ children }) => {
   const getBooks = (userId) => {
     meuNovoLivroApi
       .get(`/books?user=${userId}`)
-      .then((response) => setBooks(response.data))
-      .catch((err) => console.log(err));
+      .then((response) => {
+        setBooks(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Algo deu errado, aguarde um momento e recarregue", {
+          autoClose: 3000,
+        });
+      });
 
     return books;
   };
@@ -128,8 +136,11 @@ export const BooksProvider = ({ children }) => {
         link.href = window.URL.createObjectURL(res.data);
         link.download = name;
         link.click();
+        toast.success("Seu download vai ser iniciado!", { autoClose: 3000 });
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        toast.error("Algo deu errado, tente novamente", { autoClose: 3000 })
+      );
   };
 
   const deleteBook = (id, token) => {
@@ -139,8 +150,13 @@ export const BooksProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
+      .then(() => {
+        toast.success("Livro deletado com sucesso!", { autoClose: 3000 });
+        getBooks(jwtDecode(token).user_id);
+      })
+      .catch(() => {
+        toast.error("Algo deu errado, tente novamente", { autoClose: 3000 });
+      });
   };
 
   return (
