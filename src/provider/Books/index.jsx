@@ -46,8 +46,13 @@ export const BooksProvider = ({ children }) => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(() => getBooks(jwtDecode(token).user_id))
-      .catch((err) => console.log(err));
+      .then(() => {
+        getBooks(jwtDecode(token).user_id);
+        toast.success("Livro criado com sucesso!", { autoClose: 3000 });
+      })
+      .catch((err) =>
+        toast.error("Algo deu errado, tente novamente", { autoClose: 3000 })
+      );
   };
 
   const updateBook = (book, token, oldBook) => {
@@ -58,8 +63,13 @@ export const BooksProvider = ({ children }) => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(() => getBooks(jwtDecode(token).user_id))
-      .catch((err) => console.log(err));
+      .then(() => {
+        getBooks(jwtDecode(token).user_id);
+        toast.success("Livro atualizado com sucesso!", { autoClose: 3000 });
+      })
+      .catch((err) =>
+        toast.error("Algo deu errado, tente novamente", { autoClose: 3000 })
+      );
   };
 
   const saveOrUpdateBooks = async (token) => {
@@ -120,7 +130,7 @@ export const BooksProvider = ({ children }) => {
         setKeywords(book.keywords);
         setBookStyle(book.book_style);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Algo deu errado, tente novamente"));
   };
 
   const bookGenerate = (id, token, name) => {
