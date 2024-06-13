@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { meuNovoLivroApi } from "../../services";
 import jwtDecode from "jwt-decode";
+import { toast } from "react-toastify";
 
 const UserContext = createContext({});
 
@@ -37,6 +38,7 @@ export const UserProvider = ({ children }) => {
         userSetter();
         setLogged(true);
         setErrorLogin(false);
+        toast.success("Login feito com sucesso!", { autoClose: 3000 });
       })
       .catch((error) => setErrorLogin(true));
   };
@@ -50,9 +52,13 @@ export const UserProvider = ({ children }) => {
         password2: passwordConfirm,
       })
       .then((response) => {
+        toast.success("Conta criada com sucesso!", { autoClose: 3000 });
         setErrorSignup(false);
       })
-      .catch((error) => setErrorSignup(true));
+      .catch((error) => {
+        toast.error("algo deu errado, tente novamente", { autoClose: 3000 });
+        setErrorSignup(true);
+      });
   };
 
   const logout = () => {
