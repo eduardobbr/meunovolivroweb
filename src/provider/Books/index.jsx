@@ -28,9 +28,7 @@ export const BooksProvider = ({ children }) => {
       .then((response) => {
         setBooks(response.data);
       })
-      .then(() => console.log(books))
       .catch((err) => {
-        console.log(err);
         toast.error("Algo deu errado, aguarde um momento e recarregue", {
           autoClose: 3000,
         });
@@ -77,8 +75,6 @@ export const BooksProvider = ({ children }) => {
     if (typeof audience === "string") {
       setAudience(0);
     }
-
-    console.log(bookName);
 
     const data = {
       name: bookName,

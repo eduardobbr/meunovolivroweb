@@ -22,8 +22,8 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const userSetter = () => {
-    setUser(jwtDecode(token));
+  const userSetter = (newToken) => {
+    setUser(jwtDecode(newToken));
   };
 
   const login = async (username, password) => {
@@ -35,7 +35,7 @@ export const UserProvider = ({ children }) => {
           "@mnl_token",
           JSON.stringify(response.data.access)
         );
-        userSetter();
+        userSetter(response.data.access);
         setLogged(true);
         setErrorLogin(false);
         toast.success("Login feito com sucesso!", { autoClose: 3000 });

@@ -28,9 +28,7 @@ const BookDashCard = ({ book }) => {
               try {
                 await bookUpdaterGet(book.id, token);
                 navigate(`/producao/`);
-              } catch (error) {
-                console.log(error);
-              }
+              } catch (error) {}
             }}
           >
             Editar
