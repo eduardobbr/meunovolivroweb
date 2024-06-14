@@ -40,7 +40,10 @@ export const UserProvider = ({ children }) => {
         setErrorLogin(false);
         toast.success("Login feito com sucesso!", { autoClose: 3000 });
       })
-      .catch((error) => setErrorLogin(true));
+      .catch((error) => {
+        setErrorLogin(true);
+        toast.error("Senha e/ou ususário incorretos", { autoClose: 3000 });
+      });
   };
 
   const createUser = (email, username, password, passwordConfirm) => {
