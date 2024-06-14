@@ -28,6 +28,7 @@ export const BooksProvider = ({ children }) => {
       .then((response) => {
         setBooks(response.data);
       })
+      .then(() => console.log(books))
       .catch((err) => {
         console.log(err);
         toast.error("Algo deu errado, aguarde um momento e recarregue", {
@@ -73,11 +74,11 @@ export const BooksProvider = ({ children }) => {
   };
 
   const saveOrUpdateBooks = async (token) => {
-    setBookName(`${bookTitle} - ${author}`);
-
     if (typeof audience === "string") {
       setAudience(0);
     }
+
+    console.log(bookName);
 
     const data = {
       name: bookName,
@@ -103,11 +104,13 @@ export const BooksProvider = ({ children }) => {
       book.append("cover", coverUp);
     }
 
-    const has = books.filter((book) => book.name === bookName);
+    if (bookName) {
+      const has = books.filter((book) => book.name === bookName);
 
-    has.length === 0
-      ? createBook(book, token)
-      : updateBook(book, token, has[0]);
+      has.length === 0
+        ? createBook(book, token)
+        : updateBook(book, token, has[0]);
+    }
   };
 
   const bookUpdaterGet = (bookId, token) => {

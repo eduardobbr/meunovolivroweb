@@ -26,7 +26,8 @@ const BookCreationDashboard = () => {
     <BookCoverUpload />,
   ];
 
-  const { saveOrUpdateBooks, getBooks } = useBooks();
+  const { saveOrUpdateBooks, getBooks, setBookName, bookTitle, author } =
+    useBooks();
 
   const { token } = useUser();
 
@@ -35,7 +36,12 @@ const BookCreationDashboard = () => {
     getBooks(user.user_id);
   }, []);
 
+  useEffect(() => {
+    setBookName(`${bookTitle} - ${author}`);
+  }, [bookTitle, author]);
+
   const handleSave = () => {
+    setBookName(`${bookTitle} - ${author}`);
     saveOrUpdateBooks(token);
   };
 

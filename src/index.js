@@ -25,7 +25,7 @@ root.render(
         pauseOnFocusLoss
         draggable={false}
         pauseOnHover
-        theme="light"
+        theme="colored"
       />
       <Provider>
         <RouterProvider router={router} />

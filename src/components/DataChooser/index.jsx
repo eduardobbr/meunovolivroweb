@@ -46,7 +46,9 @@ const DataChooser = () => {
               <input
                 type="text"
                 value={bookTitle}
-                onChange={(e) => setBookTitle(e.target.value)}
+                onChange={(e) => {
+                  setBookTitle(e.target.value);
+                }}
               />
             </BoxContainer>
             <BoxContainer>
@@ -64,7 +66,9 @@ const DataChooser = () => {
               <input
                 type="text"
                 value={author}
-                onChange={(e) => setAuthor(e.target.value)}
+                onChange={(e) => {
+                  setAuthor(e.target.value);
+                }}
               />
             </BoxContainer>
             <BoxContainer>

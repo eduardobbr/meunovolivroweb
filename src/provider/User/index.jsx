@@ -66,6 +66,7 @@ export const UserProvider = ({ children }) => {
     setToken("");
     localStorage.removeItem("@mnl_token");
     localStorage.removeItem("@mnl_user");
+    toast.success("Logout feito com sucesso!", { autoClose: 3000 });
   };
 
   const checkTokenExp = () => {
