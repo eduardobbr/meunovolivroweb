@@ -4,6 +4,7 @@ import FontChooser from "../FontChooser";
 import TextEditor from "../TextEditor";
 import BookCoverUpload from "../BookCoverUpload";
 import {
+  Atencao,
   Container,
   Content,
   ListItem,
@@ -47,6 +48,9 @@ const BookCreationDashboard = () => {
 
   return (
     <Container>
+      <Atencao>
+        ATENÇÃO: Servidor em teste e o conteúdo pode ser perdido, faça backup.
+      </Atencao>
       <nav>
         <NavList>
           <ListItem onClick={() => setStep(0)}>

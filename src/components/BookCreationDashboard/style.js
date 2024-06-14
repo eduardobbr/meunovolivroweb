@@ -33,6 +33,15 @@ export const ListItem = styled.li`
 
 export const Content = styled.div``;
 
+export const Atencao = styled.h2`
+  color: red;
+  text-align: center;
+  width: 100%;
+  margin: 20px auto;
+  font-size: 20px;
+  font-weight: 700;
+`;
+
 export const PrevContBox = styled.div`
   display: flex;
   justify-content: space-between;
