@@ -13,7 +13,7 @@ const BookDashCard = ({ book }) => {
       <Content>
         <ImgBox>
           <img
-            src={`http://127.0.0.1:8000${book.cover}`}
+            src={`https://meu-novo-livro-lively-waterfall-4698.fly.dev${book.cover}`}
             alt={`Capa do livro ${book.name}`}
           />
         </ImgBox>
