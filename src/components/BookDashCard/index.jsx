@@ -13,7 +13,7 @@ const BookDashCard = ({ book }) => {
       <Content>
         <ImgBox>
           <img
-            src={`https://meu-novo-livro-lively-waterfall-4698.fly.dev${book.cover}`}
+            src={`${process.env.REACT_APP_API_URL}${book.cover}`}
             alt={`Capa do livro ${book.name}`}
           />
         </ImgBox>
@@ -28,7 +28,7 @@ const BookDashCard = ({ book }) => {
               try {
                 await bookUpdaterGet(book.id, token);
                 navigate(`/producao/`);
-              } catch (error) {}
+              } catch (error) { }
             }}
           >
             Editar

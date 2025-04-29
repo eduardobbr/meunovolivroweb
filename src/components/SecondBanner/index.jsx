@@ -46,7 +46,7 @@ const SecondBanner = () => {
       <CheckoutContent>
         <Title>Poucos passos para publicas sua obra</Title>
         <Paragraph>
-          <Link to="/plans">Comece agora</Link>
+          <Link to="/login-register">Comece agora</Link>
         </Paragraph>
       </CheckoutContent>
     </Container>

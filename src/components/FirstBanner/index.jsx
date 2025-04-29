@@ -14,7 +14,7 @@ const FirstBanner = () => {
         <TextContent>
           <BannerDescription>Produza, publique e distribua</BannerDescription>
           <BannerTitle>Vamos fazer um livro legal juntos?</BannerTitle>
-          <Link to="/plans">Vem Publicar</Link>
+          <Link to="/login-register">Vem Publicar</Link>
         </TextContent>
         <ImgContent>
           <img

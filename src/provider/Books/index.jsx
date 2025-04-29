@@ -154,7 +154,7 @@ export const BooksProvider = ({ children }) => {
 
   const deleteBook = (id, token) => {
     meuNovoLivroApi
-      .delete(`/books/${id}`, {
+      .delete(`/books/${id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

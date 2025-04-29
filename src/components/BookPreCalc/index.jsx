@@ -128,7 +128,7 @@ const BookPreCalc = () => {
             }).format(value / 10)}
           </Paragraph>
           <Paragraph>
-            <Link to="/login">Comece a produção</Link>
+            <Link to="/login-register">Comece a produção</Link>
           </Paragraph>
         </div>
       </FormBox>

@@ -48,9 +48,6 @@ const Header = () => {
               </MenuItem>
             )}
             <MenuItem>
-              <Link to={"/plans"}>Nossos Planos</Link>
-            </MenuItem>
-            <MenuItem>
               <Link to={"/published"}>Já Publicados</Link>
             </MenuItem>
             <MenuItem>
